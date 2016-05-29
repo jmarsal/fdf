@@ -6,7 +6,7 @@
 /*   By: jmarsal  <jmarsal @student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/29 23:42:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/05/30 01:10:03 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int		main(int ac, char **av)
 		mlx_loop(mlx->mlx_ptr);
 	}
 	else
-		ft_putstr("\n\033[31mERROR\033[0m\n.0-0--> usage : ./fdf exemple.fdf\n");
+		ft_putstr("\n\033[31mERROR\033[0m\n--> usage : ./fdf exemple.fdf\n");
 	return (0);
 }
