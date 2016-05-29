@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
+#    By: jmarsal  <jmarsal @student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 15:19:59 by jmarsal           #+#    #+#              #
-#    Updated: 2016/05/25 12:25:25 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/05/30 00:48:48 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,8 @@ OBJ = $(SRC:%.c=$(OBJ_PATH)/%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 	@echo "\n-----------------------------------------------------------------"
 	@echo "|\033[32;1m\t$(NAME) has been created with $(OPTI_FLAGS) optimisation\t\t\033[0m|"
 	@echo "-----------------------------------------------------------------\n"
@@ -45,13 +45,13 @@ $(OBJ_PATH)/%.o: %.c
 	@$(CC) -o $@ -c $< $(CFLAGS) $(INC_PATH)
 
 clean:
-	rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH)
 	@echo "\n-------------------------------------------------"
 	@echo "|\t\033[31mall libft_files.o are deleted\033[0m\t\t|"
 	@echo "-------------------------------------------------\n"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@echo "\n-----------------------------------------"
 	@echo "|\t\033[31m$(NAME) is deleted\033[0m\t\t|"
 	@echo "-----------------------------------------\n"
