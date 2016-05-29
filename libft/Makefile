@@ -6,13 +6,14 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 15:19:59 by jmarsal           #+#    #+#              #
-#*   Updated: 2016/05/16 22:01:35 by jmarsal          ###   ########.fr       *#
+#    Updated: 2016/05/25 12:25:25 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+OPTI_FLAGS = -O2
+CFLAGS = $(OPTI_FLAGS) -Wall -Wextra -Werror
 INC_PATH = -I./includes/
 SRC = ft_putchar.c ft_putstr.c ft_strlen.c ft_putnbr.c ft_atoi.c ft_strncmp.c \
 	ft_strcmp.c ft_strstr.c ft_strcat.c ft_strncat.c ft_strlcat.c ft_strcpy.c \
@@ -24,9 +25,9 @@ SRC = ft_putchar.c ft_putstr.c ft_strlen.c ft_putnbr.c ft_atoi.c ft_strncmp.c \
 	ft_strmapi.c ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strtrim.c\
 	ft_strsplit.c ft_itoa.c ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c \
 	ft_putendl.c ft_putendl_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
-	ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_itoa_base.c ft_print_memory.c \
-	ft_isupper.c ft_islower.c ft_isspace.c ft_strnlen.c ft_strtoupper.c \
-	ft_strtolower.c ft_abs.c ft_min.c ft_max.c
+	ft_lstadd.c ft_lstadd_end.c ft_lstiter.c ft_lstmap.c ft_itoa_base.c \
+	ft_print_memory.c ft_isupper.c ft_islower.c ft_isspace.c ft_strnlen.c \
+	ft_strtoupper.c ft_strtolower.c ft_abs.c ft_min.c ft_max.c
 OBJ_PATH = ./obj
 OBJ = $(SRC:%.c=$(OBJ_PATH)/%.o)
 
@@ -35,6 +36,9 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
+	@echo "\n-----------------------------------------------------------------"
+	@echo "|\033[32;1m\t$(NAME) has been created with $(OPTI_FLAGS) optimisation\t\t\033[0m|"
+	@echo "-----------------------------------------------------------------\n"
 
 $(OBJ_PATH)/%.o: %.c
 	@mkdir -p $(OBJ_PATH)
@@ -42,8 +46,14 @@ $(OBJ_PATH)/%.o: %.c
 
 clean:
 	rm -rf $(OBJ_PATH)
+	@echo "\n-------------------------------------------------"
+	@echo "|\t\033[31mall libft_files.o are deleted\033[0m\t\t|"
+	@echo "-------------------------------------------------\n"
 
 fclean: clean
 	rm -f $(NAME)
+	@echo "\n-----------------------------------------"
+	@echo "|\t\033[31m$(NAME) is deleted\033[0m\t\t|"
+	@echo "-----------------------------------------\n"
 
 re: fclean all

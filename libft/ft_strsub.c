@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/09 21:59:30 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/02 11:09:37 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/05/25 11:43:10 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char	*fresh;
+	char	*str;
 
 	if (s)
 	{
-		fresh = (char*)malloc(sizeof(char) * len + 1);
-		if (fresh)
+		str = (char *)malloc(sizeof(char) * (len + 1));
+		if (str)
 		{
-			fresh = ft_strncpy(fresh, &s[start], len);
-			fresh[len] = '\0';
+			while (start--)
+				s++;
+			str = ft_strncpy(str, s, len);
+			str[len] = '\0';
 		}
-		return (fresh);
+		return (str);
 	}
 	return (NULL);
 }
