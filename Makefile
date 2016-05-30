@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmarsal  <jmarsal @student.42.fr>          +#+  +:+       +#+         #
+#    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/05/30 01:08:48 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/05/30 14:41:15 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g -O0 -fsanitize=address -pedantic -Wall -Werror -Wextra
 SRC_DIR = ./srcs/
 SRC_FILES = main.c init.c event.c draw.c
 OBJ_PATH = ./obj

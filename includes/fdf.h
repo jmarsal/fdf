@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarsal  <jmarsal @student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/27 23:26:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/05/30 16:09:19 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@
 #include <stdio.h> // WARNING !!!
 
 # include "../libft/includes/libft.h"
-# include <unistd.h>
 # include <string.h>
-# include <stdlib.h>
 # include <mlx.h>
-# define WIDTH 1024
-# define HEIGHT 768
+# define WIDTH 1920
+# define HEIGHT 1080
 # define TIER WIDTH / 3
 
 typedef struct		s_coords
 {
 	int				x;
 	int				y;
+	int				z;
 	struct s_cords	*next;
 }					t_coords;
 

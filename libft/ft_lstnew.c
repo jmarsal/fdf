@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 12:34:30 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/07 15:54:08 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/05/30 13:42:19 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	{
 		newlist->content = ft_memalloc(content_size);
 		if (newlist->content == NULL)
+		{
+			free (newlist);
 			return (NULL);
+		}
 		ft_memcpy(newlist->content, content, content_size);
 		newlist->content_size = content_size;
 	}

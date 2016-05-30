@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/16 13:15:50 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/04/28 15:27:11 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/05/30 13:29:34 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ char	*ft_strcpy(char *dest, const char *src)
 	int i;
 
 	i = 0;
-	if (!dest && !src)
+	if (!dest || !src)
 		return (0);
 	while (src[i] != '\0')
 	{
