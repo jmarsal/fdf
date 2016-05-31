@@ -3,30 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmarsal  <jmarsal @student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/27 23:11:52 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/05/31 12:33:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	draw_windows(t_coords *coords, t_mlx *data, t_colors color)
+void		mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
-	while (coords->x <= WIDTH && coords->y <= HEIGHT)
+	int		octet;
+
+	octet = app->img->bpp / 8;
+	if (c->x > 0 && c->x < WIDTH && c->y > 0 && c->y < HEIGHT)
+		ft_memcpy(&app->img->data[octet * (c->x + app->img->sizeline /
+					octet * c->y)], &color, octet);
+}
+
+void	draw_windows(t_app *app)
+{
+	while (app->coords->x <= WIDTH && app->coords->y <= HEIGHT)
 	{
-		if (coords->x == WIDTH)
+		if (app->coords->x == WIDTH)
 		{
-			coords->y++;
-			coords->x = 0;
+			app->coords->y++;
+			app->coords->x = 0;
 		}
-		if (coords->x <= TIER * 1)
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, coords->x, coords->y, color.color1);
-		if (coords->x >= TIER * 1 && coords->x <= TIER * 2)
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, coords->x, coords->y, color.color2);
-		if (coords->x >= TIER * 2 && coords->x <= TIER * 3)
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, coords->x, coords->y, color.color3);
-		coords->x++;
+		if (app->coords->x <= TIER * 1)
+			mlx_put_pixel_to_image(app, app->coords, app->color.color1);
+		if (app->coords->x >= TIER * 1 && app->coords->x <= TIER * 2)
+			mlx_put_pixel_to_image(app, app->coords, app->color.color2);
+		if (app->coords->x >= TIER * 2 && app->coords->x <= TIER * 3)
+			mlx_put_pixel_to_image(app, app->coords, app->color.color3);
+		app->coords->x++;
 	}
 }

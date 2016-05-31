@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 11:08:01 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/25 14:51:18 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/05/31 14:42:49 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,30 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define GNL_BUFF_SIZE 1024
+# define EOL '\n'
+
+/*
+** LIST struct
+*/
+
 typedef struct		s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+/*
+** GNL struct
+*/
+
+typedef struct		s_gnl
+{
+	int				fd;
+	char			*line;
+	struct s_gnl	*next;
+}					t_gnl;
 
 /*
 ** Memory management
@@ -51,6 +69,12 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_print_memory(const void *addr, size_t size);
+
+/*
+** File management
+*/
+
+int					ft_get_next_line(const int fd, char **line);
 
 /*
 **	Char control
