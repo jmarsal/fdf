@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/01 02:25:00 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/01 16:08:28 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,21 @@
 # define TIER WIDTH / 3
 # define NB_ERR 4
 
-typedef struct		s_coords
-{
-	struct s_cords	*next;
-	int				x;
-	int				y;
-	int				z;
-}					t_coords;
-
 typedef struct		s_colors
 {
 	int				color1;
 	int				color2;
 	int				color3;
 }					t_colors;
+
+typedef struct		s_coords
+{
+	struct s_cords	*next;
+	int				x;
+	int				y;
+	int				z;
+	int				color;
+}					t_coords;
 
 typedef struct		s_error
 {
@@ -62,6 +63,7 @@ typedef struct		s_mlx
 
 typedef struct		s_data
 {
+	t_coords		*data_val;
 	char			**data;
 	int				nb_lines;
 }					t_data;
