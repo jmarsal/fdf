@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/31 14:55:38 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/01 02:25:00 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define TIER WIDTH / 3
+# define NB_ERR 4
 
 typedef struct		s_coords
 {
@@ -39,6 +40,11 @@ typedef struct		s_colors
 	int				color3;
 }					t_colors;
 
+typedef struct		s_error
+{
+	char			**p_err;
+}					t_error;
+
 typedef struct		s_img
 {
 	void 			*img_ptr;
@@ -54,24 +60,32 @@ typedef struct		s_mlx
 	void			*mlx_win;
 }					t_mlx;
 
+typedef struct		s_data
+{
+	char			**data;
+	int				nb_lines;
+}					t_data;
+
 typedef struct		s_app
 {
 	t_mlx			*mlx;
 	t_img			*img;
 	t_colors		color;
 	t_coords		*coords;
+	t_error			err;
+	t_data			*data;
+	int				fd;
 	int				len;
-	char			*buf;
-	char			**data;
 }					t_app;
 
 /*
 **	init.c
 */
 
-t_app		*init_app();
+t_app		*init_app(char **av);
 t_mlx		*init_mlx();
 t_img		*init_img(t_app *env);
+t_data		*init_data();
 t_colors	init_colors();
 t_coords	*init_coords();
 
@@ -94,5 +108,14 @@ void		draw_windows(t_app *app);
 ** get_data.c
 */
 
+int		get_data(t_app *app, char *line, int i);
+
+/*
+** perror.c
+*/
+
+void 		init_perror(t_error *err);
+int			print_error(t_app *app, int witch_one);
+int			error_read(t_app *app, char *av);
 
 #endif

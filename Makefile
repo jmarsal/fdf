@@ -6,7 +6,7 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/05/31 14:59:35 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/01 01:59:31 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 CC = gcc
 CFLAGS = -g -O0 -fsanitize=address -pedantic -Wall -Werror -Wextra
 SRC_DIR = ./srcs/
-SRC_FILES = main.c init.c event.c draw.c
+SRC_FILES = main.c init.c event.c draw.c perror.c get_data.c
 OBJ_PATH = ./obj
 OBJ_FILES = $(SRC_FILES:%.c=$(OBJ_PATH)/%.o)
 INC_PATH = -I./libft/ -I./libmlx/ -I./includes/

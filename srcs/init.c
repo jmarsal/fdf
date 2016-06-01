@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/31 15:24:05 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/01 01:40:12 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_app		*init_app()
+t_app		*init_app(char **av)
 {
 	t_app	*app;
 
@@ -25,9 +25,13 @@ t_app		*init_app()
 	app->color = init_colors();
 	if ((app->coords = init_coords()) == NULL)
 		return (NULL);
-	app->len = 0;
-	if ((app->buf = (char *)malloc(sizeof(char) * BUFF_SIZE)) == NULL)
+	if ((app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL)
 		return (NULL);
+	if ((app->data = init_data()) == NULL)
+		return (NULL);
+	init_perror(&app->err);
+	app->fd = open(av[1], O_RDONLY);
+	app->len = 0;
 	return (app);
 }
 
@@ -52,13 +56,24 @@ t_img		*init_img(t_app *app)
 
 	if ((img = (t_img *)malloc(sizeof(t_img))) == NULL)
 	{
-		ft_putstr("\033[31mERROR\033[0m\n--> Can't create image.\n");
+		print_error(app, 3);
 		return (NULL);
 	}
 	img->img_ptr = mlx_new_image(app->mlx, WIDTH, HEIGHT);
 	img->data = mlx_get_data_addr(img->img_ptr, &img->bpp,
 			&img->sizeline, &img->endian);
 	return (img);
+}
+
+t_data		*init_data()
+{
+	t_data		*data;
+
+	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
+		return (NULL);
+	data->data = NULL;
+	data->nb_lines = 0;
+	return (data);
 }
 
 t_colors	init_colors()
