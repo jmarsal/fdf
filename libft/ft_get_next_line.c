@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 13:56:45 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/31 15:05:18 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/01 15:21:40 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int			read_file_gnl(int fd, t_gnl *list)
 	char	*swap;
 
 	swap = NULL;
+	ret = 1;
 	while (!ft_strchr(list->line, EOL))
 	{
 		if ((ret = read(fd, buffer, GNL_BUFF_SIZE)) < 0)

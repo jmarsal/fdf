@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/01 01:40:12 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/01 15:26:53 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@ t_app		*init_app(char **av)
 
 	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
 		return (NULL);
-	if ((app->mlx = init_mlx()) == NULL)
+	if ((app->mlx = init_mlx()) == NULL || (app->img = init_img(app)) == NULL ||
+		(app->coords = init_coords()) == NULL || (app->data = init_data()) \
+		== NULL || (app->err.p_err = (char**)malloc(sizeof(char*) * \
+		(NB_ERR + 1))) == NULL)
+	{
+		free(app);
 		return (NULL);
-	if ((app->img = init_img(app)) == NULL)
-		return (NULL);
+	}
 	app->color = init_colors();
-	if ((app->coords = init_coords()) == NULL)
-		return (NULL);
-	if ((app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL)
-		return (NULL);
-	if ((app->data = init_data()) == NULL)
-		return (NULL);
 	init_perror(&app->err);
 	app->fd = open(av[1], O_RDONLY);
 	app->len = 0;
