@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/02 10:28:35 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/02 10:53:53 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ t_data		*init_data()
 
 	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
 		return (NULL);
-	data->data = NULL;
-	data->nb_lines = 0;
+	data->data_val = NULL;
+	data->x_max = 0;
+	data->y_max = 0;
 	return (data);
 }
 

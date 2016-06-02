@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/02 10:29:36 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/02 10:52:51 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 int		read_file(char **av, t_app *app)
 {
 	char	*line;
-	int		i;
+	int		ret;
 
 	line = NULL;
-	i = 0;
 	if (error_read(app, av[1]) == -1)
 		return (-1);
 	while ((ft_get_next_line(app->fd, &line)) > 0)
-		app->data->data[i++] = line;
+	{
+		if ((ret = get_data(app, line)) == -1)
+			return (print_error(app, 2));
+		app->data->y_max++;
+	}
+	if (app->data->y_max == 0)
+		return (print_error(app, 1));
 	if (close(app->fd) == -1)
 		return (-1);
 	return (0);

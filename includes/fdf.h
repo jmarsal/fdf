@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/01 16:08:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/02 10:50:36 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct		s_mlx
 typedef struct		s_data
 {
 	t_coords		*data_val;
-	char			**data;
-	int				nb_lines;
+	int				x_max;
+	int				y_max;
 }					t_data;
 
 typedef struct		s_app
@@ -110,7 +110,7 @@ void		draw_windows(t_app *app);
 ** get_data.c
 */
 
-int		get_data(t_app *app, char *line, int i);
+int			get_data(t_app *app, char *line);
 
 /*
 ** perror.c

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 23:12:12 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/01 15:09:27 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/02 10:52:48 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,11 @@ int			print_error(t_app *app, int witch_one)
 int			error_read(t_app *app, char *av)
 {
 	char	*line;
-	
+
 	line = NULL;
 	if (!(ft_strstr(av, ".fdf")))
 		return (print_error(app, 5));
 	if (app->fd < 0)
 		return (print_error(app, 0));
-	while ((ft_get_next_line(app->fd, &line)) > 0)
-		app->data->nb_lines++;
-	if (app->data->nb_lines == 0)
-		return (print_error(app, 1));
-	else
-	{
-		if (close(app->fd) == -1)
-			return (-1);
-		app->fd = open(av, O_RDONLY);
-	}
-	if ((app->data->data = (char**)malloc(sizeof(char*) * app->data->nb_lines
-							+ 1)) == NULL)
-		return (-1);
 	return (0);
 }
