@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/01 15:26:53 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/02 10:28:35 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_coords	*init_coords()
 	coords->x = 0;
 	coords->y = 0;
 	coords->z = 0;
+	coords->color = 0xffffff;
 	coords->next = NULL;
 	return (coords);
 }
