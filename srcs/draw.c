@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/31 12:33:02 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/02 12:02:23 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void		mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
+static void		mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
 	int		octet;
 

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/02 10:50:36 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/02 12:08:50 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,13 @@ typedef struct		s_app
 **	init.c
 */
 
-t_app		*init_app(char **av);
-t_mlx		*init_mlx();
-t_img		*init_img(t_app *env);
-t_data		*init_data();
-t_colors	init_colors();
+t_app		*init_app();
 t_coords	*init_coords();
 
 /*
 **	event.c
 */
 
-int			close_win(t_mlx *mlx);
 int			key_hook(int keycode);
 int			mouse_hook(int button, int x, int y);
 
@@ -103,21 +98,18 @@ int			mouse_hook(int button, int x, int y);
 **	draw.c
 */
 
-void		mlx_put_pixel_to_image(t_app *app, t_coords *c, int color);
 void		draw_windows(t_app *app);
 
 /*
 ** get_data.c
 */
 
-int			get_data(t_app *app, char *line);
+int			get_data(t_app *app, const char *line);
 
 /*
 ** perror.c
 */
 
-void 		init_perror(t_error *err);
 int			print_error(t_app *app, int witch_one);
-int			error_read(t_app *app, char *av);
 
 #endif
