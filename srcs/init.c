@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 16:10:49 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 22:45:17 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static t_data		*init_data()
 /*static t_colors	init_colors()
 {
 	t_colors	color;
-
 	color.color1 = 0x00239d;
 	color.color2 = 0xffffff;
 	color.color3 = 0xa10404;
