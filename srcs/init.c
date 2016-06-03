@@ -6,34 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/01 15:26:53 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 16:10:49 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_app		*init_app(char **av)
-{
-	t_app	*app;
-
-	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
-		return (NULL);
-	if ((app->mlx = init_mlx()) == NULL || (app->img = init_img(app)) == NULL ||
-		(app->coords = init_coords()) == NULL || (app->data = init_data()) \
-		== NULL || (app->err.p_err = (char**)malloc(sizeof(char*) * \
-		(NB_ERR + 1))) == NULL)
-	{
-		free(app);
-		return (NULL);
-	}
-	app->color = init_colors();
-	init_perror(&app->err);
-	app->fd = open(av[1], O_RDONLY);
-	app->len = 0;
-	return (app);
-}
-
-t_mlx		*init_mlx()
+static t_mlx		*init_mlx()
 {
 	t_mlx	*mlx;
 
@@ -48,7 +27,7 @@ t_mlx		*init_mlx()
 	return (mlx);
 }
 
-t_img		*init_img(t_app *app)
+static t_img		*init_img(t_app *app)
 {
 	t_img	*img;
 
@@ -63,18 +42,20 @@ t_img		*init_img(t_app *app)
 	return (img);
 }
 
-t_data		*init_data()
+static t_data		*init_data()
 {
 	t_data		*data;
 
 	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
 		return (NULL);
-	data->data = NULL;
-	data->nb_lines = 0;
+	data->data_val = NULL;
+	data->x_max = 0;
+	data->y_max = 0;
 	return (data);
 }
 
-t_colors	init_colors()
+// A voir si besoin dans le futur...
+/*static t_colors	init_colors()
 {
 	t_colors	color;
 
@@ -82,17 +63,40 @@ t_colors	init_colors()
 	color.color2 = 0xffffff;
 	color.color3 = 0xa10404;
 	return (color);
-}
+}*/
 
-t_coords	*init_coords()
+t_coords	*init_coords(int x, int y, int z, int color)
 {
 	t_coords	*coords;
 
 	if ((coords = (t_coords*)malloc(sizeof(t_coords))) == NULL)
 		return (NULL);
-	coords->x = 0;
-	coords->y = 0;
-	coords->z = 0;
+	coords->x = x;
+	coords->y = y;
+	coords->z = z;
+	if (color == 0)
+		coords->color = 0xFFFFFF;
+	else
+		coords->color = color;
 	coords->next = NULL;
 	return (coords);
+}
+
+t_app		*init_app()
+{
+	t_app	*app;
+
+	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
+		return (NULL);
+	if ((app->mlx = init_mlx()) == NULL || (app->img = init_img(app)) == NULL ||
+		(app->coords = init_coords(0, 0, 0, 0)) == NULL || (app->data = init_data()) \
+		== NULL || (app->err.p_err = (char**)malloc(sizeof(char*) * \
+		(NB_ERR + 1))) == NULL)
+	{
+		free(app);
+		return (NULL);
+	}
+	//app->color = init_colors();
+	app->len = 0;
+	return (app);
 }

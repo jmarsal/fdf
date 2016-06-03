@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event.c                                            :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/02 12:04:42 by jmarsal          ###   ########.fr       */
+/*   Created: 2016/06/03 09:59:24 by jmarsal           #+#    #+#             */
+/*   Updated: 2016/06/03 10:02:10 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int		key_hook(int keycode)
+void	coords_add_end(t_coords **alst, t_coords *new)
 {
-	// printf("keycode = %d\n", keycode);
-	if (keycode == 53)
-		exit(0);
-	return (0);
-}
+	t_coords	*cur;
 
-int		mouse_hook(int button, int x, int y)
-{
-	printf("button : %d, pos : (%d,%d)\n", button, x, y);
-	return (0);
+	cur = *alst;
+	if (cur)
+	{
+		while (cur->next)
+			cur = cur->next;
+		cur->next = new;
+	}
+	else
+		*alst = new;
 }

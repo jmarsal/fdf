@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/01 16:08:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 16:32:35 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define BUFF_SIZE 1024
 # define WIDTH 1920
 # define HEIGHT 1080
-# define TIER WIDTH / 3
+# define TIER WIDTH / 50
 # define NB_ERR 4
 
 typedef struct		s_colors
@@ -34,9 +34,9 @@ typedef struct		s_colors
 
 typedef struct		s_coords
 {
-	struct s_cords	*next;
-	int				x;
-	int				y;
+	struct s_coords	*next;
+	size_t			x;
+	size_t			y;
 	int				z;
 	int				color;
 }					t_coords;
@@ -64,8 +64,8 @@ typedef struct		s_mlx
 typedef struct		s_data
 {
 	t_coords		*data_val;
-	char			**data;
-	int				nb_lines;
+	size_t			x_max;
+	size_t			y_max;
 }					t_data;
 
 typedef struct		s_app
@@ -84,18 +84,13 @@ typedef struct		s_app
 **	init.c
 */
 
-t_app		*init_app(char **av);
-t_mlx		*init_mlx();
-t_img		*init_img(t_app *env);
-t_data		*init_data();
-t_colors	init_colors();
-t_coords	*init_coords();
+t_app		*init_app();
+t_coords	*init_coords(int x, int y, int z, int color);
 
 /*
 **	event.c
 */
 
-int			close_win(t_mlx *mlx);
 int			key_hook(int keycode);
 int			mouse_hook(int button, int x, int y);
 
@@ -103,21 +98,24 @@ int			mouse_hook(int button, int x, int y);
 **	draw.c
 */
 
-void		mlx_put_pixel_to_image(t_app *app, t_coords *c, int color);
 void		draw_windows(t_app *app);
 
 /*
 ** get_data.c
 */
 
-int		get_data(t_app *app, char *line, int i);
+int			get_data(t_app *app, const char *line, t_coords *c_data);
 
 /*
 ** perror.c
 */
 
-void 		init_perror(t_error *err);
 int			print_error(t_app *app, int witch_one);
-int			error_read(t_app *app, char *av);
+
+/*
+** list.c
+*/
+
+void	coords_add_end(t_coords **alst, t_coords *new);
 
 #endif
