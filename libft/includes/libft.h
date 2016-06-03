@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 11:08:01 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/05/31 14:42:49 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 15:05:21 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ char				*ft_strrev(char *str);
 */
 
 int					ft_atoi(const char *str);
+int					ft_atoi_base(char *str, int base);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int value, int base);
 

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 12:46:10 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 14:56:34 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct		s_app
 */
 
 t_app		*init_app();
-t_coords	*init_coords(int x, int y, int z);
+t_coords	*init_coords(int x, int y, int z, int color);
 
 /*
 **	event.c
