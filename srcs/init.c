@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/02 16:28:52 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 09:24:31 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_data		*init_data()
 
 	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
 		return (NULL);
-	data->data_val = NULL;
+	data->data_val = (t_coords*)malloc(sizeof(t_coords));
 	data->x_max = 0;
 	data->y_max = 0;
 	return (data);
