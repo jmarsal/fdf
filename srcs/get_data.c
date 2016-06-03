@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/02 16:18:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 08:55:50 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-/*static int	get_color(const char *line, int *i, t_coords *get_c)
+static int	get_color(const char *line, int *i, t_coords *get_c)
 {
 	char	*tmp_color;
 	int		len;
@@ -58,7 +58,7 @@ static int	get_coords_and_color(const char *line, int *i, t_coords *get_c)
 	}
 	get_c->x++;
 	return (ret);
-}*/
+}
 
 /*
 ** Va me servire a recuperer le nombre de points par ligne,
