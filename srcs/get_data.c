@@ -6,19 +6,30 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 12:09:29 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 13:18:04 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static int	get_z(t_app *app, const char *line, size_t *i, size_t y)
+static int	get_color(t_app *app, const char *line, size_t *i, t_coords *c_data)
 {
-	size_t	x;
+	*i += 1;
+	while (!ft_isspace(line[*i]))
+	{
+		printf("%c", line[*i]);
+		*i += 1;
+	}
+	printf("\n");
+	(void)app, (void)c_data;
+	return (0);
+}
+
+static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
+{
 	size_t	len;
 	char	*number;
 
-	x = 0;
 	len = 0;
 	number = NULL;
 	while (ft_isdigit(line[len++]) && line[len])
@@ -29,28 +40,32 @@ static int	get_z(t_app *app, const char *line, size_t *i, size_t y)
 	while (ft_isdigit(line[*i]) && line[*i])
 		number[len++] = line[*i += 1];
 	number[len++] = '\0';
-	ft_lstadd_end((t_list**)&app->data->data_val, (t_list*)init_coords(x, y, ft_atoi(number)));
-	x++;
-	(void)app, (void)y;
+	coords_add_end(&app->data->data_val,
+		init_coords(c_data->x, c_data->y, ft_atoi(number)));
+	c_data->x++;
 	return (0);
 }
 
-int		get_data(t_app *app, const char *line)
+int		get_data(t_app *app, const char *line, t_coords *c_data)
 {
 	size_t			i;
-	static size_t	y;
 
 	i = 0;
-	y = 0;
+	c_data->x = 0;
 	if (!ft_isdigit(line[0]))
 		return (-1);
 	while (line[i])
 	{
-		if (get_z(app, line, &i, y) == -1)
+		while (ft_isspace(line[i++]));
+		if (get_z(app, line, &i, c_data) == -1)
 			return (-1);
+		if (line[i] == ',')
+		{
+			if (get_color(app, line, &i, c_data) == -1)
+				return (-1);
+		}
 		i++;
 	}
-	y++;
 	printf("%s\n", line);
 	return (0);
 }
