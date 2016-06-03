@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/02 12:06:22 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 10:09:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ static t_colors	init_colors()
 	return (color);
 }
 
-t_coords	*init_coords()
+t_coords	*init_coords(int x, int y, int z)
 {
 	t_coords	*coords;
 
 	if ((coords = (t_coords*)malloc(sizeof(t_coords))) == NULL)
 		return (NULL);
-	coords->x = 0;
-	coords->y = 0;
-	coords->z = 0;
+	coords->x = x;
+	coords->y = y;
+	coords->z = z;
 	coords->color = 0xffffff;
 	coords->next = NULL;
 	return (coords);
@@ -85,7 +85,7 @@ t_app		*init_app()
 	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
 		return (NULL);
 	if ((app->mlx = init_mlx()) == NULL || (app->img = init_img(app)) == NULL ||
-		(app->coords = init_coords()) == NULL || (app->data = init_data()) \
+		(app->coords = init_coords(0, 0, 0)) == NULL || (app->data = init_data()) \
 		== NULL || (app->err.p_err = (char**)malloc(sizeof(char*) * \
 		(NB_ERR + 1))) == NULL)
 	{

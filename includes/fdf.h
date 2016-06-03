@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/02 12:08:50 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 10:04:38 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct		s_colors
 
 typedef struct		s_coords
 {
-	struct s_cords	*next;
+	struct s_coords	*next;
 	int				x;
 	int				y;
 	int				z;
@@ -85,7 +85,7 @@ typedef struct		s_app
 */
 
 t_app		*init_app();
-t_coords	*init_coords();
+t_coords	*init_coords(int x, int y, int z);
 
 /*
 **	event.c
@@ -111,5 +111,11 @@ int			get_data(t_app *app, const char *line);
 */
 
 int			print_error(t_app *app, int witch_one);
+
+/*
+** list.c
+*/
+
+void	coords_add_end(t_coords **alst, t_coords *new);
 
 #endif
