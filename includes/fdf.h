@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 10:04:38 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 11:42:11 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct		s_colors
 typedef struct		s_coords
 {
 	struct s_coords	*next;
-	int				x;
-	int				y;
+	size_t			x;
+	size_t			y;
 	int				z;
 	int				color;
 }					t_coords;
@@ -64,8 +64,8 @@ typedef struct		s_mlx
 typedef struct		s_data
 {
 	t_coords		*data_val;
-	int				x_max;
-	int				y_max;
+	size_t			x_max;
+	size_t			y_max;
 }					t_data;
 
 typedef struct		s_app
