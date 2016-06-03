@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 12:03:10 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 12:09:29 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	get_z(t_app *app, const char *line, size_t *i, size_t y)
 	while (ft_isdigit(line[*i]) && line[*i])
 		number[len++] = line[*i += 1];
 	number[len++] = '\0';
-	coords_add_end(&app->data->data_val, init_coords(x, y, ft_atoi(number)));
+	ft_lstadd_end((t_list**)&app->data->data_val, (t_list*)init_coords(x, y, ft_atoi(number)));
 	x++;
 	(void)app, (void)y;
 	return (0);
