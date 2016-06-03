@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 15:54:19 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 16:10:49 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static t_data		*init_data()
 	return (data);
 }
 
-static t_colors	init_colors()
+// A voir si besoin dans le futur...
+/*static t_colors	init_colors()
 {
 	t_colors	color;
 
@@ -62,7 +63,7 @@ static t_colors	init_colors()
 	color.color2 = 0xffffff;
 	color.color3 = 0xa10404;
 	return (color);
-}
+}*/
 
 t_coords	*init_coords(int x, int y, int z, int color)
 {
@@ -95,7 +96,7 @@ t_app		*init_app()
 		free(app);
 		return (NULL);
 	}
-	app->color = init_colors();
+	//app->color = init_colors();
 	app->len = 0;
 	return (app);
 }

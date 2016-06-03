@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 16:06:48 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 16:31:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 	else
 		coords_add_end(&app->data->data_val,
 			init_coords(c_data->x, c_data->y, ft_atoi(number), 0));
-	c_data->x++;
+	c_data->x += 1 + TIER;
 	free(number);
 	return (0);
 }
@@ -86,6 +86,5 @@ int		get_data(t_app *app, const char *line, t_coords *c_data)
 			return (-1);
 		i++;
 	}
-	printf("%s\n", line);
 	return (0);
 }
