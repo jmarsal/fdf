@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 22:43:46 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 23:42:58 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct		s_app
 	t_mlx			*mlx;
 	t_img			*img;
 	t_colors		color;
-	t_coords		*coords;
+	// t_coords		*coords;
 	t_error			err;
 	t_data			*data;
 	int				fd;

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 23:16:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/03 23:41:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ static void		mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 
 void	draw_windows(t_app *app)
 {
-	while (app->data->data_val)
+	t_coords	*coords;
+
+	coords = app->data->data_val;
+	while (coords)
 	{
-		mlx_put_pixel_to_image(app, app->data->data_val,
-			app->data->data_val->color);
-		app->data->data_val = app->data->data_val->next;
+		mlx_put_pixel_to_image(app, coords, coords->color);
+		coords = coords->next;
 	}
 	/*while (app->coords->x <= WIDTH && app->coords->y <= HEIGHT)
 	{
