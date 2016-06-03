@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 23:41:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/04 00:10:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ void	draw_windows(t_app *app)
 	t_coords	*coords;
 
 	coords = app->data->data_val;
-	while (coords)
+	while (coords->next)
 	{
-		mlx_put_pixel_to_image(app, coords, coords->color);
+		while (coords->x <= coords->next->x)
+			mlx_put_pixel_to_image(app, coords, coords->color);
+		// while (coords->y <= coords->next->y && coords->next->y != app->data->y_max)
+		// 	mlx_put_pixel_to_image(app, coords, coords->color);
 		coords = coords->next;
 	}
 	/*while (app->coords->x <= WIDTH && app->coords->y <= HEIGHT)
