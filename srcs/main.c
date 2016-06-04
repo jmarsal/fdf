@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/04 18:45:24 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/04 23:28:22 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static int		read_file(const char **av, t_app *app)
 		if ((ret = get_data(app, line, c_data)) == -1)
 			return (print_error(app, 2));
 		c_data->y += 1;
-		app->data->y_max++;
 	}
+	app->data->y_max = c_data->y;
 	free (c_data);
 	if (app->data->y_max == 0)
 		return (print_error(app, 1));
@@ -69,16 +69,9 @@ int		main(int ac, char **av)
 			ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
 			exit (-1);
 		}
-		if (read_file((const char**)av, app) == -1)
+		if (read_file((const char**)av, app) == -1 ||
+			find_and_init_good_size_of_win(app) == -1)
 			exit (-1);
-		printf("x max = %lu, y max = %lu\n", app->data->x_max, app->data->y_max);
-		app->win = init_win(1920, 1080, 3, 50);
-		if ((app->mlx = init_mlx(app)) == NULL ||
-			(app->img = init_img(app)) == NULL)
-		{
-			ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
-			exit (-1);
-		}
 		mlx_key_hook(app->mlx->mlx_win, key_hook, &app->mlx);
 		mlx_mouse_hook(app->mlx->mlx_win, mouse_hook, &app->mlx);
 		draw_windows(app);

@@ -6,7 +6,7 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/04 15:32:06 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/04 23:01:42 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 CFLAGS = -O2 -Wall -Werror -Wextra
 CFLAGS_DEBUG = -g -O0 -fsanitize=address -pedantic -Wall -Werror -Wextra
 SRC_DIR = ./srcs/
-SRC_FILES = main.c init.c event.c draw.c perror.c get_data.c list.c
+SRC_FILES = main.c init.c event.c draw.c perror.c get_data.c list.c size_win.c
 OBJ_PATH = ./obj
 OBJ_FILES = $(SRC_FILES:%.c=$(OBJ_PATH)/%.o)
 INC_PATH = -I./libft/ -I./libmlx/ -I./includes/

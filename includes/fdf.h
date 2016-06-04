@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/04 16:16:32 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/04 23:27:19 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <mlx.h>
+# include <math.h>
 # define BUFF_SIZE 1024
 # define NB_ERR 4
 
@@ -125,6 +126,12 @@ int			print_error(t_app *app, int witch_one);
 ** list.c
 */
 
-void	coords_add_end(t_coords **alst, t_coords *new);
+void		coords_add_end(t_coords **alst, t_coords *new);
+
+/*
+** size_win.c
+*/
+
+int			find_and_init_good_size_of_win(t_app *app);
 
 #endif
