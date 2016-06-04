@@ -6,7 +6,7 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/03 22:48:40 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/04 15:32:06 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ libs-re: libs-fclean
 
 fclean-all: fclean libs-fclean
 
-debug: fclean $(OBJ_FILES)
+debug: $(OBJ_FILES)
 	@make -C libft
 	@make -C libmlx
 	@$(CC) -o $(NAME) $(OBJ_FILES) $(CFLAGS_DEBUG) $(INC_PATH) $(LIB_PATH)

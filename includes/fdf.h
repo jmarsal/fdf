@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/03 23:42:58 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/04 16:16:32 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 # include <string.h>
 # include <mlx.h>
 # define BUFF_SIZE 1024
-# define WIDTH 1920
-# define HEIGHT 1080
-# define TIER WIDTH / 50
 # define NB_ERR 4
 
 typedef struct		s_colors
@@ -45,6 +42,14 @@ typedef struct		s_error
 {
 	char			**p_err;
 }					t_error;
+
+typedef struct		s_win
+{
+	size_t			width;
+	size_t			height;
+	size_t			div_const;
+	size_t			space_pix;
+}					t_win;
 
 typedef struct		s_img
 {
@@ -73,6 +78,7 @@ typedef struct		s_app
 	t_mlx			*mlx;
 	t_img			*img;
 	t_colors		color;
+	t_win			*win;
 	// t_coords		*coords;
 	t_error			err;
 	t_data			*data;
@@ -86,6 +92,9 @@ typedef struct		s_app
 
 t_app		*init_app();
 t_coords	*init_coords(int x, int y, int z, int color);
+t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix);
+t_mlx		*init_mlx(t_app *app);
+t_img		*init_img(t_app *app);
 
 /*
 **	event.c
