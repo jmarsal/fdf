@@ -6,7 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 11:08:01 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 02:01:01 by jmarsal          ###   ########.fr       */
+<<<<<<< HEAD
+/*   Updated: 2016/06/03 23:28:53 by jmarsal          ###   ########.fr       */
+=======
+/*   Updated: 2016/06/03 15:05:21 by jmarsal          ###   ########.fr       */
+>>>>>>> origin/lostcommit
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +22,6 @@
 # include <unistd.h>
 
 # define GNL_BUFF_SIZE 1024
-# define WIDTH 1920
-# define HEIGHT	1080
-# define TIER 50
 # define EOL '\n'
 
 /*
