@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 15:26:06 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/05 16:15:30 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int		read_file(const char **av, t_app *app)
 
 	line = NULL;
 	ft_putstr("ca marche ?");
-	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
+	if ((c_data = init_coords(WIDTH / 4, HEIGHT / 4, 0, 0)) == NULL)
 		return (-1);
 	app->fd = open(av[1], O_RDONLY);
 	if (error_read(app, av[1]) == -1)
@@ -48,7 +48,7 @@ static int		read_file(const char **av, t_app *app)
 		app->data->x_max = 1;
 		if ((ret = get_data(app, line, c_data)) == -1)
 			return (print_error(app, 2));
-		c_data->y += 1 + 50;
+		c_data->y += PIX_SPACE;
 		app->data->y_max++;
 	}
 	free (c_data);
@@ -73,7 +73,7 @@ int		main(int ac, char **av)
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
 		printf("x max = %lu, y max = %lu\n", app->data->x_max, app->data->y_max);
-		app->win = init_win(1920, 1080, 3, 50);
+		app->win = init_win(WIDTH, HEIGHT, 3, PIX_SPACE);
 		if ((app->mlx = init_mlx(app)) == NULL ||
 			(app->img = init_img(app)) == NULL)
 		{

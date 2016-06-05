@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 15:05:44 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/05 16:08:20 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <string.h>
 # include <mlx.h>
 # define BUFF_SIZE 1024
+# define WIDTH 1920
+# define HEIGHT 1080
+# define PIX_SPACE 50
 # define NB_ERR 4
 
 typedef struct		s_colors

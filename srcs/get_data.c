@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 02:30:18 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/05 16:14:40 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 	else
 		coords_add_end(&app->data->data_val,
 			init_coords(c_data->x, c_data->y, ft_atoi(number), 0));
-	c_data->x += 1 + 50;
+	c_data->x += PIX_SPACE;
 	app->data->x_max++;
 	free(number);
 	return (0);
@@ -76,7 +76,7 @@ int		get_data(t_app *app, const char *line, t_coords *c_data)
 	size_t			i;
 
 	i = 0;
-	c_data->x = 0;
+	c_data->x = WIDTH / 4;
 	if (!ft_isdigit(line[0]))
 		return (-1);
 	while (line[i])
