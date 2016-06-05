@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 22:42:04 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/05 22:56:20 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ static char	*init_number_z(const char *line, int len)
 	char	*number;
 
 	len = 0;
-	while (ft_isdigit(line[len++]) && line[len])
+	while (ft_isdigit(line[++len]) && line[len])
 		;
+	printf("len = %d\n", len);
 	if ((number = (char*)malloc(sizeof(char) * len + 1)) == NULL)
 		return (NULL);
 	return (number);
@@ -53,7 +54,7 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 	if ((number = init_number_z(line, len)) == NULL)
 		return (-1);
 	while (ft_isdigit(line[*i]) && line[*i])
-		printf("line[i] = %c", line[*i += 1]);
+		printf("%c", line[*i += 1]);
 		// number[len++] = line[*i += 1];
 	printf("\n");
 	number[len++] = '\0';
@@ -84,11 +85,11 @@ int		get_data(t_app *app, const char *line, t_coords *c_data)
 		return (-1);
 	while (line[i])
 	{
-		while (ft_isspace(line[i]))
-			i++;
 		if (get_z(app, line, &i, c_data) == -1)
 			return (-1);
-		++i;
+		while (ft_isspace(line[i]))
+			i++;
+		i++;
 	}
 	return (0);
 }
