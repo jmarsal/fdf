@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 18:29:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/06 00:05:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void draw_lines(t_app *app)
 		test = coords;
 		x = test->x;
 		y = test->y;
+		printf("z = %d\n", test->z);
 		while (y < coords->next->y + PIX_SPACE && coords)
 		{
 			test->y = y;
