@@ -71,6 +71,14 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
+		printf("x max = %lu, y max = %lu\n", app->data->x_max, app->data->y_max);
+		app->win = init_win(1920, 1080, 3, 50);
+		if ((app->mlx = init_mlx(app)) == NULL ||
+			(app->img = init_img(app)) == NULL)
+		{
+			ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
+			exit (-1);
+		}
 		mlx_key_hook(app->mlx->mlx_win, key_hook, &app->mlx);
 		mlx_mouse_hook(app->mlx->mlx_win, mouse_hook, &app->mlx);
 		draw_windows(app);
