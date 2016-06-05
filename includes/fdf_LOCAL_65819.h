@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 01:59:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/04 23:27:19 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct		s_app
 	t_img			*img;
 	t_colors		color;
 	t_win			*win;
-	t_coords		*coords;
+	// t_coords		*coords;
 	t_error			err;
 	t_data			*data;
 	int				fd;
@@ -93,9 +93,9 @@ typedef struct		s_app
 
 t_app		*init_app();
 t_coords	*init_coords(int x, int y, int z, int color);
-// t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix);
-// t_mlx		*init_mlx(t_app *app);
-// t_img		*init_img(t_app *app);
+t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix);
+t_mlx		*init_mlx(t_app *app);
+t_img		*init_img(t_app *app);
 
 /*
 **	event.c
