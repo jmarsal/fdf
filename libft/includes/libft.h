@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 11:08:01 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 02:53:45 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/05 03:00:06 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 # define GNL_BUFF_SIZE 1024
 # define EOL '\n'
-# define WIDTH 1920
 /*
 ** LIST struct
 */
