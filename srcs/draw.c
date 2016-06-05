@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 16:13:46 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/05 17:41:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void		mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 static void draw_lines(t_app *app)
 {
 	t_coords	*coords;
-	t_coords	*cur;
 	t_coords	*test;
 	size_t		x;
 	size_t		y;
@@ -35,21 +34,19 @@ static void draw_lines(t_app *app)
 	{
 		test = coords;
 		x = test->x;
-		while (x <= coords->next->x)
+		y = test->y;
+		printf("test->y = %lu\n", test->y);
+		while (x <= coords->next->x && coords->next)
 		{
 			test->x = x;
 			mlx_put_pixel_to_image(app, test, coords->color);
-			cur = test;
-			while (cur->y != HEIGHT / 4 + test->y && cur->next)
-				cur = cur->next;
-			y = test->y;
-			while (y <= coords->next->y)
-			{
-				test->y = y;
-				mlx_put_pixel_to_image(app, test, coords->color);
-				y++;
-			}
 			x++;
+		}
+		while (y <= coords->next->y + PIX_SPACE && coords->next)
+		{
+			test->y = y;
+			mlx_put_pixel_to_image(app, test, coords->color);
+			y++;
 		}
 		coords = coords->next;
 	}
