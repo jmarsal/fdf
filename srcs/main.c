@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 16:15:30 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/05 18:05:52 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int		read_file(const char **av, t_app *app)
 	int			ret;
 
 	line = NULL;
-	ft_putstr("ca marche ?");
 	if ((c_data = init_coords(WIDTH / 4, HEIGHT / 4, 0, 0)) == NULL)
 		return (-1);
 	app->fd = open(av[1], O_RDONLY);
@@ -72,7 +71,6 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
-		printf("x max = %lu, y max = %lu\n", app->data->x_max, app->data->y_max);
 		app->win = init_win(WIDTH, HEIGHT, 3, PIX_SPACE);
 		if ((app->mlx = init_mlx(app)) == NULL ||
 			(app->img = init_img(app)) == NULL)

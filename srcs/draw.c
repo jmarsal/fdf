@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 17:41:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/05 18:29:54 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@ static void draw_lines(t_app *app)
 	size_t		y;
 
 	coords = app->data->data_val;
+	test = coords;
 	while (coords->next)
 	{
 		test = coords;
 		x = test->x;
 		y = test->y;
-		printf("test->y = %lu\n", test->y);
-		while (x <= coords->next->x && coords->next)
-		{
-			test->x = x;
-			mlx_put_pixel_to_image(app, test, coords->color);
-			x++;
-		}
-		while (y <= coords->next->y + PIX_SPACE && coords->next)
+		while (y < coords->next->y + PIX_SPACE && coords)
 		{
 			test->y = y;
 			mlx_put_pixel_to_image(app, test, coords->color);
 			y++;
+		}
+		while (x < coords->next->x && coords)
+		{
+			test->x = x;
+			mlx_put_pixel_to_image(app, test, coords->color);
+			x++;
 		}
 		coords = coords->next;
 	}
