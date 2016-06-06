@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 15:47:55 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/06 23:54:49 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 	if (line[*i] == ',')
 	{
 		if ((c_data->color = get_color(line, i)) == -1)
+		{
+			free(number);
 			return (-1);
+		}
 		coords_add_end(&app->data->data_val,
 			init_coords(c_data->x, c_data->y, ft_atoi(number), c_data->color));
 	}
