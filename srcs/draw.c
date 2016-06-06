@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 15:34:34 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/06 16:13:19 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,31 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 // static void draw_lines(t_app *app)
 // {
 // 	t_coords	*coords;
-// 	// t_coords	*test;
-// 	// size_t		x;
-// 	// size_t		y;
+// 	t_coords	*test;
+// 	size_t		x;
+// 	size_t		y;
 //
 // 	coords = app->data->data_val;
-// 	// test = coords;
-// 	while (coords)
+// 	test = coords;
+// 	while (coords->next)
 // 	{
-// 		// test = coords;
-// 		// x = test->x;
-// 		// y = test->y;
-// 		if (coords->color == 0xFFFFFF && coords->z > 0)
-// 			coords->color = 0xff0000;
-// 		// while (y < coords->next->y + PIX_SPACE && coords)
-// 		// {
-// 		// 	test->y = y;
-// 			mlx_put_pixel_to_image(app, coords, coords->color);
-// 		// 	y++;
-// 		// }
-// 		// while (x < coords->next->x && coords)
-// 		// {
-// 		// 	test->x = x;
-// 		// 	mlx_put_pixel_to_image(app, test, coords->color);
-// 		// 	x++;
-// 		// }
+// 		test = coords;
+// 		x = test->x;
+// 		y = test->y;
+// 		if (test->color == 0xFFFFFF && test->z > 0)
+// 			coords->color = 0xa10404;
+// 		while (y < coords->next->y + PIX_SPACE && coords)
+// 		{
+// 			test->y = y;
+// 			mlx_put_pixel_to_image(app, test, coords->color);
+// 			y++;
+// 		}
+// 		while (x < coords->next->x && coords)
+// 		{
+// 			test->x = x;
+// 			mlx_put_pixel_to_image(app, test, coords->color);
+// 			x++;
+// 		}
 // 		coords = coords->next;
 // 	}
 // }
