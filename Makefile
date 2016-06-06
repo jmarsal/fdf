@@ -6,13 +6,13 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/06 14:39:43 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/06 15:38:02 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = gcc
-CFLAGS = -O2 -Wall -Werror -Wextra
+CFLAGS = -g -O0 -fsanitize=address -pedantic -Wall -Werror -Wextra
 CFLAGS_DEBUG = -g -O0 -fsanitize=address -pedantic -Wall -Werror -Wextra
 SRC_DIR = ./srcs/
 SRC_FILES = main.c init.c event.c draw.c perror.c get_data.c list.c
