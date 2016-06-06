@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 11:16:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/06 12:00:55 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void draw_lines(t_app *app)
 		test = coords;
 		x = test->x;
 		y = test->y;
+		if (test->color == 0xFFFFFF && test->z > 0)
+			coords->color = 0xa10404;
 		while (y < coords->next->y + PIX_SPACE && coords)
 		{
 			test->y = y;
