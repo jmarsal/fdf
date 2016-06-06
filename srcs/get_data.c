@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 10:55:30 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/06 12:37:10 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ int		get_data(t_app *app, const char *line, t_coords *c_data)
 			return (-1);
 		++i;
 	}
+	app->data->x_max++;
 	return (0);
 }

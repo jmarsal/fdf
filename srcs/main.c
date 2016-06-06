@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 18:05:52 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/06 13:59:12 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int		read_file(const char **av, t_app *app)
 		return (-1);
 	while ((ft_get_next_line(app->fd, &line)) > 0)
 	{
-		app->data->x_max = 1;
+		app->data->x_max = 0;
 		if ((ret = get_data(app, line, c_data)) == -1)
 			return (print_error(app, 2));
 		c_data->y += PIX_SPACE;

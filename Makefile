@@ -6,7 +6,7 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/05 15:25:42 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/06 14:39:43 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,9 @@ libs-clean:
 	@make -C libft clean
 	@make -C libmlx clean
 
-libs-fclean: libs-clean
+libs-fclean:
 	@make -C libft fclean
+	@make -C libmlx clean
 
 libs-re: libs-fclean
 	@make -C libft re
