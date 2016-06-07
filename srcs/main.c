@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/07 10:53:51 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/07 11:41:15 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		read_file(const char **av, t_app *app)
 	char		*line;
 	int			ret;
 
-	// line = NULL;
+	line = NULL;
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);
 	app->fd = open(av[1], O_RDONLY);

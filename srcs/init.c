@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 14:48:20 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/07 11:44:06 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static t_data		*init_data()
 	data->data_val = NULL;
 	data->x_max = 0;
 	data->y_max = 0;
+	data->check_elements = 0;
 	return (data);
 }
 

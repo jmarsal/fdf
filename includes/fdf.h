@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/05 16:08:20 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/07 11:43:29 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct		s_data
 	t_coords		*data_val;
 	size_t			x_max;
 	size_t			y_max;
+	size_t			check_elements;
 }					t_data;
 
 typedef struct		s_app

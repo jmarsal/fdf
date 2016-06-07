@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/07 11:19:50 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/07 11:51:50 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ int		get_data(t_app *app, const char *line, t_coords *c_data)
 			return (-1);
 		j++;
 	}
-	printf("0x%08.8X\n", c_data->color);
-	printf("x_max = %lu\n", app->data->x_max);
-	printf("y_max = %lu\n", app->data->y_max);
+	if (app->data->check_elements == 0)
+		app->data->check_elements = app->data->x_max;
+	if (app->data->check_elements != app->data->x_max)
+		return (-1);
 	return (0);
 }
