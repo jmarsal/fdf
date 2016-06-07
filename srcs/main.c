@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/07 15:41:01 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/07 16:13:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int		main(int ac, char **av)
 			ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
 			exit (-1);
 		}
+		if (read_file((const char**)av, app) == -1)
+			exit (-1);
 		app->win = init_win(WIDTH, HEIGHT, 3, 0);
 		if ((app->mlx = init_mlx(app)) == NULL ||
 			(app->img = init_img(app)) == NULL)
@@ -76,8 +78,6 @@ int		main(int ac, char **av)
 			ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
 			exit (-1);
 		}
-		if (read_file((const char**)av, app) == -1)
-			exit (-1);
 		mlx_key_hook(app->mlx->mlx_win, key_hook, &app->mlx);
 		mlx_mouse_hook(app->mlx->mlx_win, mouse_hook, &app->mlx);
 		draw_windows(app);
