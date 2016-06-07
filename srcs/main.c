@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/07 16:13:02 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 00:38:45 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int		read_file(const char **av, t_app *app)
 	free (c_data);
 	if (app->data->y_max == 0)
 		return (print_error(app, 1));
+	app->win->width = app->data->y_max * 2;
 	if (close(app->fd) == -1)
 		return (-1);
 	return (0);
@@ -71,7 +72,7 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
-		app->win = init_win(WIDTH, HEIGHT, 3, 0);
+		app->win = init_win(app->win->width, app->win->height, 3, 0);
 		if ((app->mlx = init_mlx(app)) == NULL ||
 			(app->img = init_img(app)) == NULL)
 		{
