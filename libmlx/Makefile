@@ -20,7 +20,7 @@ clean:
 	@rm -f $(NOM) $(OBJ) *~
 	@rm -f mlx_app
 	@echo "\n-------------------------------------------------"
-	@echo "|\t\033[31mall $(NOM) files.o are deleted\033[0m\t\t|"
+	@echo "|\t\033[31mall libmlx_files.o are deleted\033[0m\t\t|"
 	@echo "-------------------------------------------------\n"
 	@echo "\n-----------------------------------------"
 	@echo "|\t\033[31m$(NOM) is deleted\033[0m\t\t|"

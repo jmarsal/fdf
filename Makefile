@@ -6,14 +6,15 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/06 16:25:24 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/07 11:29:10 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = gcc
-CFLAGS = -O2 -Wall -Werror -Wextra
-CFLAGS_DEBUG = -g -O0 -fsanitize=address -pedantic -Wall -Werror -Wextra
+OPTI = -O2
+CFLAGS = -Wall -Werror -Wextra
+CFLAGS_DEBUG = -g3 -O0 -fsanitize=address
 SRC_DIR = ./srcs/
 SRC_FILES = main.c init.c event.c draw.c perror.c get_data.c list.c
 OBJ_PATH = ./obj
@@ -27,9 +28,9 @@ $(NAME): $(OBJ_FILES)
 	@make -C libft
 	@make -C libmlx
 	@$(CC) -o $(NAME) $(OBJ_FILES) $(CFLAGS) $(INC_PATH) $(LIB_PATH)
-	@echo "\n-------------------------------------------------"
-	@echo "|\033[32;1m\t$(NAME) has been created with -O2 !\t\t\033[0m|"
-	@echo "-------------------------------------------------\n"
+	@echo "\n-----------------------------------------"
+	@echo "|\033[32;1m\t$(NAME) has been created !\t\t\033[0m|"
+	@echo "-----------------------------------------\n"
 
 $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_PATH)
@@ -49,6 +50,12 @@ fclean: clean
 
 re: fclean all
 
+opti: CFLAGS += $(OPTI)
+opti: re
+	@echo "\n-----------------------------------------"
+	@echo "|\033[32;1m\tOPTIMAL mode for $(NAME) with $(OPTI)!\t\033[0m|"
+	@echo "-----------------------------------------\n"
+
 libs:
 	@make -C libft
 	@make -C libmlx
@@ -57,8 +64,9 @@ libs-clean:
 	@make -C libft clean
 	@make -C libmlx clean
 
-libs-fclean: libs-clean
+libs-fclean:
 	@make -C libft fclean
+	@make -C libmlx clean
 
 libs-re: libs-fclean
 	@make -C libft re
@@ -66,13 +74,11 @@ libs-re: libs-fclean
 
 fclean-all: fclean libs-fclean
 
-debug: $(OBJ_FILES)
-	@make -C libft
-	@make -C libmlx
-	@$(CC) -o $(NAME) $(OBJ_FILES) $(CFLAGS_DEBUG) $(INC_PATH) $(LIB_PATH)
-	@echo "\n-------------------------------------------------------------------------------------------------"
+debug: CFLAGS += $(CFLAGS_DEBUG)
+debug: re
+	@echo "\n-----------------------------------------------------------------"
 	@echo "|\033[32;1m\tDebug mode for $(NAME) with $(CFLAGS_DEBUG)!\t\033[0m|"
-	@echo "-------------------------------------------------------------------------------------------------\n"
+	@echo "-----------------------------------------------------------------\n"
 
 norme:
 	norminette $(SRC)

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 11:24:13 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/06 14:48:20 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static t_data		*init_data()
 	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
 		return (NULL);
 	data->data_val = NULL;
-	data->x_max = 1;
-	data->y_max = 1;
+	data->x_max = 0;
+	data->y_max = 0;
 	return (data);
 }
 
@@ -101,9 +101,9 @@ t_app		*init_app()
 
 	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
 		return (NULL);
-	if ((
+	if (
 		(app->data = init_data()) == NULL ||
-		(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL))
+		(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL)
 	{
 		free(app);
 		return (NULL);

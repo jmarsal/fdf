@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 10:55:30 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/07 11:19:50 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 	if (line[*i] == ',')
 	{
 		if ((c_data->color = get_color(line, i)) == -1)
+		{
+			free(number);
 			return (-1);
+		}
 		coords_add_end(&app->data->data_val,
 			init_coords(c_data->x, c_data->y, ft_atoi(number), c_data->color));
 	}
@@ -86,19 +89,26 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 
 int		get_data(t_app *app, const char *line, t_coords *c_data)
 {
+	char	**g_data;
 	size_t	i;
+	size_t  j;
 
 	i = 0;
-	c_data->x = WIDTH / 4;
+	j = 0;
+	if ((g_data = (char**)malloc(sizeof(char *) * ft_strlen(line))) == NULL)
+		return (-1);
+	c_data->x = 0;
 	if (!ft_isdigit(line[0]))
 		return (-1);
-	while (line[i])
+	g_data = ft_strsplit(line, ' ');
+	while (g_data[j])
 	{
-		while (ft_isspace(line[i]))
-			i++;
-		if (get_z(app, line, &i, c_data) == -1)
+		if (get_z(app, g_data[i], &i, c_data) == -1)
 			return (-1);
-		++i;
+		j++;
 	}
+	printf("0x%08.8X\n", c_data->color);
+	printf("x_max = %lu\n", app->data->x_max);
+	printf("y_max = %lu\n", app->data->y_max);
 	return (0);
 }
