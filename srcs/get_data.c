@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/07 14:44:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/07 15:49:04 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 	else
 		coords_add_end(&app->data->data_val,
 			init_coords(c_data->x, c_data->y, ft_atoi(number), 0));
-	c_data->x += PIX_SPACE;
+	c_data->x += app->win->space_pix;
 	app->data->x_max++;
 	free(number);
 	return (0);
@@ -92,24 +92,32 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 
 int		get_data(t_app *app, const char *line, t_coords *c_data)
 {
-	char	**g_data;
+	char	**elems;
+	size_t	nb_elems;
 	size_t	i;
 	size_t  j;
 
 	i = 0;
 	j = 0;
-	if ((g_data = (char**)malloc(sizeof(char *) * ft_strlen(line))) == NULL)
+	nb_elems = 0;
+	if ((elems = (char**)malloc(sizeof(char *) * ft_strlen(line))) == NULL)
 		return (-1);
 	c_data->x = 0;
 	if (line[0] == ' ')
 		while (!(ft_isspace(line[i++])) && line[i])
 	if (!ft_isdigit(line[i]))
 		return (-1);
-	g_data = ft_strsplit(line, ' ');
-	while (g_data[j])
+	elems = ft_strsplit(line, ' ');
+	if (!nb_elems)
+	{
+		while (elems[nb_elems++])
+		;
+		app->win->space_pix = (HEIGHT / nb_elems);
+	}
+	while (elems[j])
 	{
 		i = 0;
-		if (get_z(app, g_data[j], &i, c_data) == -1)
+		if (get_z(app, elems[j], &i, c_data) == -1)
 			return (-1);
 		j++;
 	}
