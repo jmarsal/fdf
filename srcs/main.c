@@ -6,17 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 10:46:44 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 11:56:40 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-static int		close_win(t_mlx *mlx)
-{
-	free(mlx);
-	exit(0);
-}
 
 static int			error_read(t_app *app, const char *av)
 {
@@ -53,7 +47,7 @@ static int		read_file(const char **av, t_app *app)
 	free (c_data);
 	if (app->data->y_max == 0)
 		return (print_error(app, 1));
-	app->win->width = app->data->y_max * 2;
+	app->win->width = app->data->y_max * W_RESIZE;
 	if (close(app->fd) == -1)
 		return (-1);
 	return (0);
@@ -72,20 +66,7 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
-		app->win = init_win(app->win->width, app->win->height, 3, 0);
-		if ((app->mlx = init_mlx(app)) == NULL ||
-			(app->img = init_img(app)) == NULL)
-		{
-			ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
-			exit (-1);
-		}
-		mlx_key_hook(app->mlx->mlx_win, key_hook, &app->mlx);
-		mlx_mouse_hook(app->mlx->mlx_win, mouse_hook, &app->mlx);
-		draw_windows(app);
-		mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
-			app->img->img_ptr, 0, 0);
-		mlx_hook(app->mlx->mlx_win, 17, 1L << 17, close_win, &app->mlx);
-		mlx_loop(app->mlx->mlx_ptr);
+		mlx_start(app);
 	}
 	else
 		ft_putstr("\n\033[31mERROR\033[0m\n--> usage : ./fdf template.fdf\n");

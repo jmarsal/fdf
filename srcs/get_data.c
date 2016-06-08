@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 10:41:56 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 11:58:42 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,12 @@ int		get_data(t_app *app, const char *line, t_coords *c_data)
 	elems = ft_strsplit(line, ' ');
 	if (!nb_elems)
 	{
-		while (elems[nb_elems++])
+		while (elems[++nb_elems])
 		;
 		if (app->win->height)
-			app->win->height = nb_elems;
-		app->win->space_pix = (app->win->height / nb_elems);
+			app->win->height = nb_elems * H_SPACE_PIX;
+		app->win->space_pix = app->win->height / nb_elems;
+		app->win->height = nb_elems * H_RESIZE;
 	}
 	while (elems[j])
 	{

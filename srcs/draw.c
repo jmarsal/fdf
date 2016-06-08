@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/07 15:53:31 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 11:50:52 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,17 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 static void draw_points(t_app *app)
 {
 	t_coords	*coords;
-	// t_coords	*new_coords;
+	t_coords	*new_coords;
 
 	coords = app->data->data_val;
-	// new_coords = coords;
+	new_coords = coords;
 	while (coords)
 	{
-		// new_coords->x = coords->x + app->win->space_pix;
-		// new_coords->y = coords->y + app->win->space_pix;
+		new_coords->x = coords->x + app->win->space_pix;
+		new_coords->y = coords->y + app->win->space_pix;
 		if (coords->color == 0xFFFFFF && coords->z > 0)
 			coords->color = 0xff0000;
-		mlx_put_pixel_to_image(app, coords, coords->color);
+		mlx_put_pixel_to_image(app, new_coords, coords->color);
 		coords = coords->next;
 	}
 }
