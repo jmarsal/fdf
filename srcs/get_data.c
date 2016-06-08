@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 00:41:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 10:41:56 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*init_number_z(const char *line, size_t *i)
 	len = 0;
 	while (ft_isdigit(line[*i + len]) && line[*i + len])
 		++len;
-	if ((number = (char*)malloc(sizeof(char) * len + 1)) == NULL)
+	if ((number = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
 		return (NULL);
 	return (number);
 }

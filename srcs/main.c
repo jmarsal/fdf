@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 00:38:45 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 10:46:44 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int			error_read(t_app *app, const char *av)
 
 	line = NULL;
 	if (!(ft_strstr(av, ".fdf")))
-		return (print_error(app, 5));
+		return (print_error(app, 4));
 	if (app->fd < 0)
 		return (print_error(app, 0));
 	return (0);
