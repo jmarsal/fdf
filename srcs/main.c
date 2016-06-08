@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 23:56:07 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 00:18:27 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		find_good_size_win(const char *av, t_app *app)
 	else if (ft_strstr(av, "elem-col.fdf"))
 		get_size(app, tab_of_size, 1);
 	else if (ft_strstr(av, "elem-fract.fdf"))
-		get_size(app, tab_of_size, 2);
+		get_size(app, tab_of_size, 5);
 	else if (ft_strstr(av, "elem.fdf"))
 		get_size(app, tab_of_size, 3);
 	else if (ft_strstr(av, "elem2.fdf"))

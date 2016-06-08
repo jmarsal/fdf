@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 23:59:10 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 00:18:37 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <string.h>
 # include <mlx.h>
 # define BUFF_SIZE 1024
-# define NB_FILES 5
+# define NB_FILES 6
 # define WIDTH 1920
 # define HEIGHT 1080
 # define H_SPACE_PIX 30

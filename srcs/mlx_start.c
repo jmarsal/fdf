@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 23:57:11 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 00:20:57 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ int				**init_size_win()
 	tab_of_size[0][1] = 350;
 	tab_of_size[1][0] = 600;
 	tab_of_size[1][1] = 600;
-	tab_of_size[2][0] = 1880;
+	tab_of_size[2][0] = 1840;
 	tab_of_size[2][1] = 1080;
 	tab_of_size[3][0] = 400;
 	tab_of_size[3][1] = 400;
 	tab_of_size[4][0] = 1920;
 	tab_of_size[4][1] = 1080;
+	tab_of_size[5][0] = 1520;
+	tab_of_size[5][1] = 1080;
 	return (tab_of_size);
 }
 
