@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 15:17:26 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 23:59:10 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <string.h>
 # include <mlx.h>
 # define BUFF_SIZE 1024
+# define NB_FILES 5
 # define WIDTH 1920
 # define HEIGHT 1080
 # define H_SPACE_PIX 30
-# define W_RESIZE 52
 # define H_RESIZE 18
 # define NB_ERR 5
 
@@ -147,6 +147,8 @@ void	coords_add_end(t_coords **alst, t_coords *new);
 
 void	mlx_start(t_app *app);
 void	find_size_of_win(t_app *app, size_t *nb_elem, char **elems);
+int		**init_size_win();
+void	get_size(t_app *app, int **tab_of_size, int witch_file);
 
 /*
 ** init_data.c
