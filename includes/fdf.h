@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 11:58:04 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 15:17:26 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,17 @@ typedef struct		s_mlx
 	void			*mlx_win;
 }					t_mlx;
 
+typedef struct		s_get_data
+{
+	char	**elems;
+	size_t	nb_elems;
+	size_t	i;
+	size_t  j;
+}					t_get_data;
+
 typedef struct		s_data
 {
+	t_get_data		get_data;
 	t_coords		*data_val;
 	size_t			x_max;
 	size_t			y_max;
@@ -137,5 +146,12 @@ void	coords_add_end(t_coords **alst, t_coords *new);
 */
 
 void	mlx_start(t_app *app);
+void	find_size_of_win(t_app *app, size_t *nb_elem, char **elems);
+
+/*
+** init_data.c
+*/
+
+char	*init_number_z(const char *line, size_t *i);
 
 #endif
