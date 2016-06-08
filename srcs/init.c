@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 15:14:02 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 16:13:08 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ t_app		*init_app()
 		free(app);
 		return (NULL);
 	}
-	//app->color = init_colors();
 	app->win = (t_win*)malloc(sizeof(t_win));
 	app->len = 0;
 	app->data->get_data.i = 0;
