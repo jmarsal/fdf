@@ -6,24 +6,24 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/07 10:41:29 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/08 15:25:02 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = gcc
 OPTI = -O2
-CFLAGS = -Wall -Werror -Wextra
 CFLAGS_DEBUG = -g3 -O0 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra $(OPTI)
 SRC_DIR = ./srcs/
-SRC_FILES = main.c init.c event.c draw.c perror.c get_data.c list.c
+SRC_FILES = main.c init.c event.c draw.c perror.c get_data.c list.c mlx_start.c \
+			init_data.c
 OBJ_PATH = ./obj
 OBJ_FILES = $(SRC_FILES:%.c=$(OBJ_PATH)/%.o)
 INC_PATH = -I./libft/ -I./libmlx/ -I./includes/
 LIB_PATH = -L./libmlx/ -lmlx -L./libft/ -lft -framework OpenGL -framework AppKit
 
 all: $(NAME)
-
 $(NAME): $(OBJ_FILES)
 	@make -C libft
 	@make -C libmlx
@@ -50,12 +50,6 @@ fclean: clean
 
 re: fclean all
 
-opti: CFLAGS += $(OPTI)
-opti: re
-	@echo "\n-----------------------------------------"
-	@echo "|\033[32;1m\tOPTIMAL mode for $(NAME) with $(OPTI)!\t\033[0m|"
-	@echo "-----------------------------------------\n"
-
 libs:
 	@make -C libft
 	@make -C libmlx
@@ -74,7 +68,7 @@ libs-re: libs-fclean
 
 fclean-all: fclean libs-fclean
 
-debug: CFLAGS += $(CFLAGS_DEBUG)
+debug: CFLAGS := $(filter-out $(OPTI),$(CFLAGS) $(CFLAGS_DEBUG))
 debug: re
 	@echo "\n-----------------------------------------------------------------"
 	@echo "|\033[32;1m\tDebug mode for $(NAME) with $(CFLAGS_DEBUG)!\t\033[0m|"
@@ -84,4 +78,5 @@ norme:
 	norminette $(SRC)
 	norminette $(INC_PATH)*.h
 
-.PHONY:  all, clean, fclean, re
+.PHONY:  all, clean, fclean, re, libs, libs-clean, libs-fclean, libs-re \
+		fclean-all, debug, norme

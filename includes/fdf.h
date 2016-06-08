@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/07 14:48:41 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 15:17:26 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 # define BUFF_SIZE 1024
 # define WIDTH 1920
 # define HEIGHT 1080
-# define NB_ERR 4
+# define H_SPACE_PIX 30
+# define W_RESIZE 52
+# define H_RESIZE 18
+# define NB_ERR 5
 
 typedef struct		s_colors
 {
@@ -68,8 +71,17 @@ typedef struct		s_mlx
 	void			*mlx_win;
 }					t_mlx;
 
+typedef struct		s_get_data
+{
+	char	**elems;
+	size_t	nb_elems;
+	size_t	i;
+	size_t  j;
+}					t_get_data;
+
 typedef struct		s_data
 {
+	t_get_data		get_data;
 	t_coords		*data_val;
 	size_t			x_max;
 	size_t			y_max;
@@ -82,7 +94,6 @@ typedef struct		s_app
 	t_img			*img;
 	t_colors		color;
 	t_win			*win;
-	// t_coords		*coords;
 	t_error			err;
 	t_data			*data;
 	int				fd;
@@ -129,5 +140,18 @@ int			print_error(t_app *app, int witch_one);
 */
 
 void	coords_add_end(t_coords **alst, t_coords *new);
+
+/*
+** mlx_start.c
+*/
+
+void	mlx_start(t_app *app);
+void	find_size_of_win(t_app *app, size_t *nb_elem, char **elems);
+
+/*
+** init_data.c
+*/
+
+char	*init_number_z(const char *line, size_t *i);
 
 #endif

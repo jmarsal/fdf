@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 00:41:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 16:23:19 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,6 @@ static int	get_color(const char *line, size_t *i)
 	color = ft_atoi_base(number, 16);
 	free(number);
 	return (color);
-}
-static char	*init_number_z(const char *line, size_t *i)
-{
-	size_t	len;
-	char	*number;
-
-	len = 0;
-	while (ft_isdigit(line[*i + len]) && line[*i + len])
-		++len;
-	if ((number = (char*)malloc(sizeof(char) * len + 1)) == NULL)
-		return (NULL);
-	return (number);
 }
 
 static char	*get_number(const char *line, size_t *i)
@@ -90,40 +78,39 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 	return (0);
 }
 
-int		get_data(t_app *app, const char *line, t_coords *c_data)
+static int	parse_data(t_app *app, const char *line, t_coords *c_data)
 {
-	char	**elems;
-	size_t	nb_elems;
-	size_t	i;
-	size_t  j;
-
-	i = 0;
-	j = 0;
-	nb_elems = 0;
-	if ((elems = (char**)malloc(sizeof(char *) * ft_strlen(line))) == NULL)
-		return (-1);
-	c_data->x = 0;
 	if (line[0] == ' ')
-		while (!(ft_isspace(line[i++])) && line[i])
-	if (!ft_isdigit(line[i]))
+		while (!(ft_isspace(line[app->data->get_data.i++])) &&
+											line[app->data->get_data.i])
+	if (!ft_isdigit(line[app->data->get_data.i]))
 		return (-1);
-	elems = ft_strsplit(line, ' ');
-	if (!nb_elems)
+	app->data->get_data.elems = ft_strsplit(line, ' ');
+	if (!app->data->get_data.nb_elems)
+		find_size_of_win(app, &app->data->get_data.nb_elems,
+			app->data->get_data.elems);
+	while (app->data->get_data.elems[app->data->get_data.j])
 	{
-		while (elems[nb_elems++])
-		;
-		if (app->win->height)
-			app->win->height = nb_elems;
-		app->win->space_pix = (app->win->height / nb_elems);
-	}
-	while (elems[j])
-	{
-		i = 0;
-		if (get_z(app, elems[j], &i, c_data) == -1)
-			return (-1);
-		j++;
+		app->data->get_data.i = 0;
+		if (get_z(app, app->data->get_data.elems[app->data->get_data.j],
+			&app->data->get_data.i,	c_data) == -1)
+				return (-1);
+		app->data->get_data.j++;
 	}
 	if (app->data->check_elements == 0)
 		app->data->check_elements = app->data->x_max;
+	return (0);
+}
+
+int			get_data(t_app *app, const char *line, t_coords *c_data)
+{
+	if ((app->data->get_data.elems = (char**)malloc(sizeof(char *) *
+													ft_strlen(line))) == NULL)
+	return (-1);
+	app->data->get_data.j = 0;
+	app->data->get_data.nb_elems = 0;
+	c_data->x = 0;
+	if ((parse_data(app, line, c_data)) == -1)
+		return (-1);
 	return ((app->data->check_elements != app->data->x_max) ? -1 : 0);
 }

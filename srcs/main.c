@@ -6,17 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 00:38:45 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/08 16:25:17 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-static int		close_win(t_mlx *mlx)
-{
-	free(mlx);
-	exit(0);
-}
 
 static int			error_read(t_app *app, const char *av)
 {
@@ -24,10 +18,24 @@ static int			error_read(t_app *app, const char *av)
 
 	line = NULL;
 	if (!(ft_strstr(av, ".fdf")))
-		return (print_error(app, 5));
+		return (print_error(app, 4));
 	if (app->fd < 0)
 		return (print_error(app, 0));
 	return (0);
+}
+
+static void		find_good_size_win(const char *av, t_app *app)
+{
+	if (ft_strstr(av, "42.fdf"))
+	{
+		app->win->width = 600;
+		app->win->height = 350;
+	}
+	else
+	{
+		app->win->width = 1920;
+		app->win->height = 1080;
+	}
 }
 
 static int		read_file(const char **av, t_app *app)
@@ -36,7 +44,7 @@ static int		read_file(const char **av, t_app *app)
 	char		*line;
 	int			ret;
 
-	line = NULL;
+	find_good_size_win(av[1], app);
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);
 	app->fd = open(av[1], O_RDONLY);
@@ -53,7 +61,6 @@ static int		read_file(const char **av, t_app *app)
 	free (c_data);
 	if (app->data->y_max == 0)
 		return (print_error(app, 1));
-	app->win->width = app->data->y_max * 2;
 	if (close(app->fd) == -1)
 		return (-1);
 	return (0);
@@ -72,20 +79,9 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
-		app->win = init_win(app->win->width, app->win->height, 3, 0);
-		if ((app->mlx = init_mlx(app)) == NULL ||
-			(app->img = init_img(app)) == NULL)
-		{
-			ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
-			exit (-1);
-		}
-		mlx_key_hook(app->mlx->mlx_win, key_hook, &app->mlx);
-		mlx_mouse_hook(app->mlx->mlx_win, mouse_hook, &app->mlx);
-		draw_windows(app);
-		mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
-			app->img->img_ptr, 0, 0);
-		mlx_hook(app->mlx->mlx_win, 17, 1L << 17, close_win, &app->mlx);
-		mlx_loop(app->mlx->mlx_ptr);
+			printf("width = %lu\n", app->win->width);
+			printf("height = %lu\n", app->win->height);
+		mlx_start(app);
 	}
 	else
 		ft_putstr("\n\033[31mERROR\033[0m\n--> usage : ./fdf template.fdf\n");
