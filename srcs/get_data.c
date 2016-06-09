@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/07 11:19:50 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 13:41:51 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,26 @@
 
 static int	get_color(const char *line, size_t *i)
 {
-	size_t	len;
+	int		len;
 	int		color;
 	char	*number;
 
-	*i += 2;
-	len = *i;
-	while (ft_isspace(line[len++]) && line[len])
-		;
-	if ((number = (char*)malloc(sizeof(char) * len + 1)) == NULL)
+	*i += 3;
+	len = 0;
+	while (!ft_isspace(line[*i + len]) && line[*i + len])
+		++len;
+	if ((number = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
 		return (-1);
 	len = 0;
-	while (!ft_isspace(line[*i]))
-		number[len++] = line[*i += 1];
-	number[len++] = '\0';
+	while (line[*i + len] != ' ' && line[*i + len])
+		{
+			number[len] = line[*i + len];
+			len++;
+		}
+	number[len] = '\0';
 	color = ft_atoi_base(number, 16);
 	free(number);
 	return (color);
-}
-static char	*init_number_z(const char *line, size_t *i)
-{
-	size_t	len;
-	char	*number;
-
-	len = 0;
-	while (ft_isdigit(line[*i + len]) && line[*i + len])
-		len++;
-	if ((number = (char*)malloc(sizeof(char) * len + 1)) == NULL)
-		return (NULL);
-	return (number);
 }
 
 static char	*get_number(const char *line, size_t *i)
@@ -53,21 +44,25 @@ static char	*get_number(const char *line, size_t *i)
 	len = 0;
 	if ((number = init_number_z(line, i)) == NULL)
 		return (NULL);
-	while (ft_isdigit(line[*i]) && line[*i])
+	while (ft_isdigit(line[*i + len]) && line[*i + len])
 		{
-			number[len++] = line[*i];
-			*i += 1;
+			number[len] = line[*i + len];
+			len++;
 		}
-	number[len++] = '\0';
+	number[len] = '\0';
 	return (number);
 }
 
 static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 {
 	char	*number;
+	int		z;
+	int		color;
 
+	color = 0;
 	if ((number = get_number(line, i)) == NULL)
 		return (-1);
+	z = ft_atoi(number);
 	if (line[*i] == ',')
 	{
 		if ((c_data->color = get_color(line, i)) == -1)
@@ -75,40 +70,55 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 			free(number);
 			return (-1);
 		}
-		coords_add_end(&app->data->data_val,
-			init_coords(c_data->x, c_data->y, ft_atoi(number), c_data->color));
+		color = c_data->color;
 	}
-	else
-		coords_add_end(&app->data->data_val,
-			init_coords(c_data->x, c_data->y, ft_atoi(number), 0));
-	c_data->x += PIX_SPACE;
-	app->data->x_max++;
+	coords_add_end(&app->data->data_val, init_coords(c_data->x, c_data->y, z,
+														color));
+	c_data->x += app->win->space_pix;
+	app->x_max++;
 	free(number);
 	return (0);
 }
 
-int		get_data(t_app *app, const char *line, t_coords *c_data)
+static int	parse_data(t_app *app, const char *line, t_coords *c_data,
+						t_get_data *helper)
 {
-	char	**g_data;
-	size_t	i;
-	size_t  j;
-
-	i = 0;
-	j = 0;
-	if ((g_data = (char**)malloc(sizeof(char *) * ft_strlen(line))) == NULL)
-		return (-1);
-	c_data->x = 0;
-	if (!ft_isdigit(line[0]))
-		return (-1);
-	g_data = ft_strsplit(line, ' ');
-	while (g_data[j])
+	if (line[0] == ' ')
+		while (!(ft_isspace(line[helper->i++])) && line[helper->i])
+			if (!ft_isdigit(line[helper->i]))
+				return (-1);
+	helper->elems = ft_strsplit(line, ' ');
+	if (!helper->nb_elems)
 	{
-		if (get_z(app, g_data[i], &i, c_data) == -1)
-			return (-1);
-		j++;
+		while (helper->elems[++helper->nb_elems])
+		;
+		app->win->space_pix = app->win->width / helper->nb_elems;
 	}
-	printf("0x%08.8X\n", c_data->color);
-	printf("x_max = %lu\n", app->data->x_max);
-	printf("y_max = %lu\n", app->data->y_max);
+	while (helper->elems[helper->j])
+	{
+		helper->i = 0;
+		if (get_z(app, helper->elems[helper->j], &helper->i, c_data) == -1)
+				return (-1);
+		helper->j += 1;
+	}
+	if (app->check_elements == 0)
+		app->check_elements = app->x_max;
 	return (0);
+}
+
+int			get_data(t_app *app, const char *line, t_coords *c_data)
+{
+	t_get_data	helper;
+
+	if ((helper.elems = (char**)malloc(sizeof(char *) * ft_strlen(line))) == NULL)
+		return (-1);
+	helper.i = 0;
+	helper.j = 0;
+	helper.nb_elems = 0;
+	c_data->x = 0;
+	if ((parse_data(app, line, c_data, &helper)) == -1)
+		return (-1);
+	data_add_end(&app->data, init_data(app->data->data_val));
+	app->data->data_val = NULL;
+	return ((app->check_elements != app->x_max) ? -1 : 0);
 }

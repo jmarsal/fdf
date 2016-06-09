@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_app.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 14:48:20 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 13:48:21 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,6 @@ t_img		*init_img(t_app *app)
 	return (img);
 }
 
-static t_data		*init_data()
-{
-	t_data		*data;
-
-	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
-		return (NULL);
-	data->data_val = NULL;
-	data->x_max = 0;
-	data->y_max = 0;
-	return (data);
-}
-
-// A voir si besoin dans le futur...
-/*static t_colors	init_colors()
-{
-	t_colors	color;
-	color.color1 = 0x00239d;
-	color.color2 = 0xffffff;
-	color.color3 = 0xa10404;
-	return (color);
-}*/
-
 t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix)
 {
 	t_win	*tmp;
@@ -78,37 +56,25 @@ t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix
 	return (tmp);
 }
 
-t_coords	*init_coords(int x, int y, int z, int color)
-{
-	t_coords	*coords;
-
-	if ((coords = (t_coords*)malloc(sizeof(t_coords))) == NULL)
-		return (NULL);
-	coords->x = x;
-	coords->y = y;
-	coords->z = z;
-	if (color == 0)
-		coords->color = 0xFFFFFF;
-	else
-		coords->color = color;
-	coords->next = NULL;
-	return (coords);
-}
-
 t_app		*init_app()
 {
-	t_app	*app;
+	t_app		*app;
+	t_coords	*start;
 
 	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
 		return (NULL);
+	start = NULL;
 	if (
-		(app->data = init_data()) == NULL ||
-		(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL)
+		(app->data = init_data(NULL)) == NULL ||
+		(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL
+		|| (app->win = (t_win*)malloc(sizeof(t_win))) == NULL)
 	{
 		free(app);
 		return (NULL);
 	}
-	//app->color = init_colors();
+	app->check_elements = 0;
+	app->x_max = 0;
+	app->y_max = 0;
 	app->len = 0;
 	return (app);
 }

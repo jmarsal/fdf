@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/06 16:13:19 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 13:08:11 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 	int		octet;
 
 	octet = app->img->bpp / 8;
-	if (c->x > 0 && c->x < WIDTH && c->y > 0 && c->y < HEIGHT)
+	if (c->x > 0 && c->x < app->win->width && c->y > 0 && c->y < app->win->height)
 		ft_memcpy(&app->img->data[octet * (c->x + app->img->sizeline /
 					octet * c->y)], &color, octet);
 }
@@ -77,15 +77,28 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 
 static void draw_points(t_app *app)
 {
+	t_data		*lst_cur;
 	t_coords	*coords;
+	t_coords	*new_coords;
+	int test;
 
-	coords = app->data->data_val;
-	while (coords)
+	lst_cur = app->data;
+	coords = NULL;
+	while (lst_cur)
 	{
-		if (coords->color == 0xFFFFFF && coords->z > 0)
-			coords->color = 0xff0000;
-		mlx_put_pixel_to_image(app, coords, coords->color);
-		coords = coords->next;
+		test = 0;
+		coords = lst_cur->data_val;
+		new_coords = coords;
+		while (coords)
+		{
+			new_coords->x = coords->x + H_RESIZE;
+			new_coords->y = coords->y + H_RESIZE;
+			if (coords->color == 0xFFFFFF && coords->z > 0)
+				coords->color = 0xff0000;
+			mlx_put_pixel_to_image(app, new_coords, coords->color);
+			coords = coords->next;
+		}
+		lst_cur = lst_cur->next;
 	}
 }
 
