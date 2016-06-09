@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 12:32:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 13:47:03 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,30 @@ char	*init_number_z(const char *line, size_t *i)
 	return (number);
 }
 
-t_data		*init_lst_lines(t_coords *get_data_line)
+t_coords	*init_coords(int x, int y, int z, int color)
 {
-	t_data	*lst_line;
+	t_coords	*coords;
 
-	if ((lst_line = (t_data *)malloc(sizeof(t_data))) == NULL)
+	if ((coords = (t_coords*)malloc(sizeof(t_coords))) == NULL)
 		return (NULL);
-	lst_line->data_val = get_data_line;
-	lst_line->next = NULL;
-	return (lst_line);
+	coords->x = x;
+	coords->y = y;
+	coords->z = z;
+	if (color == 0)
+		coords->color = 0xFFFFFF;
+	else
+		coords->color = color;
+	coords->next = NULL;
+	return (coords);
+}
+
+t_data		*init_data(t_coords *lst_lines)
+{
+	t_data		*data;
+
+	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
+		return (NULL);
+	data->data_val = lst_lines;
+	data->next = NULL;
+	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 12:30:32 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 13:41:51 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,9 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 			return (-1);
 		}
 		color = c_data->color;
-		coords_add_end(&app->data->data_val,
-			init_coords(c_data->x, c_data->y, z, color));
 	}
-	else
-		coords_add_end(&app->data->data_val,
-			init_coords(c_data->x, c_data->y, z, color));
+	coords_add_end(&app->data->data_val, init_coords(c_data->x, c_data->y, z,
+														color));
 	c_data->x += app->win->space_pix;
 	app->x_max++;
 	free(number);
@@ -92,7 +89,11 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 				return (-1);
 	helper->elems = ft_strsplit(line, ' ');
 	if (!helper->nb_elems)
-		find_size_of_win(app, &helper->nb_elems, helper->elems);
+	{
+		while (helper->elems[++helper->nb_elems])
+		;
+		app->win->space_pix = app->win->width / helper->nb_elems;
+	}
 	while (helper->elems[helper->j])
 	{
 		helper->i = 0;
@@ -117,6 +118,7 @@ int			get_data(t_app *app, const char *line, t_coords *c_data)
 	c_data->x = 0;
 	if ((parse_data(app, line, c_data, &helper)) == -1)
 		return (-1);
-	data_add_end(&app->data, init_lst_lines(app->data->data_val));
+	data_add_end(&app->data, init_data(app->data->data_val));
+	app->data->data_val = NULL;
 	return ((app->check_elements != app->x_max) ? -1 : 0);
 }

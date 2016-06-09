@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 11:25:56 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 13:34:54 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static int			error_read(t_app *app, const char *av)
+static int		error_read(t_app *app, const char *av)
 {
 	char	*line;
 
@@ -24,40 +24,13 @@ static int			error_read(t_app *app, const char *av)
 	return (0);
 }
 
-static void		find_good_size_win(const char *av, t_app *app)
-{
-	int **tab_of_size;
-
-	tab_of_size = init_size_win();
-	if (ft_strstr(av, "42.fdf"))
-		get_size(app, tab_of_size, 0);
-	else if (ft_strstr(av, "elem-col.fdf"))
-		get_size(app, tab_of_size, 1);
-	else if (ft_strstr(av, "elem-fract.fdf"))
-		get_size(app, tab_of_size, 5);
-	else if (ft_strstr(av, "elem.fdf"))
-		get_size(app, tab_of_size, 3);
-	else if (ft_strstr(av, "elem2.fdf"))
-		get_size(app, tab_of_size, 1);
-	else if (ft_strstr(av, "julia.fdf"))
-		get_size(app, tab_of_size, 4);
-	else if (ft_strstr(av, "mars.fdf"))
-		get_size(app, tab_of_size, 2);
-	else if (ft_strstr(av, "t1.fdf"))
-		get_size(app, tab_of_size, 2);
-	else if (ft_strstr(av, "t2.fdf"))
-		get_size(app, tab_of_size, 4);
-	else
-		get_size(app, tab_of_size, 4);
-}
-
 static int		read_file(const char **av, t_app *app)
 {
 	t_coords	*c_data;
 	char		*line;
 	int			ret;
 
-	find_good_size_win(av[1], app);
+	read_name_for_size_win(av[1], app);
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);
 	app->fd = open(av[1], O_RDONLY);
