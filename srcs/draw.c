@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 15:43:05 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 11:11:30 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
+/*static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
 	int		octet;
 
@@ -20,7 +20,7 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 	if (c->x > 0 && c->x < WIDTH && c->y > 0 && c->y < HEIGHT)
 		ft_memcpy(&app->img->data[octet * (c->x + app->img->sizeline /
 					octet * c->y)], &color, octet);
-}
+}*/
 
 // static void draw_lines(t_app *app)
 // {
@@ -77,19 +77,30 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 
 static void draw_points(t_app *app)
 {
+	t_data		*lst_cur;
 	t_coords	*coords;
 	t_coords	*new_coords;
+	int test;
 
-	coords = app->data->data_val;
+	lst_cur = app->data;
+	coords = NULL;
 	new_coords = coords;
-	while (coords)
+	while (lst_cur)
 	{
-		new_coords->x = coords->x + H_RESIZE;
-		new_coords->y = coords->y + H_RESIZE;
-		if (coords->color == 0xFFFFFF && coords->z > 0)
-			coords->color = 0xff0000;
-		mlx_put_pixel_to_image(app, new_coords, coords->color);
-		coords = coords->next;
+		test = 0;
+		coords = lst_cur->data_val;
+		printf("dans lst_cur\n");
+		while (coords)
+		{
+			printf("test = %d\n", test++);
+			// new_coords->x = coords->x + H_RESIZE;
+			// new_coords->y = coords->y + H_RESIZE;
+			// if (coords->color == 0xFFFFFF && coords->z > 0)
+			// 	coords->color = 0xff0000;
+			// mlx_put_pixel_to_image(app, new_coords, coords->color);
+			coords = coords->next;
+		}
+		lst_cur = lst_cur->next;
 	}
 }
 

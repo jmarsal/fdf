@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 16:13:08 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 12:20:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,14 @@ t_img		*init_img(t_app *app)
 	return (img);
 }
 
-static t_data		*init_data()
+t_data		*init_data(t_coords *lst_lines)
 {
 	t_data		*data;
 
 	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
 		return (NULL);
-	data->data_val = NULL;
-	data->x_max = 0;
-	data->y_max = 0;
-	data->check_elements = 0;
+	data->data_val = lst_lines;
+	data->next = NULL;
 	return (data);
 }
 
@@ -98,19 +96,24 @@ t_coords	*init_coords(int x, int y, int z, int color)
 
 t_app		*init_app()
 {
-	t_app	*app;
+	t_app		*app;
+	t_coords	*start;
 
 	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
 		return (NULL);
+	start = NULL;
+	app->lst_lines = init_data(NULL);
 	if (
-		(app->data = init_data()) == NULL ||
-		(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL)
+		(app->data = init_data(NULL)) == NULL ||
+		(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL
+		|| (app->win = (t_win*)malloc(sizeof(t_win))) == NULL)
 	{
 		free(app);
 		return (NULL);
 	}
-	app->win = (t_win*)malloc(sizeof(t_win));
+	app->check_elements = 0;
+	app->x_max = 0;
+	app->y_max = 0;
 	app->len = 0;
-	app->data->get_data.i = 0;
 	return (app);
 }

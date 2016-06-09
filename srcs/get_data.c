@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 16:23:19 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 12:30:32 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,13 @@ static char	*get_number(const char *line, size_t *i)
 static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 {
 	char	*number;
+	int		z;
+	int		color;
 
+	color = 0;
 	if ((number = get_number(line, i)) == NULL)
 		return (-1);
+	z = ft_atoi(number);
 	if (line[*i] == ',')
 	{
 		if ((c_data->color = get_color(line, i)) == -1)
@@ -66,51 +70,53 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 			free(number);
 			return (-1);
 		}
+		color = c_data->color;
 		coords_add_end(&app->data->data_val,
-			init_coords(c_data->x, c_data->y, ft_atoi(number), c_data->color));
+			init_coords(c_data->x, c_data->y, z, color));
 	}
 	else
 		coords_add_end(&app->data->data_val,
-			init_coords(c_data->x, c_data->y, ft_atoi(number), 0));
+			init_coords(c_data->x, c_data->y, z, color));
 	c_data->x += app->win->space_pix;
-	app->data->x_max++;
+	app->x_max++;
 	free(number);
 	return (0);
 }
 
-static int	parse_data(t_app *app, const char *line, t_coords *c_data)
+static int	parse_data(t_app *app, const char *line, t_coords *c_data,
+						t_get_data *helper)
 {
 	if (line[0] == ' ')
-		while (!(ft_isspace(line[app->data->get_data.i++])) &&
-											line[app->data->get_data.i])
-	if (!ft_isdigit(line[app->data->get_data.i]))
-		return (-1);
-	app->data->get_data.elems = ft_strsplit(line, ' ');
-	if (!app->data->get_data.nb_elems)
-		find_size_of_win(app, &app->data->get_data.nb_elems,
-			app->data->get_data.elems);
-	while (app->data->get_data.elems[app->data->get_data.j])
-	{
-		app->data->get_data.i = 0;
-		if (get_z(app, app->data->get_data.elems[app->data->get_data.j],
-			&app->data->get_data.i,	c_data) == -1)
+		while (!(ft_isspace(line[helper->i++])) && line[helper->i])
+			if (!ft_isdigit(line[helper->i]))
 				return (-1);
-		app->data->get_data.j++;
+	helper->elems = ft_strsplit(line, ' ');
+	if (!helper->nb_elems)
+		find_size_of_win(app, &helper->nb_elems, helper->elems);
+	while (helper->elems[helper->j])
+	{
+		helper->i = 0;
+		if (get_z(app, helper->elems[helper->j], &helper->i, c_data) == -1)
+				return (-1);
+		helper->j += 1;
 	}
-	if (app->data->check_elements == 0)
-		app->data->check_elements = app->data->x_max;
+	if (app->check_elements == 0)
+		app->check_elements = app->x_max;
 	return (0);
 }
 
 int			get_data(t_app *app, const char *line, t_coords *c_data)
 {
-	if ((app->data->get_data.elems = (char**)malloc(sizeof(char *) *
-													ft_strlen(line))) == NULL)
-	return (-1);
-	app->data->get_data.j = 0;
-	app->data->get_data.nb_elems = 0;
-	c_data->x = 0;
-	if ((parse_data(app, line, c_data)) == -1)
+	t_get_data	helper;
+
+	if ((helper.elems = (char**)malloc(sizeof(char *) * ft_strlen(line))) == NULL)
 		return (-1);
-	return ((app->data->check_elements != app->data->x_max) ? -1 : 0);
+	helper.i = 0;
+	helper.j = 0;
+	helper.nb_elems = 0;
+	c_data->x = 0;
+	if ((parse_data(app, line, c_data, &helper)) == -1)
+		return (-1);
+	data_add_end(&app->data, init_lst_lines(app->data->data_val));
+	return ((app->check_elements != app->x_max) ? -1 : 0);
 }
