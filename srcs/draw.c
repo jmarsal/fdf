@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 16:30:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 23:20:40 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,10 @@ static t_coords	*parallel(t_app *app, t_coords *coords)
 
 	tmp.z = coords->z * app->const_power;
 	tmp.y = coords->y * app->win->space_pix;
-	printf("%lu\n", coords->y * app->win->space_pix);
 	tmp.x = coords->x * tmp.z * app->win->space_pix;
-	printf("tmp->z = %f, tmp->y = %d, tmp->x = %d\n", tmp.z, tmp.y, tmp.x);
+	if (coords->color == 0xFFFFFF && tmp.z > 0)
+		coords->color = 0xff0000;
+	// printf("%lu\n", app->win->space_pix);
 	return (init_coords(tmp.x, tmp.y, tmp.z, coords->color));
 }
 
@@ -109,7 +110,6 @@ static void		check_lines(t_app *app, t_coords *coord, t_coords *next)
 	t_coords		*tmp2;
 
 	tmp1 = parallel(app, coord);
-	printf("x tmp 1= %lu, y tmp 1= %lu\n", tmp1->x, tmp1->y);
 	tmp2 = parallel(app, next);
 	if ((tmp1->x - tmp2->x) == 0)
 		draw_vertical(app, coord, next);

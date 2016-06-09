@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 13:36:01 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 23:05:30 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,25 @@ static int			**init_size_win()
 	if ((tab_of_size = (int**)malloc(sizeof(int*) * NB_FILES)) == NULL)
 		return (NULL);
 	while (index < NB_FILES)
-		tab_of_size[index++] = (int*)malloc(sizeof(int) * 2);
+		tab_of_size[index++] = (int*)malloc(sizeof(int) * 3);
 	tab_of_size[0][0] = 600;
 	tab_of_size[0][1] = 350;
+	tab_of_size[0][2] = 30;
 	tab_of_size[1][0] = 600;
 	tab_of_size[1][1] = 600;
+	tab_of_size[1][2] = 30;
 	tab_of_size[2][0] = 1840;
 	tab_of_size[2][1] = 1080;
+	tab_of_size[2][2] = 30;
 	tab_of_size[3][0] = 400;
 	tab_of_size[3][1] = 400;
+	tab_of_size[3][2] = 30;
 	tab_of_size[4][0] = 1920;
 	tab_of_size[4][1] = 1080;
+	tab_of_size[4][2] = 10;
 	tab_of_size[5][0] = 1520;
 	tab_of_size[5][1] = 1080;
+	tab_of_size[5][2] = 30;
 	return (tab_of_size);
 }
 
@@ -41,6 +47,7 @@ static void		get_size(t_app *app, int **tab_of_size, int witch_file)
 {
 	app->win->width = tab_of_size[witch_file][0];
 	app->win->height = tab_of_size[witch_file][1];
+	app->win->space_pix = tab_of_size[witch_file][2];
 }
 
 void		 	read_name_for_size_win(const char *av, t_app *app)

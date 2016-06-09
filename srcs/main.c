@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 15:47:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 23:00:29 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
-			printf("width = %lu\n", app->win->width);
-			printf("height = %lu\n", app->win->height);
 		mlx_start(app);
 	}
 	else
