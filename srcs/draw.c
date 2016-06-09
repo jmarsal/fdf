@@ -6,105 +6,140 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 13:08:11 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 16:30:14 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
+static void	mlx_put_pixel_to_image(t_app *app, t_affine *c, int color)
 {
 	int		octet;
 
 	octet = app->img->bpp / 8;
-	if (c->x > 0 && c->x < app->win->width && c->y > 0 && c->y < app->win->height)
+	if (c->x > 0 && c->x < (int)app->win->width && c->y > 0 && c->y < (int)app->win->height)
 		ft_memcpy(&app->img->data[octet * (c->x + app->img->sizeline /
 					octet * c->y)], &color, octet);
 }
 
-// static void draw_lines(t_app *app)
-// {
-// 	t_coords	*coords;
-// 	t_coords	*test;
-// 	size_t		x;
-// 	size_t		y;
-//
-// 	coords = app->data->data_val;
-// 	test = coords;
-// 	while (coords->next)
-// 	{
-// 		test = coords;
-// 		x = test->x;
-// 		y = test->y;
-// 		if (test->color == 0xFFFFFF && test->z > 0)
-// 			coords->color = 0xa10404;
-// 		while (y < coords->next->y + PIX_SPACE && coords)
-// 		{
-// 			test->y = y;
-// 			mlx_put_pixel_to_image(app, test, coords->color);
-// 			y++;
-// 		}
-// 		while (x < coords->next->x && coords)
-// 		{
-// 			test->x = x;
-// 			mlx_put_pixel_to_image(app, test, coords->color);
-// 			x++;
-// 		}
-// 		coords = coords->next;
-// 	}
-// }
-
-// static void draw_columns(t_app *app)
-// {
-// 	t_coords	*coords;
-// 	t_coords	*test;
-// 	size_t		y;
-//
-// 	coords = app->data->data_val;
-// 	while (coords->next)
-// 	{
-// 		test = coords;
-// 		y = test->y;
-// 		while (y <= coords->next->y)
-// 		{
-// 			test->y = y;
-// 			mlx_put_pixel_to_image(app, test, coords->color);
-// 			y++;
-// 		}
-// 		coords = coords->next;
-// 	}
-// }
-
-static void draw_points(t_app *app)
+static void		get_color(t_app *env, t_coords *start, t_coords *end, t_affine c)
 {
-	t_data		*lst_cur;
-	t_coords	*coords;
-	t_coords	*new_coords;
-	int test;
+	if (start->color > end->color)
+		mlx_put_pixel_to_image(env, &c, end->color);
+	else
+		mlx_put_pixel_to_image(env, &c, start->color);
+}
 
-	lst_cur = app->data;
-	coords = NULL;
-	while (lst_cur)
+static void		draw_affine(t_app *env, t_coords *start, t_coords *end, t_affine c)
+{
+	c.x = start->x;
+	while (c.x < (int)end->x)
 	{
-		test = 0;
-		coords = lst_cur->data_val;
-		new_coords = coords;
-		while (coords)
+		c.y = c.coef * c.x + c.cst;
+		if (c.y > c.coef * (c.x + 1) + c.cst)
 		{
-			new_coords->x = coords->x + H_RESIZE;
-			new_coords->y = coords->y + H_RESIZE;
-			if (coords->color == 0xFFFFFF && coords->z > 0)
-				coords->color = 0xff0000;
-			mlx_put_pixel_to_image(app, new_coords, coords->color);
-			coords = coords->next;
+			while (c.y >= c.coef * (c.x + 1) + c.cst)
+			{
+				get_color(env, start, end, c);
+				c.y--;
+			}
 		}
-		lst_cur = lst_cur->next;
+		else
+		{
+			while (c.y <= c.coef * (c.x + 1) + c.cst)
+			{
+				get_color(env, start, end, c);
+				c.y++;
+			}
+		}
+		c.x++;
 	}
+}
+
+void			check_affine(t_app *env, t_coords *start, t_coords *end)
+{
+	t_affine affine;
+
+	if (start->x > end->x)
+		return (check_affine(env, end, start));
+	affine.coef = (float)(end->y - start->y) / (float)(end->x - start->x);
+	affine.cst = start->y - (affine.coef * start->x);
+	draw_affine(env, start, end, affine);
+}
+
+void			draw_vertical(t_app *env, t_coords *start, t_coords *end)
+{
+	t_affine		c;
+
+	c.x = (int)start->x;
+	c.y = (int)start->y;
+	if (c.y < (int)end->y)
+	{
+		while (c.y <= (int)end->y)
+		{
+			mlx_put_pixel_to_image(env, &c, start->color);
+			c.y++;
+		}
+	}
+	else if (c.y > (int)end->y)
+	{
+		while (c.y >= (int)end->y)
+		{
+			mlx_put_pixel_to_image(env, &c, start->color);
+			c.y--;
+		}
+	}
+}
+
+static t_coords	*parallel(t_app *app, t_coords *coords)
+{
+	t_coord		tmp;
+
+	tmp.z = coords->z * app->const_power;
+	tmp.y = coords->y * app->win->space_pix;
+	printf("%lu\n", coords->y * app->win->space_pix);
+	tmp.x = coords->x * tmp.z * app->win->space_pix;
+	printf("tmp->z = %f, tmp->y = %d, tmp->x = %d\n", tmp.z, tmp.y, tmp.x);
+	return (init_coords(tmp.x, tmp.y, tmp.z, coords->color));
+}
+
+static void		check_lines(t_app *app, t_coords *coord, t_coords *next)
+{
+	t_coords		*tmp1;
+	t_coords		*tmp2;
+
+	tmp1 = parallel(app, coord);
+	printf("x tmp 1= %lu, y tmp 1= %lu\n", tmp1->x, tmp1->y);
+	tmp2 = parallel(app, next);
+	if ((tmp1->x - tmp2->x) == 0)
+		draw_vertical(app, coord, next);
+	else
+		check_affine(app, coord, next);
+}
+
+void			draw_line(t_app *app, t_coords *coord, t_coords *next)
+{
+	if (coord->x != app->x_max)
+		check_lines(app, coord, next);
 }
 
 void	draw_windows(t_app *app)
 {
-	draw_points(app);
-	// draw_lines(app);
-	// draw_columns(app);
+	t_data		*lst_cur;
+	t_coords	*coords_cur;
+	t_coords	*coords_next;
+
+	lst_cur = app->data;
+	while (lst_cur->next)
+	{
+		coords_cur = lst_cur->data_val;
+		coords_next = lst_cur->next->data_val;
+		while (coords_cur && coords_next->next)
+		{
+			draw_line(app, coords_cur, coords_next);
+			coords_cur = coords_cur->next;
+			coords_next = coords_next->next;
+		}
+		lst_cur = lst_cur->next;
+	}
 }

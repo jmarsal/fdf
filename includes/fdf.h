@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 13:49:59 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 15:14:20 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <mlx.h>
+# include <math.h>
 # define BUFF_SIZE 1024
 # define NB_FILES 6
 # define WIDTH 1920
@@ -26,6 +27,23 @@
 # define H_SPACE_PIX 30
 # define H_RESIZE 18
 # define NB_ERR 5
+
+typedef struct		s_affine
+{
+	int				x;
+	int				y;
+	float			coef;
+	float			cst;
+}					t_affine;
+
+typedef struct		s_coord
+{
+	int				x;
+	int				y;
+	double			z;
+}					t_coord;
+
+////////////////////////////////////////
 
 typedef struct			s_coords
 {
@@ -90,6 +108,8 @@ typedef struct			s_app
 	size_t				check_elements;
 	int					fd;
 	int					len;
+	double				const_power;
+	int					showing;
 }						t_app;
 
 /*

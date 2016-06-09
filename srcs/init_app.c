@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 13:48:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/09 15:58:20 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ t_app		*init_app()
 	app->x_max = 0;
 	app->y_max = 0;
 	app->len = 0;
+	app->showing = 0;
+	app->const_power = 1;
 	return (app);
 }
