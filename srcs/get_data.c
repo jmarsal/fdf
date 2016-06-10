@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/10 09:57:41 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/10 12:15:50 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 	{
 		while (helper->elems[++helper->nb_elems])
 		;
-		// app->win->space_pix = app->win->width / helper->nb_elems;
 	}
 	while (helper->elems[helper->j])
 	{

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/10 00:29:00 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/10 13:52:08 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int			**init_size_win()
 		return (NULL);
 	while (index < NB_FILES)
 		tab_of_size[index++] = (int*)malloc(sizeof(int) * 3);
-	tab_of_size[0][0] = 600;
-	tab_of_size[0][1] = 350;
+	tab_of_size[0][0] = 1000;
+	tab_of_size[0][1] = 1000;
 	tab_of_size[0][2] = 33;
 	tab_of_size[1][0] = 600;
 	tab_of_size[1][1] = 600;

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/10 10:07:10 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/10 12:48:44 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,6 @@
 # define H_SPACE_PIX 30
 # define H_RESIZE 18
 # define NB_ERR 5
-
-typedef struct		s_affine
-{
-	int				x;
-	int				y;
-	float			coef;
-	float			cst;
-}					t_affine;
-
-typedef struct		s_coord
-{
-	int				x;
-	int				y;
-	double			z;
-}					t_coord;
-
-////////////////////////////////////////
 
 typedef struct			s_coords
 {
@@ -94,7 +77,6 @@ typedef struct			s_data
 {
 	struct s_data		*next;
 	t_coords			*data_val;
-	// t_coords			*end_lst_ptr;
 }						t_data;
 
 typedef struct			s_params
@@ -103,7 +85,8 @@ typedef struct			s_params
 	size_t				y_max;
 	size_t				check_elements;
 	double				const_power;
-	int					showing;
+	int					move;
+	int					zoom;
 }						t_params;
 
 typedef struct			s_app
@@ -131,6 +114,7 @@ t_img		*init_img(t_app *app);
 
 int			key_hook(int keycode);
 int			mouse_hook(int button, int x, int y);
+int			change_z(int keycode, t_app *app);
 
 /*
 **	draw.c
