@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 15:14:20 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/10 10:07:10 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,17 @@ typedef struct			s_data
 {
 	struct s_data		*next;
 	t_coords			*data_val;
+	// t_coords			*end_lst_ptr;
 }						t_data;
+
+typedef struct			s_params
+{
+	size_t				x_max;
+	size_t				y_max;
+	size_t				check_elements;
+	double				const_power;
+	int					showing;
+}						t_params;
 
 typedef struct			s_app
 {
@@ -103,13 +113,7 @@ typedef struct			s_app
 	t_win				*win;
 	t_error				err;
 	t_data				*data;
-	size_t				x_max;
-	size_t				y_max;
-	size_t				check_elements;
-	int					fd;
-	int					len;
-	double				const_power;
-	int					showing;
+	t_params			*params;
 }						t_app;
 
 /*

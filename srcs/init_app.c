@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 22:25:55 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/10 10:00:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,22 @@ t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix
 t_app		*init_app()
 {
 	t_app		*app;
-	t_coords	*start;
 
 	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
 		return (NULL);
-	start = NULL;
 	if (
 		(app->data = init_data(NULL)) == NULL ||
 		(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL
-		|| (app->win = (t_win*)malloc(sizeof(t_win))) == NULL)
+		|| (app->win = (t_win*)malloc(sizeof(t_win))) == NULL
+		|| (app->params = (t_params*)malloc(sizeof(t_params))) == NULL)
 	{
 		free(app);
 		return (NULL);
 	}
-	app->check_elements = 0;
-	app->x_max = 0;
-	app->y_max = 0;
-	app->len = 0;
-	app->showing = 0;
-	app->const_power = 2;
+	app->params->check_elements = 0;
+	app->params->x_max = 0;
+	app->params->y_max = 0;
+	app->params->showing = 0;
+	app->params->const_power = 2;
 	return (app);
 }

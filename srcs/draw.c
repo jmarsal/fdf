@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 23:20:40 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/10 09:58:53 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static t_coords	*parallel(t_app *app, t_coords *coords)
 {
 	t_coord		tmp;
 
-	tmp.z = coords->z * app->const_power;
+	tmp.z = -coords->z * app->params->const_power;
 	tmp.y = coords->y * app->win->space_pix;
 	tmp.x = coords->x * tmp.z * app->win->space_pix;
 	if (coords->color == 0xFFFFFF && tmp.z > 0)
@@ -119,7 +119,7 @@ static void		check_lines(t_app *app, t_coords *coord, t_coords *next)
 
 void			draw_line(t_app *app, t_coords *coord, t_coords *next)
 {
-	if (coord->x != app->x_max)
+	if (coord->x != app->params->x_max)
 		check_lines(app, coord, next);
 }
 
