@@ -6,18 +6,46 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/10 23:39:59 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/11 22:57:26 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void echangerEntiers(int* x, int* y)
-{
-  int t = *x;
-  *x = *y;
-  *y = t;
-}
+// static void echangerEntiers(int* x, int* y)
+// {
+//   int t = *x;
+//   *x = *y;
+//   *y = t;
+// }
+
+// static void draw_line(t_app *app, t_coords *current, t_coords *next, size_t i)
+// {
+// 	t_coords	*tmp;
+// 	// t_coords	*tmp2;
+// 	size_t		y;
+// 	size_t		x;
+//
+// 	tmp = current;
+// 	// tmp2 = tmp;
+// 	y = current->y;
+// 	x = current->x;
+// 	while (i-- && next->next)
+// 		next = next->next;
+// 	while (y < next->y)
+// 	{
+// 		tmp->y = y;
+// 		mlx_put_pixel_to_image(app, tmp, current->color);
+// 		y++;
+// 	}
+// 	while (x < next->x)
+// 	{
+// 		tmp->x = x;
+// 		mlx_put_pixel_to_image(app, tmp, current->color);
+// 		x++;
+// 	}
+// 	// mlx_put_pixel_to_image(app, current, current->color);
+// }
 
 static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
@@ -40,34 +68,6 @@ static void change_data(t_app *app, t_coords *coords_currrent)
 		coords_currrent->color = 0xff0000;
 }
 
-static void draw_line(t_app *app, t_coords *current, t_coords *next, size_t i)
-{
-	t_coords	*tmp;
-	// t_coords	*tmp2;
-	size_t		y;
-	size_t		x;
-
-	tmp = current;
-	// tmp2 = tmp;
-	y = current->y;
-	x = current->x;
-	while (i-- && next->next)
-		next = next->next;
-	while (y < next->y)
-	{
-		tmp->y = y;
-		mlx_put_pixel_to_image(app, tmp, current->color);
-		y++;
-	}
-	while (x < next->x)
-	{
-		tmp->x = x;
-		mlx_put_pixel_to_image(app, tmp, current->color);
-		x++;
-	}
-	// mlx_put_pixel_to_image(app, current, current->color);
-}
-
 void		draw_windows(t_app *app)
 {
 	t_data		*lst_cur;
@@ -85,10 +85,9 @@ void		draw_windows(t_app *app)
 		{
 			coords_cur->x += app->params->move;
 			coords_cur->y += app->params->move;
-			//draw_line(app, coords_cur, coords_next, i);
 			change_data(app, coords_cur);
-			// mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
-			draw_line(app, coords_cur, coords_next, i);
+			mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
+			// draw_line(app, coords_cur, coords_next, i);
 			coords_cur = coords_cur->next;
 			coords_next = coords_next->next;
 			i++;

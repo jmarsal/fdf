@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/10 09:57:55 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/11 23:13:54 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int		error_read(t_app *app, const char *av, int fd)
 
 	line = NULL;
 	if (!(ft_strstr(av, ".fdf")))
-		return (print_error(app, 4));
+		return (print_error(app->err, 4));
 	if (fd < 0)
-		return (print_error(app, 0));
+		return (print_error(app->err, 0));
 	return (0);
 }
 
@@ -30,7 +30,7 @@ static int		read_file(const char **av, t_app *app)
 	char		*line;
 	int			fd;
 
-	read_name_for_size_win(av[1], app);
+	read_name_for_size_win(av[1], app->win);
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);
 	fd = open(av[1], O_RDONLY);
@@ -40,13 +40,13 @@ static int		read_file(const char **av, t_app *app)
 	{
 		app->params->x_max = 0;
 		if ((get_data(app, line, c_data)) == -1)
-			return (print_error(app, 2));
+			return (print_error(app->err, 2));
 		c_data->y += app->win->space_pix;
 		app->params->y_max++;
 	}
 	free (c_data);
 	if (app->params->y_max == 0)
-		return (print_error(app, 1));
+		return (print_error(app->err, 1));
 	if (close(fd) == -1)
 		return (-1);
 	return (0);

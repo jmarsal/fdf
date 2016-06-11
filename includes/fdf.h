@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/10 12:48:44 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/11 23:20:13 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <mlx.h>
 # include <math.h>
 # define BUFF_SIZE 1024
-# define NB_FILES 6
+# define NB_FILES 9
 # define WIDTH 1920
 # define HEIGHT 1080
 # define H_SPACE_PIX 30
@@ -42,8 +42,16 @@ typedef struct			s_error
 	char				**p_err;
 }						t_error;
 
+typedef struct			s_size_win
+{
+	int					*tab_of_size_width;
+	int					*tab_of_size_height;
+	int					*tab_of_size_space_pix;
+}						t_size_win;
+
 typedef struct			s_win
 {
+	t_size_win			*size;
 	size_t				width;
 	size_t				height;
 	size_t				div_const;
@@ -104,9 +112,10 @@ typedef struct			s_app
 */
 
 t_app		*init_app();
-t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix);
-t_mlx		*init_mlx(t_app *app);
-t_img		*init_img(t_app *app);
+t_win		*init_win(size_t width, size_t heigth, size_t div_const,
+						size_t space_pix);
+t_mlx		*init_mlx(t_win *win);
+t_img		*init_img(t_mlx *mlx, t_win *win, t_error err);
 
 /*
 **	event.c
@@ -132,7 +141,7 @@ int			get_data(t_app *app, const char *line, t_coords *c_data);
 ** perror.c
 */
 
-int			print_error(t_app *app, int witch_one);
+int			print_error(t_error err, int witch_one);
 
 /*
 ** list.c
@@ -159,6 +168,9 @@ t_data		*init_data(t_coords *lst_lines);
 ** size_win.c
 */
 
-void		 read_name_for_size_win(const char *av, t_app *app);
+int		 	read_name_for_size_win(const char *av, t_win *win);
+int			*init_size_win_space_pix();
+int			*init_size_win_height();
+int			*init_size_win_width();
 
 #endif
