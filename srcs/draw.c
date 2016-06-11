@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/10 14:01:52 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/10 23:39:59 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 
 static void change_data(t_app *app, t_coords *coords_currrent)
 {
-	printf("move = %d\n", app->params->move);
+	// printf("move = %d\n", app->params->move);
 	coords_currrent->x = (((coords_currrent->x + coords_currrent->z) +
 				app->win->space_pix) * app->params->zoom);
 	coords_currrent->y = (((coords_currrent->y - coords_currrent->z) +
