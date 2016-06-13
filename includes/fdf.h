@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 09:53:25 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/13 12:10:32 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,14 @@
 # include <math.h>
 # define BUFF_SIZE 1024
 # define NB_FILES 9
-# define WIDTH 1920
-# define HEIGHT 1080
-# define H_SPACE_PIX 30
 # define H_RESIZE 18
 # define NB_ERR 5
 
 typedef struct			s_coords
 {
 	struct s_coords		*next;
-	size_t				x;
-	size_t				y;
+	int					x;
+	int					y;
 	int					z;
 	int					color;
 }						t_coords;
@@ -52,8 +49,8 @@ typedef struct			s_size_win
 typedef struct			s_win
 {
 	t_size_win			*size;
-	size_t				width;
-	size_t				height;
+	int					width;
+	int					height;
 	size_t				div_const;
 	size_t				space_pix;
 }						t_win;

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 11:45:38 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/13 15:21:21 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,6 @@
 //   *x = *y;
 //   *y = t;
 // }
-
-// static void draw_line(t_app *app, t_coords *current, t_coords *next, size_t i)
-// {
-// 	t_coords	*tmp;
-// 	// t_coords	*tmp2;
-// 	size_t		y;
-// 	size_t		x;
-//
-// 	tmp = current;
-// 	// tmp2 = tmp;
-// 	y = current->y;
-// 	x = current->x;
-// 	while (i-- && next->next)
-// 		next = next->next;
-// 	while (y < next->y)
-// 	{
-// 		tmp->y = y;
-// 		mlx_put_pixel_to_image(app, tmp, current->color);
-// 		y++;
-// 	}
-// 	while (x < next->x)
-// 	{
-// 		tmp->x = x;
-// 		mlx_put_pixel_to_image(app, tmp, current->color);
-// 		x++;
-// 	}
-// 	// mlx_put_pixel_to_image(app, current, current->color);
-// }
-
 static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
 	int		octet;
@@ -57,15 +28,81 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 					octet * c->y)], &color, octet);
 }
 
-static void change_data(t_app *app, t_coords *coords_currrent)
+/*static void	draw_columns(t_app *app, t_coords *current, t_coords *next, size_t i)
 {
-	// printf("move = %d\n", app->params->move);
-	coords_currrent->x = (((coords_currrent->x + coords_currrent->z) +
-				app->win->space_pix) * app->params->zoom);
-	coords_currrent->y = (((coords_currrent->y - coords_currrent->z) +
-				app->win->space_pix) * app->params->zoom);
-	if (coords_currrent->z > 0 &&app->data->is_colors == 0)
-		coords_currrent->color = 0xff0000;
+	t_coords	*tmp;
+	int			y;
+
+	tmp = current;
+	y = current->y;
+	while (i-- > 0 && next)
+		next = next->next;
+	while (y < next->y && next)
+	{
+		tmp->y = y;
+		mlx_put_pixel_to_image(app, tmp, current->color);
+		y++;
+	}
+}*/
+
+static void	draw_line(t_app *app, t_coords *current)
+{
+	t_coords	*tmp;
+	int			y;
+	int			x;
+	int			color;
+
+	tmp = current;
+	y = current->y;
+	x = current->x;
+	color = current->color;
+	while (x < current->next->x && current->next)
+	{
+		tmp->x = x;
+		if (y < current->next->y)
+			y++;
+		else if (y > current->next->y)
+			y--;
+		tmp->y = y;
+		if ((y != current->next->y && current->z == 0) ||
+		(y != current->next->y && current->next->z == 0))
+			tmp->color = 0xFFFFFF;
+		else if (current->next->z > 0)
+		{
+			current->next->color = 0xff0000;
+			tmp->color = current->next->color;
+		}
+		else if (current->z == 0)
+			tmp->color = 0xFFFFFF;
+		mlx_put_pixel_to_image(app, tmp, current->color);
+		x++;
+	}
+	(void)app;
+}
+
+static void change_data(t_data *lst, t_params *params, t_win *win, t_data *data)
+{
+	t_data		*lst_cur;
+	t_coords	*coords_cur;
+
+	lst_cur = lst;
+	while (lst_cur)
+	{
+		coords_cur = lst_cur->data_val;
+		while (coords_cur)
+		{
+			coords_cur->x = (params->move +
+				((coords_cur->x + coords_cur->z) +
+				win->space_pix) * params->zoom);
+			coords_cur->y = (params->move +
+				((coords_cur->y - coords_cur->z) +
+				win->space_pix) * params->zoom);
+			if (coords_cur->z > 0 && data->is_colors == 0)
+				coords_cur->color = 0xff0000;
+			coords_cur = coords_cur->next;
+		}
+		lst_cur = lst_cur->next;
+	}
 }
 
 void		draw_windows(t_app *app)
@@ -76,20 +113,21 @@ void		draw_windows(t_app *app)
 	size_t		i;
 
 	lst_cur = app->data;
-	while (lst_cur->next)
+	change_data(lst_cur, app->params, app->win, app->data);
+	while (lst_cur)
 	{
 		coords_cur = lst_cur->data_val;
-		coords_next = lst_cur->next->data_val;
+		if (lst_cur->next)
+			coords_next = lst_cur->next->data_val;
 		i = 0;
-		while (coords_cur && coords_next)
+		while (coords_cur)
 		{
-			coords_cur->x += app->params->move;
-			coords_cur->y += app->params->move;
-			change_data(app, coords_cur);
-			mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
-			// draw_line(app, coords_cur, coords_next, i);
+			// mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
+			draw_line(app, coords_cur);
+			// draw_columns(app, coords_cur, coords_next, i);
 			coords_cur = coords_cur->next;
-			coords_next = coords_next->next;
+			if (coords_cur->next)
+				coords_next = coords_next->next;
 			i++;
 		}
 		lst_cur = lst_cur->next;
