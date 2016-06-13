@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 15:42:58 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/13 21:42:03 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static int	get_color(const char *line, size_t *i)
 		return (-1);
 	len = 0;
 	while (line[*i + len] != ' ' && line[*i + len])
-		{
-			number[len] = line[*i + len];
-			len++;
-		}
+	{
+		number[len] = line[*i + len];
+		len++;
+	}
 	number[len] = '\0';
 	color = ft_atoi_base(number, 16);
 	free(number);
