@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/11 22:59:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/13 11:45:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char	*get_number(const char *line, size_t *i)
 			len++;
 		}
 	number[len] = '\0';
+	*i += 2;
 	return (number);
 }
 
@@ -71,6 +72,7 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 			return (-1);
 		}
 		color = c_data->color;
+		app->data->is_colors = 1;
 	}
 	coords_add_end(&app->data->data_val, init_coords(c_data->x, c_data->y, z,
 														color));
@@ -83,10 +85,6 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 						t_get_data *helper)
 {
-	if (line[0] == ' ')
-		while (!(ft_isspace(line[helper->i++])) && line[helper->i])
-			if (!ft_isdigit(line[helper->i]))
-				return (-1);
 	helper->elems = ft_strsplit(line, ' ');
 	if (!helper->nb_elems)
 	{
@@ -109,7 +107,7 @@ int			get_data(t_app *app, const char *line, t_coords *c_data)
 {
 	t_get_data	helper;
 
-	if ((helper.elems = (char**)malloc(sizeof(char *) * ft_strlen(line))) == NULL)
+	if (!(helper.elems = (char**)malloc(sizeof(char *) * ft_strlen(line))))
 		return (-1);
 	helper.i = 0;
 	helper.j = 0;

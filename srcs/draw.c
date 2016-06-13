@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/11 22:57:26 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/13 11:45:38 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void change_data(t_app *app, t_coords *coords_currrent)
 				app->win->space_pix) * app->params->zoom);
 	coords_currrent->y = (((coords_currrent->y - coords_currrent->z) +
 				app->win->space_pix) * app->params->zoom);
-	if (coords_currrent->z > 0 && coords_currrent->color == 0xffffff)
+	if (coords_currrent->z > 0 &&app->data->is_colors == 0)
 		coords_currrent->color = 0xff0000;
 }
 

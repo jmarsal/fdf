@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/11 23:20:13 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/13 09:53:25 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct			s_data
 {
 	struct s_data		*next;
 	t_coords			*data_val;
+	int					is_colors;
 }						t_data;
 
 typedef struct			s_params
