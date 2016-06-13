@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 15:54:34 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/13 16:31:45 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 					octet * c->y)], &color, octet);
 }
 
-/*static void	draw_columns(t_app *app, t_coords *current, t_coords *next, size_t i)
+static void	draw_columns(t_app *app, t_coords *current, t_coords *next, size_t i)
 {
 	t_coords	*tmp;
 	int			y;
@@ -43,7 +43,7 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 		mlx_put_pixel_to_image(app, tmp, current->color);
 		y++;
 	}
-}*/
+}
 
 static void	draw_line(t_app *app, t_coords *current)
 {
@@ -56,28 +56,30 @@ static void	draw_line(t_app *app, t_coords *current)
 	y = current->y;
 	x = current->x;
 	color = current->color;
-	while (current->next && x < current->next->x)
-	{
-		tmp->x = x;
-		if (y < current->next->y)
-			y++;
-		else if (y > current->next->y)
-			y--;
-		tmp->y = y;
-		if ((y != current->next->y && current->z == 0) ||
-		(y != current->next->y && current->next->z == 0))
-			tmp->color = 0xFFFFFF;
-		else if (current->next->z > 0)
+	// if (current)
+	// {
+		while (current->next && x < current->next->x)
 		{
-			current->next->color = 0xff0000;
-			tmp->color = current->next->color;
+			tmp->x = x;
+			if (y < current->next->y)
+				y++;
+			else if (y > current->next->y)
+				y--;
+			tmp->y = y;
+			if ((y != current->next->y && current->z == 0) ||
+			(y != current->next->y && current->next->z == 0))
+				tmp->color = 0xFFFFFF;
+			else if (current->next->z > 0)
+			{
+				current->next->color = 0xff0000;
+				tmp->color = current->next->color;
+			}
+			else if (current->z == 0)
+				tmp->color = 0xFFFFFF;
+			mlx_put_pixel_to_image(app, tmp, current->color);
+			x++;
 		}
-		else if (current->z == 0)
-			tmp->color = 0xFFFFFF;
-		mlx_put_pixel_to_image(app, tmp, current->color);
-		x++;
-	}
-	(void)app;
+	// }
 }
 
 static void change_data(t_data *lst, t_params *params, t_win *win, t_data *data)
@@ -122,9 +124,10 @@ void		draw_windows(t_app *app)
 		i = 0;
 		while (coords_cur)
 		{
-			mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
+			printf("x = %d\n", coords_cur->x);
+			// mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
 			draw_line(app, coords_cur);
-			// draw_columns(app, coords_cur, coords_next, i);
+			draw_columns(app, coords_cur, coords_next, i);
 			coords_cur = coords_cur->next;
 			// if (coords_next->next)
 				// coords_next = coords_next->next;
