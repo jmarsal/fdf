@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 15:21:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/13 15:54:34 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	draw_line(t_app *app, t_coords *current)
 	y = current->y;
 	x = current->x;
 	color = current->color;
-	while (x < current->next->x && current->next)
+	while (current->next && x < current->next->x)
 	{
 		tmp->x = x;
 		if (y < current->next->y)
@@ -122,12 +122,12 @@ void		draw_windows(t_app *app)
 		i = 0;
 		while (coords_cur)
 		{
-			// mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
+			mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
 			draw_line(app, coords_cur);
 			// draw_columns(app, coords_cur, coords_next, i);
 			coords_cur = coords_cur->next;
-			if (coords_cur->next)
-				coords_next = coords_next->next;
+			// if (coords_next->next)
+				// coords_next = coords_next->next;
 			i++;
 		}
 		lst_cur = lst_cur->next;
