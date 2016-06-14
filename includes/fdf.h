@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 16:02:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 23:26:56 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void		draw_windows(t_app *app);
 ** get_data.c
 */
 
-int			get_data(t_app *app, const char *line, t_coords *c_data, t_data *data);
+int			get_data(t_app *app, const char *line, t_coords *c_data, t_data *data, t_coords tab[data->helper.line][data->helper.elem]);
 
 /*
 ** perror.c

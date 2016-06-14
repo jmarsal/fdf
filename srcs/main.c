@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 16:25:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 23:35:17 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,21 @@ static int		read_file(const char **av, t_app *app)
 	if (error_read(app->err, av[1], fd) == -1)
 		return (-1);
 	while ((ft_get_next_line(fd, &line)) > 0)
+	{
+		app->params->x_max = (int)ft_strsplit(line, ' ');
 		app->params->y_max++;
+	}
+	t_coords tab[app->params->y_max][app->params->x_max];
 	app->data->helper.line = app->params->y_max;
 	if (app->params->y_max == 0)
 		return (print_error(app->err, 1));
 	if (close(fd) == -1)
 		return (-1);
-	if (!(app->data->data_elem = (t_coords**)malloc(sizeof(t_coords*) *
-		app->params->y_max + 1)))
-		return (-1);
-	while (app->data->helper.line-- > 1)
-	{
-		if (!(app->data->data_elem[i] = (t_coords *)malloc(sizeof(t_coords) * ft_strlen(line) + 1)))
-		i++;
-	}
-	app->data->data_elem[i] = NULL;
 	fd = open(av[1], O_RDONLY);
 	while ((ft_get_next_line(fd, &line)) > 0)
 	{
 		app->params->x_max = 0;
-		if ((get_data(app, line, c_data, app->data)) == -1)
+		if ((get_data(app, line, c_data, app->data, tab)) == -1)
 			return (print_error(app->err, 2));
 		c_data->y += app->win->space_pix;
 		app->data->helper.line++;

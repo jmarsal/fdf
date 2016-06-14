@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 16:29:25 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 23:28:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*get_number(const char *line, size_t *i)
 }
 
 static int	get_z(t_app *app, const char *line, t_get_data *h,
-					t_coords *c_data)
+					t_coords *c_data, t_coords tab[h->line][h->elem])
 {
 	char	*number;
 	int		z;
@@ -77,15 +77,15 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 		color = c_data->color;
 		app->data->is_colors = 1;
 	}
-	printf("line = %lu, elem = %lu\n", h->line, h->elem);
-	app->data->data_elem[h->line][h->elem].x = c_data->x;
-	app->data->data_elem[h->line][h->elem].y = c_data->y;
-	app->data->data_elem[h->line][h->elem].z = c_data->z;
-	printf("x = %d, y = %d, z = %d\n",
-	app->data->data_elem[h->line][h->elem].x,
-	app->data->data_elem[h->line][h->elem].y,
-	app->data->data_elem[h->line][h->elem].z);
-	// app->data->data_elem[h->line][h->elem].color = c_data->color;
+	// printf("line = %lu, elem = %lu\n", h->line, h->elem);
+	tab[h->line][h->elem].x = c_data->x;
+	tab[h->line][h->elem].y = c_data->y;
+	tab[h->line][h->elem].z = c_data->z;
+	// printf("x = %d, y = %d, z = %d\n",
+	// tab[h->line][h->elem].x,
+	// tab[h->line][h->elem].y,
+	// tab[h->line][h->elem].z);
+	tab[h->line][h->elem].color = c_data->color;
 	h->elem++;
 	c_data->x += app->win->space_pix;
 	app->params->x_max++;
@@ -94,7 +94,7 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 }
 
 static int	parse_data(t_app *app, const char *line, t_coords *c_data,
-						t_get_data *helper)
+						t_get_data *helper, t_coords tab[helper->line][helper->elem])
 {
 	helper->elems = ft_strsplit(line, ' ');
 	if (!helper->nb_elems)
@@ -105,7 +105,7 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 	while (helper->elems[helper->j])
 	{
 		helper->i = 0;
-		if (get_z(app, helper->elems[helper->j], helper, c_data) == -1)
+		if (get_z(app, helper->elems[helper->j], helper, c_data, tab) == -1)
 				return (-1);
 		helper->j++;
 	}
@@ -115,7 +115,7 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 }
 
 int			get_data(t_app *app, const char *line, t_coords *c_data,
-						t_data *data)
+						t_data *data, t_coords tab[data->helper.line][data->helper.elem])
 {
 	t_coords	*tmp;
 
@@ -127,7 +127,7 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 	data->helper.j = 0;
 	data->helper.nb_elems = 0;
 	data->helper.elem = 0;
-	if ((parse_data(app, line, tmp, &data->helper)) == -1)
+	if ((parse_data(app, line, tmp, &data->helper, tab)) == -1)
 		return (-1);
 	c_data = tmp;
 	free(tmp);
