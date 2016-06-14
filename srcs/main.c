@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 10:24:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 13:52:40 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ static int		error_read(t_error err, const char *av, int fd)
 static int		read_file(const char **av, t_app *app)
 {
 	t_coords	*c_data;
+	size_t		j;
 	char		*line;
 	int			fd;
 
 	app->data->is_colors = 0;
+	j = 0;
 	read_name_for_size_win(av[1], app->win);
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);

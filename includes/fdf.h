@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 10:17:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 13:46:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 typedef struct			s_coords
 {
-	struct s_coords		*next;
+	// struct s_coords		*next;
 	int					x;
 	int					y;
 	int					z;
@@ -80,8 +80,9 @@ typedef struct			s_get_data
 
 typedef struct			s_data
 {
-	struct s_data		*next;
-	t_coords			*data_val;
+	// struct s_data		*next;
+	t_coords			**data_elem;
+	// t_coords			*data_val;
 	int					is_colors;
 }						t_data;
 
