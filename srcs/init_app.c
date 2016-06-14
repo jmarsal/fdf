@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 09:54:47 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 10:08:55 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ t_img		*init_img(t_mlx *mlx, t_win *win, t_error err)
 	return (img);
 }
 
-t_win		*init_win(size_t width, size_t heigth, size_t div_const,
-						size_t space_pix)
+t_win		*init_win(int width, int heigth, size_t space_pix)
 {
 	t_win	*tmp;
 
@@ -52,7 +51,6 @@ t_win		*init_win(size_t width, size_t heigth, size_t div_const,
 		return (NULL);
 	tmp->width = width;
 	tmp->height = heigth;
-	tmp->div_const = div_const;
 	tmp->space_pix = space_pix;
 	return (tmp);
 }

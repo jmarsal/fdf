@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 22:32:04 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 11:59:15 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		close_win(t_mlx *mlx)
 
 void			mlx_start(t_app *app)
 {
-	if (!(app->win = init_win(app->win->width, app->win->height, 3,
+	if (!(app->win = init_win(app->win->width, app->win->height,
 		app->win->space_pix)) || !(app->mlx = init_mlx(app->win)) ||
 		!(app->img = init_img(app->mlx, app->win, app->err)))
 	{

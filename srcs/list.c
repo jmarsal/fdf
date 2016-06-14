@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 09:59:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 11:00:07 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 11:57:33 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	coords_add_end(t_coords **alst, t_coords *new)
 		while (cur->next)
 			cur = cur->next;
 		cur->next = new;
+		printf("%p\n", cur->next);
 	}
 	else
 		*alst = new;

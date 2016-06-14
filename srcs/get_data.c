@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 21:42:03 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 12:02:48 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 		color = c_data->color;
 		app->data->is_colors = 1;
 	}
+	printf("x = %d, y = %d, z = %d\n", c_data->x, c_data->y, c_data->z);
+
 	coords_add_end(&app->data->data_val, init_coords(c_data->x, c_data->y, z,
 														color));
 	c_data->x += app->win->space_pix;
@@ -96,7 +98,7 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 		helper->i = 0;
 		if (get_z(app, helper->elems[helper->j], &helper->i, c_data) == -1)
 				return (-1);
-		helper->j += 1;
+		helper->j++;
 	}
 	if (app->params->check_elements == 0)
 		app->params->check_elements = app->params->x_max;
@@ -117,5 +119,6 @@ int			get_data(t_app *app, const char *line, t_coords *c_data)
 		return (-1);
 	data_add_end(&app->data, init_data(app->data->data_val));
 	app->data->data_val = NULL;
+	// app->data->data_val->next = NULL;
 	return ((app->params->check_elements != app->params->x_max) ? -1 : 0);
 }

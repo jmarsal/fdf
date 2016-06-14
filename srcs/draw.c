@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/13 23:48:44 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 12:04:56 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void change_data(t_data *lst, t_params *params, t_win *win, t_data *data)
 	while (lst_cur)
 	{
 		coords_cur = lst_cur->data_val;
+		printf(" dans change_data coords_cur = %p\n", coords_cur);	
 		while (coords_cur)
 		{
 			coords_cur->x = (params->move +
@@ -112,7 +113,6 @@ void		draw_windows(t_app *app)
 	size_t		i;
 
 	lst_cur = app->data;
-	coords_cur = NULL;
 	change_data(lst_cur, app->params, app->win, app->data);
 	while (lst_cur)
 	{
@@ -120,16 +120,18 @@ void		draw_windows(t_app *app)
 		if (lst_cur->next)
 			coords_next = lst_cur->next->data_val;
 		i = 0;
+		printf("coords_cur de %lu = %p\n", i, coords_cur);
 		while (coords_cur)
 		{
 			mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
-			draw_line(app, coords_cur);
+			// draw_line(app, coords_cur);
 			// draw_columns(app, coords_cur, coords_next, i);
-			if (coords_next->next)
-				coords_next = coords_next->next;
+			//if (coords_next->next)
+			// coords_next = coords_next->next;
 			coords_cur = coords_cur->next;
-			i++;
+			// i++;
 		}
+		i++;
 		lst_cur = lst_cur->next;
 	}
 }

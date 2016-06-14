@@ -6,13 +6,13 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/13 22:26:49 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/14 11:24:08 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = gcc
-OPTI = -O2
+OPTI = -O0 -g3
 CFLAGS_DEBUG = -g3 -O0 -fsanitize=address
 CFLAGS = -Wall -Werror -Wextra $(OPTI)
 SRC_DIR = ./srcs/
