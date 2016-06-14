@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 10:08:55 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 14:03:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_app		*init_app()
 
 	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
 		return (NULL);
-	if (!(app->data = init_data(NULL)) ||
+	if (!(app->data = init_data()) ||
 		!(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) ||
 		!(app->win = (t_win*)malloc(sizeof(t_win))) ||
 		!(app->params = (t_params*)malloc(sizeof(t_params))) ||

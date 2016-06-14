@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 13:52:40 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 16:25:14 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ static int		error_read(t_error err, const char *av, int fd)
 static int		read_file(const char **av, t_app *app)
 {
 	t_coords	*c_data;
-	size_t		j;
+	size_t		i;
 	char		*line;
 	int			fd;
 
 	app->data->is_colors = 0;
-	j = 0;
+	app->data->helper.line = 0;
+	i = 0;
 	read_name_for_size_win(av[1], app->win);
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);
@@ -40,16 +41,31 @@ static int		read_file(const char **av, t_app *app)
 	if (error_read(app->err, av[1], fd) == -1)
 		return (-1);
 	while ((ft_get_next_line(fd, &line)) > 0)
-	{
-		app->params->x_max = 0;
-		if ((get_data(app, line, c_data)) == -1)
-			return (print_error(app->err, 2));
-		c_data->y += app->win->space_pix;
 		app->params->y_max++;
-	}
-	free (c_data);
+	app->data->helper.line = app->params->y_max;
 	if (app->params->y_max == 0)
 		return (print_error(app->err, 1));
+	if (close(fd) == -1)
+		return (-1);
+	if (!(app->data->data_elem = (t_coords**)malloc(sizeof(t_coords*) *
+		app->params->y_max + 1)))
+		return (-1);
+	while (app->data->helper.line-- > 1)
+	{
+		if (!(app->data->data_elem[i] = (t_coords *)malloc(sizeof(t_coords) * ft_strlen(line) + 1)))
+		i++;
+	}
+	app->data->data_elem[i] = NULL;
+	fd = open(av[1], O_RDONLY);
+	while ((ft_get_next_line(fd, &line)) > 0)
+	{
+		app->params->x_max = 0;
+		if ((get_data(app, line, c_data, app->data)) == -1)
+			return (print_error(app->err, 2));
+		c_data->y += app->win->space_pix;
+		app->data->helper.line++;
+	}
+	free (c_data);
 	if (close(fd) == -1)
 		return (-1);
 	return (0);
@@ -68,7 +84,7 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
-		mlx_start(app);
+		// mlx_start(app);
 	}
 	else
 		ft_putstr("\n\033[31mERROR\033[0m\n--> usage : ./fdf template.fdf\n");

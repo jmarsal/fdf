@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 12:04:56 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 14:09:11 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //   *x = *y;
 //   *y = t;
 // }
-void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
+/*void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
 	int		octet;
 
@@ -88,7 +88,7 @@ void change_data(t_data *lst, t_params *params, t_win *win, t_data *data)
 	while (lst_cur)
 	{
 		coords_cur = lst_cur->data_val;
-		printf(" dans change_data coords_cur = %p\n", coords_cur);	
+		printf(" dans change_data coords_cur = %p\n", coords_cur);
 		while (coords_cur)
 		{
 			coords_cur->x = (params->move +
@@ -134,4 +134,4 @@ void		draw_windows(t_app *app)
 		i++;
 		lst_cur = lst_cur->next;
 	}
-}
+}*/

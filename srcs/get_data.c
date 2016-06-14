@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 12:43:04 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 16:29:25 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,22 @@ static char	*get_number(const char *line, size_t *i)
 	return (number);
 }
 
-static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
+static int	get_z(t_app *app, const char *line, t_get_data *h,
+					t_coords *c_data)
 {
 	char	*number;
 	int		z;
 	int		color;
 
 	color = 0;
-	if ((number = get_number(line, i)) == NULL)
+	if ((number = get_number(line, &h->i)) == NULL)
 		return (-1);
 	z = ft_atoi(number);
-	if (line[*i] && line[*i] == ',')
+	c_data->z = z;
+	printf("z = %d\n", z);
+	if (line[h->i] && line[h->i] == ',')
 	{
-		if ((c_data->color = get_color(line, i)) == -1)
+		if ((c_data->color = get_color(line, &h->i)) == -1)
 		{
 			free(number);
 			return (-1);
@@ -74,8 +77,16 @@ static int	get_z(t_app *app, const char *line, size_t *i, t_coords *c_data)
 		color = c_data->color;
 		app->data->is_colors = 1;
 	}
-	coords_add_end(&app->data->data_val, init_coords(c_data->x, c_data->y, z,
-														color));
+	printf("line = %lu, elem = %lu\n", h->line, h->elem);
+	app->data->data_elem[h->line][h->elem].x = c_data->x;
+	app->data->data_elem[h->line][h->elem].y = c_data->y;
+	app->data->data_elem[h->line][h->elem].z = c_data->z;
+	printf("x = %d, y = %d, z = %d\n",
+	app->data->data_elem[h->line][h->elem].x,
+	app->data->data_elem[h->line][h->elem].y,
+	app->data->data_elem[h->line][h->elem].z);
+	// app->data->data_elem[h->line][h->elem].color = c_data->color;
+	h->elem++;
 	c_data->x += app->win->space_pix;
 	app->params->x_max++;
 	free(number);
@@ -94,7 +105,7 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 	while (helper->elems[helper->j])
 	{
 		helper->i = 0;
-		if (get_z(app, helper->elems[helper->j], &helper->i, c_data) == -1)
+		if (get_z(app, helper->elems[helper->j], helper, c_data) == -1)
 				return (-1);
 		helper->j++;
 	}
@@ -103,20 +114,22 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 	return (0);
 }
 
-int			get_data(t_app *app, const char *line, t_coords *c_data)
+int			get_data(t_app *app, const char *line, t_coords *c_data,
+						t_data *data)
 {
-	t_get_data	helper;
+	t_coords	*tmp;
 
-	if (!(helper.elems = (char**)malloc(sizeof(char *) * ft_strlen(line))))
+	if ((tmp = init_coords(0, c_data->y, c_data->z, c_data->color)) == NULL)
 		return (-1);
-	helper.i = 0;
-	helper.j = 0;
-	helper.nb_elems = 0;
-	c_data->x = 0;
-	if ((parse_data(app, line, c_data, &helper)) == -1)
+	if (!(data->helper.elems = (char**)malloc(sizeof(char *) * ft_strlen(line))))
 		return (-1);
-	data_add_end(&app->data, init_data(app->data->data_val));
-	app->data->data_val = NULL;
-	// app->data->data_val->next = NULL;
+	data->helper.i = 0;
+	data->helper.j = 0;
+	data->helper.nb_elems = 0;
+	data->helper.elem = 0;
+	if ((parse_data(app, line, tmp, &data->helper)) == -1)
+		return (-1);
+	c_data = tmp;
+	free(tmp);
 	return ((app->params->check_elements != app->params->x_max) ? -1 : 0);
 }

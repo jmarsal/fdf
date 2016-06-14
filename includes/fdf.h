@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 13:46:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/14 16:02:21 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct			s_get_data
 {
 	char				**elems;
 	size_t				nb_elems;
+	size_t				line;
+	size_t				elem;
 	size_t				i;
 	size_t  			j;
 }						t_get_data;
@@ -82,6 +84,7 @@ typedef struct			s_data
 {
 	// struct s_data		*next;
 	t_coords			**data_elem;
+	t_get_data			helper;
 	// t_coords			*data_val;
 	int					is_colors;
 }						t_data;
@@ -133,7 +136,7 @@ void		draw_windows(t_app *app);
 ** get_data.c
 */
 
-int			get_data(t_app *app, const char *line, t_coords *c_data);
+int			get_data(t_app *app, const char *line, t_coords *c_data, t_data *data);
 
 /*
 ** perror.c
@@ -160,7 +163,7 @@ void		mlx_start(t_app *app);
 
 char		*init_number_z(const char *line, size_t *i);
 t_coords	*init_coords(int x, int y, int z, int color);
-t_data		*init_data(t_coords *lst_lines);
+t_data		*init_data();
 
 /*
 ** size_win.c
