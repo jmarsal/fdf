@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 14:54:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 15:04:30 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*get_number(const char *line, size_t *i)
 }
 
 static int	get_z(t_app *app, const char *line, t_get_data *h,
-					t_coords *c_data, t_coords tab[h->line][h->elem])
+					t_coords *c_data, t_coords **tab)
 {
 	char	*number;
 	int		z;
@@ -66,7 +66,7 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 		return (-1);
 	z = ft_atoi(number);
 	c_data->z = z;
-	printf("z = %d\n", z);
+	// printf("z = %d\n", z);
 	if (line[h->i] && line[h->i] == ',')
 	{
 		if ((c_data->color = get_color(line, &h->i)) == -1)
@@ -85,33 +85,30 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 	// printf("x = %d, y = %d, z = %d, color = 0x0%6.6X\n",
 	// tab[h->line][h->elem].x,
 	// tab[h->line][h->elem].y,
-	// tab[h->line][h->elem].z);
-	tab[h->line][h->elem].color = c_data->color;
+	// tab[h->line][h->elem].z,
+	// tab[h->line][h->elem].color);
 	h->elem++;
 	c_data->x += app->win->space_pix;
+	app->params->x_max++;
 	free(number);
 	return (0);
 }
 
 static int	parse_data(t_app *app, const char *line, t_coords *c_data,
-						t_get_data *helper, t_coords tab[helper->line][helper->elem])
+						t_get_data *helper, t_coords **tab)
 {
-	size_t	j;
-
-	j = 0;
 	helper->elems = ft_strsplit(line, ' ');
 	if (!helper->nb_elems)
 	{
 		while (helper->elems[++helper->nb_elems])
 			;
 	}
-	app->params->x_max = helper->nb_elems;
-	while (helper->elems[j])
+	while (helper->elems[helper->j])
 	{
 		helper->i = 0;
-		if (get_z(app, helper->elems[j], helper, c_data, tab) == -1)
+		if (get_z(app, helper->elems[helper->j], helper, c_data, tab) == -1)
 				return (-1);
-		j++;
+		helper->j++;
 	}
 	if (app->params->check_elements == 0)
 		app->params->check_elements = app->params->x_max;
@@ -119,13 +116,14 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 }
 
 int			get_data(t_app *app, const char *line, t_coords *c_data,
-						t_data *data, t_coords tab[data->helper.line][data->helper.elem])
+						t_data *data, t_coords **tab)
 {
 	if ((c_data = init_coords(0, c_data->y, c_data->z, c_data->color)) == NULL)
 		return (-1);
-	if (!(data->helper.elems = (char**)malloc(sizeof(char *) * app->params->x_max)))
+	if (!(data->helper.elems = (char**)malloc(sizeof(char *) * ft_strlen(line))))
 		return (-1);
 	data->helper.i = 0;
+	data->helper.j = 0;
 	data->helper.nb_elems = 0;
 	data->helper.elem = 0;
 	if ((parse_data(app, line, c_data, &data->helper, tab)) == -1)
