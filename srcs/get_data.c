@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 15:04:30 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 16:28:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,13 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 		while (helper->elems[++helper->nb_elems])
 			;
 	}
+	if ((tab = init_tab(tab, helper->line, helper->nb_elems + 1)) == NULL)
+		return (-1);
 	while (helper->elems[helper->j])
 	{
 		helper->i = 0;
 		if (get_z(app, helper->elems[helper->j], helper, c_data, tab) == -1)
-				return (-1);
+			return (-1);
 		helper->j++;
 	}
 	if (app->params->check_elements == 0)
@@ -128,5 +130,6 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 	data->helper.elem = 0;
 	if ((parse_data(app, line, c_data, &data->helper, tab)) == -1)
 		return (-1);
+		printf("x_max = %lu, check = %lu\n", app->params->x_max, app->params->check_elements);
 	return ((app->params->check_elements != app->params->x_max) ? -1 : 0);
 }

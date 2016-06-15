@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 15:03:41 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 15:42:34 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct			s_data
 	// struct s_data		*next;
 	t_coords			**data_elem;
 	t_get_data			helper;
+	size_t				newsize;
+	size_t				oldsize;
 	// t_coords			*data_val;
 	int					is_colors;
 }						t_data;
@@ -163,6 +165,7 @@ void		mlx_start(t_app *app);
 */
 
 char		*init_number_z(const char *line, size_t *i);
+t_coords	**init_tab(t_coords **tab, size_t line, size_t nb_elems);
 t_coords	*init_coords(int x, int y, int z, int color);
 t_data		*init_data();
 
