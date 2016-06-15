@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 11:30:46 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 12:45:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,19 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 		color = c_data->color;
 		app->data->is_colors = 1;
 	}
-	// printf("line = %lu, elem = %lu\n", h->line, h->elem);
-	tab[h->line][h->elem].x = c_data->x;
-	tab[h->line][h->elem].y = c_data->y;
-	tab[h->line][h->elem].z = c_data->z;
-	tab[h->line][h->elem].color = c_data->color;
-	// printf("x = %d, y = %d, z = %d, color = 0x0%6.6X\n",
-	// tab[h->line][h->elem].x,
-	// tab[h->line][h->elem].y,
-	// tab[h->line][h->elem].z,
-	// tab[h->line][h->elem].color);
+	printf("line = %lu, elem = %lu\n", h->line, h->elem);
+	tab[0][0].x = c_data->x;
+	tab[0][0].y = c_data->y;
+	tab[0][0].z = c_data->z;
+	tab[0][0].color = c_data->color;
+	printf("x = %d, y = %d, z = %d, color = 0x0%6.6X\n",
+	tab[h->line][h->elem].x,
+	tab[h->line][h->elem].y,
+	tab[h->line][h->elem].z,
+	tab[h->line][h->elem].color);
+	exit(-1);
 	h->elem++;
 	c_data->x += app->win->space_pix;
-	app->params->x_max++;
 	free(number);
 	return (0);
 }
@@ -97,18 +97,22 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 						t_get_data *helper, t_coords **tab)
 {
+	size_t	j;
+
+	j = 0;
 	helper->elems = ft_strsplit(line, ' ');
 	if (!helper->nb_elems)
 	{
 		while (helper->elems[++helper->nb_elems])
 			;
 	}
-	while (helper->elems[helper->j])
+	app->params->x_max = helper->nb_elems;
+	while (helper->elems[j])
 	{
 		helper->i = 0;
-		if (get_z(app, helper->elems[helper->j], helper, c_data, tab) == -1)
+		if (get_z(app, helper->elems[j], helper, c_data, tab) == -1)
 				return (-1);
-		helper->j++;
+		j++;
 	}
 	if (app->params->check_elements == 0)
 		app->params->check_elements = app->params->x_max;
@@ -122,10 +126,9 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 
 	if ((tmp = init_coords(0, c_data->y, c_data->z, c_data->color)) == NULL)
 		return (-1);
-	if (!(data->helper.elems = (char**)malloc(sizeof(char *) * ft_strlen(line))))
+	if (!(data->helper.elems = (char**)malloc(sizeof(char *) * app->params->x_max)))
 		return (-1);
 	data->helper.i = 0;
-	data->helper.j = 0;
 	data->helper.nb_elems = 0;
 	data->helper.elem = 0;
 	if ((parse_data(app, line, tmp, &data->helper, tab)) == -1)

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 11:31:12 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 12:41:31 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,47 @@ t_coords		**init_tab(t_params *params)
 	i = 0;
 	y = params->y_max;
 	x = params->x_max;
-	if ((tab = (t_coords**)malloc(sizeof(t_coords*) * y)) == NULL)
+	if ((tab = (t_coords**)malloc(sizeof(t_coords*) * y + 1)) == NULL)
 		return (NULL);
 	while (i < y)
 	{
-		if ((tab[i] = (t_coords*)malloc(sizeof(t_coords) * x)) == NULL)
+		if ((tab[i] = (t_coords*)malloc(sizeof(t_coords) * x + 1)) == NULL)
 			return (NULL);
 		i++;
 	}
+	return (tab);
+}
+
+t_coords 		**get_size_tab(int fd, char *line, t_app *app, const char **av)
+{
+	t_coords	**tab;
+	char		**elems;
+
+	app->data->helper.nb_elems = 0;
+	if (!(elems = (char**)malloc(sizeof(char *) * app->params->x_max)))
+		return (NULL);
+	fd = open(av[1], O_RDONLY);
+	if (error_read(app->err, av[1], fd) == -1)
+		return (NULL);
+	while ((ft_get_next_line(fd, &line)) > 0)
+	{
+		if (!app->params->x_max)
+		{
+			elems = ft_strsplit(line, ' ');
+			if (!app->data->helper.nb_elems)
+			{
+				while (elems[++app->data->helper.nb_elems])
+					;
+			}
+			app->params->x_max = app->data->helper.nb_elems;
+		}
+		app->params->y_max++;
+	}
+	if ((tab = init_tab(app->params)) == NULL)
+		return (NULL);
+	printf("y_max = %lu, x_max = %lu\n", app->params->y_max, app->params->x_max);
+	if (close(fd) == -1)
+		return (NULL);
 	return (tab);
 }
 
@@ -52,24 +85,15 @@ static int		read_file(const char **av, t_app *app)
 	char		*line;
 	int			fd;
 
+	tab = NULL;
+	fd = 0;
+	line = NULL;
 	app->data->is_colors = 0;
 	app->data->helper.line = 0;
 	read_name_for_size_win(av[1], app->win);
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);
-	fd = open(av[1], O_RDONLY);
-	if (error_read(app->err, av[1], fd) == -1)
-		return (-1);
-	while ((ft_get_next_line(fd, &line)) > 0)
-	{
-		app->params->x_max = (int)ft_strsplit(line, ' ');
-		app->params->y_max++;
-	}
-	if ((tab = init_tab(app->params)) == NULL)
-		return (-1);
-	if (app->params->y_max == 0)
-		return (print_error(app->err, 1));
-	if (close(fd) == -1)
+	if ((get_size_tab(fd, line, app, av)) == NULL)
 		return (-1);
 	fd = open(av[1], O_RDONLY);
 	while ((ft_get_next_line(fd, &line)) > 0)
@@ -81,6 +105,8 @@ static int		read_file(const char **av, t_app *app)
 		app->data->helper.line++;
 	}
 	free (c_data);
+	if (app->params->y_max == 0)
+		return (print_error(app->err, 1));
 	if (close(fd) == -1)
 		return (-1);
 	return (0);
