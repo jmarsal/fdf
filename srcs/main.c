@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 13:07:08 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 14:54:42 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,39 @@ static int		error_read(t_error err, const char *av, int fd)
 	return (0);
 }
 
+t_coords		**init_tab(t_params *params)
+{
+	t_coords	**tab;
+	size_t		i;
+	size_t		y;
+	size_t		x;
+
+	i = 0;
+	y = params->y_max;
+	x = params->x_max;
+	// printf("malloc tab_tab = %lu\n", sizeof(t_coords*) * y + 1);
+	if ((tab = (t_coords**)malloc(sizeof(t_coords*) * y + 1)) == NULL)
+		return (NULL);
+	while (i < y)
+	{
+		// printf("x = %lu\n", x);
+		// printf("malloc tab = %lu\n", sizeof(t_coords) * x + 1);
+		if ((tab[i] = (t_coords*)malloc(sizeof(t_coords) * x + 1)) == NULL)
+			return (NULL);
+		i++;
+	}
+	return (tab);
+}
+
 static int		read_file(const char **av, t_app *app)
 {
 	t_coords	*c_data;
 	size_t		i;
 	char		*line;
 	int			fd;
+	char		**tmp;
 
-	tab = NULL;
-	fd = 0;
-	line = NULL;
+	tmp = NULL;
 	app->data->is_colors = 0;
 	app->data->helper.line = 0;
 	i = 0;
@@ -45,7 +68,12 @@ static int		read_file(const char **av, t_app *app)
 		return (-1);
 	while ((ft_get_next_line(fd, &line)) > 0)
 	{
-		app->params->x_max = (int)ft_strsplit(line, ' ');
+		if (!app->params->x_max)
+		{
+			tmp = ft_strsplit(line, ' ');
+			while (tmp[++app->params->x_max])
+				;
+		}
 		app->params->y_max++;
 	}
 	t_coords tab[app->params->y_max][app->params->x_max];

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/11 22:49:24 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 14:01:51 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int			*init_size_win_space_pix()
 {
 	int	*tab_of_size;
-	int	index;
 
-	index = 0;
 	if ((tab_of_size = (int*)malloc(sizeof(int) * NB_FILES)) == NULL)
 		return (NULL);
 	tab_of_size[0] = 33;	//42.fdf space_pix
@@ -35,9 +33,7 @@ int			*init_size_win_space_pix()
 int			*init_size_win_height()
 {
 	int	*tab_of_size;
-	int	index;
 
-	index = 0;
 	if ((tab_of_size = (int*)malloc(sizeof(int) * NB_FILES)) == NULL)
 		return (NULL);
 	tab_of_size[0] = 500;	//42.fdf height
@@ -55,9 +51,7 @@ int			*init_size_win_height()
 int			*init_size_win_width()
 {
 	int	*tab_of_size;
-	int	index;
 
-	index = 0;
 	if ((tab_of_size = (int*)malloc(sizeof(int) * NB_FILES)) == NULL)
 		return (NULL);
 	tab_of_size[0] = 800;	//42.fdf width

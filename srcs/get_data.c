@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 13:07:07 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 14:54:54 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 	tab[h->line][h->elem].x = c_data->x;
 	tab[h->line][h->elem].y = c_data->y;
 	tab[h->line][h->elem].z = c_data->z;
-	// printf("x = %d, y = %d, z = %d\n",
+	tab[h->line][h->elem].color = color;
+	// printf("x = %d, y = %d, z = %d, color = 0x0%6.6X\n",
 	// tab[h->line][h->elem].x,
 	// tab[h->line][h->elem].y,
 	// tab[h->line][h->elem].z);
@@ -120,18 +121,14 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 int			get_data(t_app *app, const char *line, t_coords *c_data,
 						t_data *data, t_coords tab[data->helper.line][data->helper.elem])
 {
-	t_coords	*tmp;
-
-	if ((tmp = init_coords(0, c_data->y, c_data->z, c_data->color)) == NULL)
+	if ((c_data = init_coords(0, c_data->y, c_data->z, c_data->color)) == NULL)
 		return (-1);
 	if (!(data->helper.elems = (char**)malloc(sizeof(char *) * app->params->x_max)))
 		return (-1);
 	data->helper.i = 0;
 	data->helper.nb_elems = 0;
 	data->helper.elem = 0;
-	if ((parse_data(app, line, tmp, &data->helper, tab)) == -1)
+	if ((parse_data(app, line, c_data, &data->helper, tab)) == -1)
 		return (-1);
-	c_data = tmp;
-	free(tmp);
 	return ((app->params->check_elements != app->params->x_max) ? -1 : 0);
 }
