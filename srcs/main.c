@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 11:31:12 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 14:35:31 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ t_coords		**init_tab(t_params *params)
 	i = 0;
 	y = params->y_max;
 	x = params->x_max;
-	if ((tab = (t_coords**)malloc(sizeof(t_coords*) * y)) == NULL)
+	// printf("malloc tab_tab = %lu\n", sizeof(t_coords*) * y + 1);
+	if ((tab = (t_coords**)malloc(sizeof(t_coords*) * y + 1)) == NULL)
 		return (NULL);
 	while (i < y)
 	{
-		if ((tab[i] = (t_coords*)malloc(sizeof(t_coords) * x)) == NULL)
+		// printf("x = %lu\n", x);
+		// printf("malloc tab = %lu\n", sizeof(t_coords) * x + 1);
+		if ((tab[i] = (t_coords*)malloc(sizeof(t_coords) * x + 1)) == NULL)
 			return (NULL);
 		i++;
 	}
@@ -51,7 +54,9 @@ static int		read_file(const char **av, t_app *app)
 	t_coords	*c_data;
 	char		*line;
 	int			fd;
+	char		**tmp;
 
+	tmp = NULL;
 	app->data->is_colors = 0;
 	app->data->helper.line = 0;
 	read_name_for_size_win(av[1], app->win);
@@ -62,7 +67,12 @@ static int		read_file(const char **av, t_app *app)
 		return (-1);
 	while ((ft_get_next_line(fd, &line)) > 0)
 	{
-		app->params->x_max = (int)ft_strsplit(line, ' ');
+		if (!app->params->x_max)
+		{
+			tmp = ft_strsplit(line, ' ');
+			while (tmp[++app->params->x_max])
+				;
+		}
 		app->params->y_max++;
 	}
 	if ((tab = init_tab(app->params)) == NULL)
