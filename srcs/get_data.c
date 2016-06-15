@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 23:28:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 11:30:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*get_number(const char *line, size_t *i)
 }
 
 static int	get_z(t_app *app, const char *line, t_get_data *h,
-					t_coords *c_data, t_coords tab[h->line][h->elem])
+					t_coords *c_data, t_coords **tab)
 {
 	char	*number;
 	int		z;
@@ -66,7 +66,7 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 		return (-1);
 	z = ft_atoi(number);
 	c_data->z = z;
-	printf("z = %d\n", z);
+	// printf("z = %d\n", z);
 	if (line[h->i] && line[h->i] == ',')
 	{
 		if ((c_data->color = get_color(line, &h->i)) == -1)
@@ -81,11 +81,12 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 	tab[h->line][h->elem].x = c_data->x;
 	tab[h->line][h->elem].y = c_data->y;
 	tab[h->line][h->elem].z = c_data->z;
-	// printf("x = %d, y = %d, z = %d\n",
+	tab[h->line][h->elem].color = c_data->color;
+	// printf("x = %d, y = %d, z = %d, color = 0x0%6.6X\n",
 	// tab[h->line][h->elem].x,
 	// tab[h->line][h->elem].y,
-	// tab[h->line][h->elem].z);
-	tab[h->line][h->elem].color = c_data->color;
+	// tab[h->line][h->elem].z,
+	// tab[h->line][h->elem].color);
 	h->elem++;
 	c_data->x += app->win->space_pix;
 	app->params->x_max++;
@@ -94,7 +95,7 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 }
 
 static int	parse_data(t_app *app, const char *line, t_coords *c_data,
-						t_get_data *helper, t_coords tab[helper->line][helper->elem])
+						t_get_data *helper, t_coords **tab)
 {
 	helper->elems = ft_strsplit(line, ' ');
 	if (!helper->nb_elems)
@@ -115,7 +116,7 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 }
 
 int			get_data(t_app *app, const char *line, t_coords *c_data,
-						t_data *data, t_coords tab[data->helper.line][data->helper.elem])
+						t_data *data, t_coords **tab)
 {
 	t_coords	*tmp;
 

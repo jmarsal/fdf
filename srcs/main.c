@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 23:35:17 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/15 11:31:12 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,36 @@ static int		error_read(t_error err, const char *av, int fd)
 	return (0);
 }
 
+t_coords		**init_tab(t_params *params)
+{
+	t_coords	**tab;
+	size_t		i;
+	size_t		y;
+	size_t		x;
+
+	i = 0;
+	y = params->y_max;
+	x = params->x_max;
+	if ((tab = (t_coords**)malloc(sizeof(t_coords*) * y)) == NULL)
+		return (NULL);
+	while (i < y)
+	{
+		if ((tab[i] = (t_coords*)malloc(sizeof(t_coords) * x)) == NULL)
+			return (NULL);
+		i++;
+	}
+	return (tab);
+}
+
 static int		read_file(const char **av, t_app *app)
 {
+	t_coords	**tab;
 	t_coords	*c_data;
-	size_t		i;
 	char		*line;
 	int			fd;
 
 	app->data->is_colors = 0;
 	app->data->helper.line = 0;
-	i = 0;
 	read_name_for_size_win(av[1], app->win);
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);
@@ -45,8 +65,8 @@ static int		read_file(const char **av, t_app *app)
 		app->params->x_max = (int)ft_strsplit(line, ' ');
 		app->params->y_max++;
 	}
-	t_coords tab[app->params->y_max][app->params->x_max];
-	app->data->helper.line = app->params->y_max;
+	if ((tab = init_tab(app->params)) == NULL)
+		return (-1);
 	if (app->params->y_max == 0)
 		return (print_error(app->err, 1));
 	if (close(fd) == -1)
