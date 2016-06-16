@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 16:24:29 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 22:29:34 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
 	t_coords	*tmp;
 	int			y;
-
 	tmp = current;
 	y = current->y;
 	while (i-- > 0 && next)
@@ -44,14 +43,12 @@ void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 		y++;
 	}
 }
-
 void	draw_line(t_app *app, t_coords *current)
 {
 	t_coords	*tmp;
 	int			y;
 	int			x;
 	int			color;
-
 	tmp = current;
 	y = current->y;
 	x = current->x;
@@ -78,12 +75,10 @@ void	draw_line(t_app *app, t_coords *current)
 		x++;
 	}
 }
-
 void change_data(t_data *lst, t_params *params, t_win *win, t_data *data)
 {
 	t_data		*lst_cur;
 	t_coords	*coords_cur;
-
 	lst_cur = lst;
 	while (lst_cur)
 	{
