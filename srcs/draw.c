@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/14 23:30:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 16:24:29 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //   *x = *y;
 //   *y = t;
 // }
-/*void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
+void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
 	int		octet;
 
@@ -28,7 +28,7 @@
 					octet * c->y)], &color, octet);
 }
 
-void	draw_columns(t_app *app, t_coords *current, t_coords *next, size_t i)
+/*void	draw_columns(t_app *app, t_coords *current, t_coords *next, size_t i)
 {
 	t_coords	*tmp;
 	int			y;
@@ -103,35 +103,37 @@ void change_data(t_data *lst, t_params *params, t_win *win, t_data *data)
 		}
 		lst_cur = lst_cur->next;
 	}
-}
+}*/
 
 void		draw_windows(t_app *app)
 {
-	t_data		*lst_cur;
-	t_coords	*coords_cur;
-	t_coords	*coords_next;
-	size_t		i;
+	t_coords	**data;
+	size_t		lines;
+	size_t		elems;
+	int			color;
 
-	lst_cur = app->data;
-	change_data(lst_cur, app->params, app->win, app->data);
-	while (lst_cur)
+	data = app->data->data_elem;
+	lines = 0;
+	// change_data(lst_cur, app->params, app->win, app->data);
+	while (lines < app->data->helper.line)
 	{
-		coords_cur = lst_cur->data_val;
-		if (lst_cur->next)
-			coords_next = lst_cur->next->data_val;
-		i = 0;
-		printf("coords_cur de %lu = %p\n", i, coords_cur);
-		while (coords_cur)
+		elems = 0;
+		while (elems < app->data->helper.index)
 		{
-			mlx_put_pixel_to_image(app, coords_cur, coords_cur->color);
+			color = data[lines][elems].color;
+			// printf("color = 0x%6.06X\n", color);
+			// printf("x = %d, y = %d, z = %d\n",	data[lines][elems].x,
+			// 									data[lines][elems].y,
+			// 									data[lines][elems].z);
+			mlx_put_pixel_to_image(app, &app->data->data_elem[lines][elems],
+									color);
+			++elems;
 			// draw_line(app, coords_cur);
 			// draw_columns(app, coords_cur, coords_next, i);
 			//if (coords_next->next)
 			// coords_next = coords_next->next;
-			coords_cur = coords_cur->next;
 			// i++;
 		}
-		i++;
-		lst_cur = lst_cur->next;
+		++lines;
 	}
-}*/
+}

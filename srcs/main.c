@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 14:42:36 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 15:40:25 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
-		// mlx_start(app);
+		mlx_start(app);
 	}
 	else
 		ft_putstr("\n\033[31mERROR\033[0m\n--> usage : ./fdf template.fdf\n");

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 14:39:48 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 16:23:39 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	get_color(const char *line, size_t *i)
 	}
 	number[len] = '\0';
 	color = ft_atoi_base(number, 16);
+	if (color == 0)
+		color = 0xFFFFFF;
 	free(number);
 	return (color);
 }
@@ -64,7 +66,7 @@ static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 	int		z;
 	int		color;
 
-	color = 0;
+	color = 0xFFFFFF;
 	if (!(number = get_number(line, &h->i)))
 		return (-1);
 	z = ft_atoi(number);
@@ -79,8 +81,10 @@ static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 		color = c_data->color;
 		app->data->is_colors = 1;
 	}
-	c_data->color = color;
+	else
+		c_data->color = color;
 	c_data->x += app->win->space_pix;
+	printf("color = 0x%6.06X\n", color);
 	free(number);
 	return (0);
 }
