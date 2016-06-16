@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 12:28:31 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 13:22:09 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-char	*init_number_z(const char *line, size_t *i)
+char	*init_number_z(const char *line, size_t *i, size_t sign)
 {
 	size_t	len;
 	char	*number;
@@ -20,6 +20,7 @@ char	*init_number_z(const char *line, size_t *i)
 	len = 0;
 	while (ft_isdigit(line[*i + len]) && line[*i + len])
 		++len;
+	len = (sign) ? len += 1 : len;
 	if ((number = (char*)malloc(sizeof(char) * len + 1)) == NULL)
 		return (NULL);
 	return (number);
