@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 16:17:35 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 12:28:31 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ char	*init_number_z(const char *line, size_t *i)
 
 t_coords		**init_tab(t_coords **tab, size_t line, size_t nb_elems)
 {
-	size_t		x;
-
-	x = nb_elems;
-	if ((tab[line] = (t_coords*)malloc(sizeof(t_coords) * x + 1)) == NULL)
+	if (!(tab[line] = (t_coords*)malloc(sizeof(t_coords) * nb_elems + 1)))
 		return (NULL);
 	return (tab);
 }
@@ -57,9 +54,10 @@ t_data		*init_data()
 
 	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
 		return (NULL);
-	if (!(data->data_elem = (t_coords**)malloc(sizeof(t_coords*) * 8)))
-		return (NULL);
-	data->oldsize = 4;
+	data->data_elem = NULL;
+	data->oldsize = 8;
 	data->newsize = data->oldsize * 2;
+	data->is_colors = 0;
+	data->helper.line = 0;
 	return (data);
 }

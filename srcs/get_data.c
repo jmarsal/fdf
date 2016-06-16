@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 16:28:46 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 12:08:56 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static char	*get_number(const char *line, size_t *i)
 	if ((number = init_number_z(line, i)) == NULL)
 		return (NULL);
 	while (ft_isdigit(line[*i + len]) && line[*i + len])
-		{
-			number[len] = line[*i + len];
-			len++;
-		}
+	{
+		number[len] = line[*i + len];
+		len++;
+	}
 	number[len] = '\0';
 	*i += len;
 	return (number);
@@ -60,13 +60,22 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 	char	*number;
 	int		z;
 	int		color;
+	int		sign;
 
 	color = 0;
+	sign = 0;
+	if (line[h->i] == '-')
+	{
+		sign = 1;
+		h->i++;
+	}
 	if ((number = get_number(line, &h->i)) == NULL)
 		return (-1);
 	z = ft_atoi(number);
-	c_data->z = z;
-	// printf("z = %d\n", z);
+	if (sign == 0)
+		c_data->z = z;
+	else if (sign == 1)
+		c_data->z = -z;
 	if (line[h->i] && line[h->i] == ',')
 	{
 		if ((c_data->color = get_color(line, &h->i)) == -1)
@@ -77,7 +86,6 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 		color = c_data->color;
 		app->data->is_colors = 1;
 	}
-	// printf("line = %lu, elem = %lu\n", h->line, h->elem);
 	tab[h->line][h->elem].x = c_data->x;
 	tab[h->line][h->elem].y = c_data->y;
 	tab[h->line][h->elem].z = c_data->z;
@@ -89,7 +97,6 @@ static int	get_z(t_app *app, const char *line, t_get_data *h,
 	// tab[h->line][h->elem].color);
 	h->elem++;
 	c_data->x += app->win->space_pix;
-	app->params->x_max++;
 	free(number);
 	return (0);
 }
@@ -103,7 +110,8 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 		while (helper->elems[++helper->nb_elems])
 			;
 	}
-	if ((tab = init_tab(tab, helper->line, helper->nb_elems + 1)) == NULL)
+	app->params->x_max = helper->nb_elems;
+	if (!(tab = init_tab(tab, helper->line, helper->nb_elems)))
 		return (-1);
 	while (helper->elems[helper->j])
 	{
@@ -128,8 +136,8 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 	data->helper.j = 0;
 	data->helper.nb_elems = 0;
 	data->helper.elem = 0;
+	app->params->x_max = 0;
 	if ((parse_data(app, line, c_data, &data->helper, tab)) == -1)
 		return (-1);
-		printf("x_max = %lu, check = %lu\n", app->params->x_max, app->params->check_elements);
 	return ((app->params->check_elements != app->params->x_max) ? -1 : 0);
 }

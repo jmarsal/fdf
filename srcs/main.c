@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 16:18:40 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 12:45:08 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static int		read_file(const char **av, t_app *app)
 	char		*line;
 	int			fd;
 
-	app->data->is_colors = 0;
-	app->data->helper.line = 0;
 	read_name_for_size_win(av[1], app->win);
 	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
 		return (-1);
@@ -41,17 +39,19 @@ static int		read_file(const char **av, t_app *app)
 	fd = open(av[1], O_RDONLY);
 	while ((ft_get_next_line(fd, &line)) > 0)
 	{
-		if (app->data->helper.line % 7 == 0)
+		if (app->data->helper.line % (app->data->oldsize - 1) == 0)
 		{
-			if (!(app->data->data_elem = ft_realloc(app->data->data_elem, app->data->newsize,
-				app->data->oldsize)))
+			if (!(app->data->data_elem = ft_realloc(app->data->data_elem,
+				app->data->newsize * app->data->oldsize, app->data->oldsize)))
 			return (-1);
+			app->data->oldsize = app->data->newsize;
+			app->data->newsize = app->data->oldsize * 2;
 		}
-		app->params->x_max = 0;
 		if ((get_data(app, line, c_data, app->data, app->data->data_elem))
 			== -1)
 			return (print_error(app->err, 2));
 		c_data->y += app->win->space_pix;
+		app->params->y_max++;
 		app->data->helper.line++;
 	}
 	free (c_data);

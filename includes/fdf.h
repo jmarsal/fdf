@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 15:42:34 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 12:32:09 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ int			print_error(t_error err, int witch_one);
 ** list.c
 */
 
-void		coords_add_end(t_coords **alst, t_coords *new);
-void		data_add_end(t_data **alst, t_data *new);
+// void		coords_add_end(t_coords **alst, t_coords *new);
+// void		data_add_end(t_data **alst, t_data *new);
 
 /*
 ** mlx_start.c
