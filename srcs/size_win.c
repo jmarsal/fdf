@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/15 14:01:51 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 22:56:52 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			*init_size_win_space_pix()
 {
 	int	*tab_of_size;
 
-	if ((tab_of_size = (int*)malloc(sizeof(int) * NB_FILES)) == NULL)
+	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
 		return (NULL);
 	tab_of_size[0] = 33;	//42.fdf space_pix
 	tab_of_size[1] = 31;	//elem-col.fdf stace_pix
@@ -34,7 +34,7 @@ int			*init_size_win_height()
 {
 	int	*tab_of_size;
 
-	if ((tab_of_size = (int*)malloc(sizeof(int) * NB_FILES)) == NULL)
+	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
 		return (NULL);
 	tab_of_size[0] = 500;	//42.fdf height
 	tab_of_size[1] = 450;	//elem-col.fdf height
@@ -52,7 +52,7 @@ int			*init_size_win_width()
 {
 	int	*tab_of_size;
 
-	if ((tab_of_size = (int*)malloc(sizeof(int) * NB_FILES)) == NULL)
+	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
 		return (NULL);
 	tab_of_size[0] = 800;	//42.fdf width
 	tab_of_size[1] = 500;	//elem-col.fdf width

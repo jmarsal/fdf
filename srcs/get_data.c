@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 22:33:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 23:46:10 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_color(const char *line, size_t *i)
 	len = 0;
 	while (!ft_isspace(line[*i + len]) && line[*i + len])
 		++len;
-	if ((number = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
+	if (!(number = ft_memalloc(sizeof(char) * (len + 1))))
 		return (-1);
 	len = 0;
 	while (line[*i + len] != ' ' && line[*i + len])
@@ -48,7 +48,7 @@ static char	*get_number(const char *line, size_t *i)
 	len = 0;
 	sign = (line[*i] == '-') ? 1 : 0;
 	index = 0;
-	if ((number = init_number_z(line, i, sign)) == NULL)
+	if (!(number = init_number_z(line, i, sign)))
 		return (NULL);
 	if (sign)
 		number[index++] = '-';
@@ -84,7 +84,6 @@ static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 	else
 		c_data->color = color;
 	c_data->x += app->win->space_pix;
-	printf("color = 0x%6.06X\n", color);
 	free(number);
 	return (0);
 }
@@ -122,8 +121,8 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 {
 	if ((c_data = init_coords(0, c_data->y, c_data->z, c_data->color)) == NULL)
 		return (-1);
-	if (!(data->helper.elems = (char**)malloc(sizeof(char *) *
-		ft_strlen(line))))
+	if (!(data->helper.elems = ft_memalloc(sizeof(char*) *
+		ft_strlen(line) + 1)))
 		return (-1);
 	data->helper.i = 0;
 	data->helper.j = 0;

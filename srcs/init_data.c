@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 22:31:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/16 23:50:44 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*init_number_z(const char *line, size_t *i, size_t sign)
 	while (ft_isdigit(line[*i + len]) && line[*i + len])
 		++len;
 	len = (sign) ? len += 1 : len;
-	if ((number = (char*)malloc(sizeof(char) * len + 1)) == NULL)
+	if (!(number = ft_memalloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	return (number);
 }
@@ -37,7 +37,7 @@ t_coords	*init_coords(int x, int y, int z, int color)
 {
 	t_coords	*coords;
 
-	if ((coords = (t_coords*)malloc(sizeof(t_coords))) == NULL)
+	if (!(coords = ft_memalloc(sizeof(coords) * 2)))
 		return (NULL);
 	coords->x = x;
 	coords->y = y;
@@ -50,9 +50,9 @@ t_data		*init_data()
 {
 	t_data		*data;
 
-	if ((data = (t_data*)malloc(sizeof(t_data))) == NULL)
+	if (!(data = ft_memalloc(sizeof(t_data))))
 		return (NULL);
-	data->data_elem = NULL;
+	data->data_elem = ft_memalloc(sizeof(char*));
 	data->oldsize = 8;
 	data->newsize = data->oldsize * 2;
 	data->is_colors = 0;
