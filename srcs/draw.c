@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 13:23:51 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 13:31:44 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ void		draw_windows(t_app *app)
 		while (elems < app->params->x_max)
 		{
 			color = data[lines][elems].color;
-			printf("x = %d, y = %d, z = %d\n",	data[lines][elems].x,
-											data[lines][elems].y,
-											 data[lines][elems].z);
+			// printf("x = %d, y = %d, z = %d\n",	data[lines][elems].x,
+			// 								data[lines][elems].y,
+			// 								 data[lines][elems].z);
 			mlx_put_pixel_to_image(app, &data[lines][elems], color);
 			// printf("elems = %lu\n", elems);
 			++elems;
