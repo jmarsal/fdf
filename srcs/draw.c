@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 15:51:16 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 16:17:58 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,68 +42,71 @@ void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 		mlx_put_pixel_to_image(app, tmp, current->color);
 		y++;
 	}
-}
-void	draw_line(t_app *app, t_coords *current)
+}*/
+void	draw_line(t_app *app, t_coords *c_data, t_coords *n_data)
 {
 	t_coords	*tmp;
 	int			y;
 	int			x;
 	int			color;
-	tmp = current;
-	y = current->y;
-	x = current->x;
-	color = current->color;
-	while (current->next && x < current->next->x)
+	tmp = c_data;
+	y = c_data->y;
+	x = c_data->x;
+	color = c_data->color;
+	while (x < n_data->x)
 	{
 		tmp->x = x;
-		if (y < current->next->y)
+		if (y < n_data->y)
 			y++;
-		else if (y > current->next->y)
+		else if (y > n_data->y)
 			y--;
 		tmp->y = y;
-		if ((y != current->next->y && current->z == 0) ||
-		(y != current->next->y && current->next->z == 0))
+		if ((y != n_data->y && c_data->z == 0) ||
+		(y != n_data->y && n_data->z == 0))
 			tmp->color = 0xFFFFFF;
-		else if (current->next->z > 0)
+		else if (n_data->z > 0)
 		{
-			current->next->color = 0xff0000;
-			tmp->color = current->next->color;
+			n_data->color = 0xff0000;
+			tmp->color = n_data->color;
 		}
-		else if (current->z == 0)
+		else if (c_data->z == 0)
 			tmp->color = 0xFFFFFF;
 		mlx_put_pixel_to_image(app, tmp, tmp->color);
 		x++;
 	}
-}*/
+}
 
-static t_coords *new_data(t_win *win, t_coords *n_data, t_data *data)
+static t_coords *new_data(t_win *win, t_coords *c_data, t_data *data)
 {
-	n_data->x += ((n_data->x * win->zoom) + n_data->z);
-	n_data->y += ((n_data->y * win->zoom) - n_data->z);
-	n_data->color = (n_data->z > 0 && data->is_colors == 0) ?
-					0xff0000 : n_data->color;
-	return (n_data);
+	c_data->x += (((c_data->x * win->zoom) + c_data->z) + win->move);
+	c_data->y += (((c_data->y * win->zoom) - c_data->z) + win->move);
+	c_data->color = (c_data->z > 0 && data->is_colors == 0) ?
+					0xff0000 : c_data->color;
+	return (c_data);
 }
 
 void		draw_windows(t_app *app)
 {
-	t_coords	**data;
 	size_t		lines;
 	size_t		elems;
+	t_coords	*c_data;
 	t_coords	*n_data;
 
-	data = app->data->data_elem;
 	lines = 0;
 	while (lines < app->params->y_max)
 	{
 		elems = 0;
 		while (elems < app->params->x_max)
 		{
-			n_data = new_data(app->win, &data[lines][elems], app->data);
-			mlx_put_pixel_to_image(app, n_data, n_data->color);
-			++elems;
-			// draw_line(app, coords_cur);
+			c_data = new_data(app->win, &app->data->data_elem[lines][elems],
+								app->data);
+			if (elems + 1 < app->params->x_max)
+				n_data = new_data(app->win,
+						&app->data->data_elem[lines][elems + 1], app->data);
+			// mlx_put_pixel_to_image(app, c_data, c_data->color);
+			draw_line(app, c_data, n_data);
 			// draw_columns(app, coords_cur, coords_next, i);
+			++elems;
 		}
 		++lines;
 	}
