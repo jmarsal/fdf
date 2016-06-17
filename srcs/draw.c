@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 15:44:23 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 15:51:16 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	draw_line(t_app *app, t_coords *current)
 
 static t_coords *new_data(t_win *win, t_coords *n_data, t_data *data)
 {
-	n_data->x += ((n_data->x * win->zoom) + n_data->z + win->move);
-	n_data->y += ((n_data->y * win->zoom) - n_data->z + win->move);
+	n_data->x += ((n_data->x * win->zoom) + n_data->z);
+	n_data->y += ((n_data->y * win->zoom) - n_data->z);
 	n_data->color = (n_data->z > 0 && data->is_colors == 0) ?
 					0xff0000 : n_data->color;
 	return (n_data);

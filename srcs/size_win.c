@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 15:36:44 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 15:59:27 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int			*init_size_win_zoom()
 		return (NULL);
 	tab_of_size[0] = 33;	//42.fdf space_pix
 	tab_of_size[1] = 31;	//elem-col.fdf stace_pix
-	tab_of_size[2] = 2;		//elem-fract.fdf space_pix 2
+	tab_of_size[2] = 1;		//elem-fract.fdf space_pix 2
 	tab_of_size[3] = 30;	//elem.fdf space_pix
 	tab_of_size[4] = 30;	//elem2.fdf space_pix
-	tab_of_size[5] = 2;		//julia.fdf space_pix
+	tab_of_size[5] = 1;		//julia.fdf space_pix
 	tab_of_size[6] = 8;		//mars.fdf space_pix 10
 	tab_of_size[7] = 3;		//t1.fdf space_pix 10
 	tab_of_size[8] = 10;	//t2.fdf space_pix 10
@@ -59,7 +59,7 @@ int			*init_size_win_width()
 	tab_of_size[2] = 1100;	//elem-fract.fdf width 1000
 	tab_of_size[3] = 400;	//elem.fdf width
 	tab_of_size[4] = 750;	//elem2.fdf width
-	tab_of_size[5] = 1920;	//julia.fdf width
+	tab_of_size[5] = 1220;	//julia.fdf width
 	tab_of_size[6] = 1750;	//mars.fdf width 1840
 	tab_of_size[7] = 850;	//t1.fdf width 1840
 	tab_of_size[8] = 1220;	//t2.fdf width 1220
