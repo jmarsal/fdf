@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 23:41:37 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 13:14:38 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ static int		get_data_in_line(t_app *app, t_data *data, char *line,
 {
 	if (data->helper.line % (data->oldsize - 1) == 0)
 	{
-		if (!(data->data_elem = ft_realloc(data->data_elem,
-			data->newsize * sizeof(t_coords), data->oldsize)))
+		if (!(data->data_elem = ft_realloc(data->data_elem, \
+			data->newsize * sizeof(t_coords), data->oldsize * sizeof(t_coords))))
 			return (-1);
-		// data->data_elem[data->helper.line + 1] = NULL;
 		data->oldsize = data->newsize;
 		data->newsize = data->oldsize * 2;
 	}
@@ -79,7 +78,6 @@ int		main(int ac, char **av)
 		}
 		if (read_file((const char**)av, app) == -1)
 			exit (-1);
-		// printf("x = %d\n", app->data->data_elem[499][499].x);
 		mlx_start(app);
 	}
 	else

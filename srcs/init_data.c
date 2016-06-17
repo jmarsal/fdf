@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 23:50:44 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 13:18:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*init_number_z(const char *line, size_t *i, size_t sign)
 	len = 0;
 	while (ft_isdigit(line[*i + len]) && line[*i + len])
 		++len;
-	len = (sign) ? len += 1 : len;
+	len = (sign) ? ++len : len;
 	if (!(number = ft_memalloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	return (number);
@@ -37,7 +37,7 @@ t_coords	*init_coords(int x, int y, int z, int color)
 {
 	t_coords	*coords;
 
-	if (!(coords = ft_memalloc(sizeof(coords) * 2)))
+	if (!(coords = ft_memalloc(sizeof(coords))))
 		return (NULL);
 	coords->x = x;
 	coords->y = y;
@@ -52,8 +52,8 @@ t_data		*init_data()
 
 	if (!(data = ft_memalloc(sizeof(t_data))))
 		return (NULL);
-	data->data_elem = ft_memalloc(sizeof(char*));
-	data->oldsize = 8;
+	data->data_elem = NULL;
+	data->oldsize = 16;
 	data->newsize = data->oldsize * 2;
 	data->is_colors = 0;
 	data->helper.line = 0;

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 23:53:32 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 13:23:51 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,21 +113,21 @@ void		draw_windows(t_app *app)
 	while (lines < app->params->y_max)
 	{
 		elems = 0;
+		printf("lines = %lu\n", lines);
 		while (elems < app->params->x_max)
 		{
 			color = data[lines][elems].color;
-			// printf("color = 0x%6.06X\n", color);
-			// printf("x = %d, y = %d, z = %d\n",	data[lines][elems].x,
-			// 									data[lines][elems].y,
-			// 									data[lines][elems].z);
+			printf("x = %d, y = %d, z = %d\n",	data[lines][elems].x,
+											data[lines][elems].y,
+											 data[lines][elems].z);
 			mlx_put_pixel_to_image(app, &data[lines][elems], color);
-			printf("elems = %lu\n", elems);
-			elems++;
+			// printf("elems = %lu\n", elems);
+			++elems;
 			// draw_line(app, coords_cur);
 			// draw_columns(app, coords_cur, coords_next, i);
 		}
-		printf("\nlines = %lu\n", lines);
-		printf("y_max = %lu\n", app->params->y_max);
-		lines++;
+
+		// printf("y_max = %lu\n", app->params->y_max);
+		++lines;
 	}
 }
