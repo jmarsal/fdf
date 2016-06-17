@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 23:37:25 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/18 01:15:59 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	draw_line(t_app *app, t_coords **n_data, size_t lines, size_t elems)
 			c_elems.color = 0xFFFFFF;
 		else if (n_elems.z > 0 || (n_elems.z != n_elems.z && n_elems.z > 0))
 		{
-			n_elems.color = 0xff0000;
+			// n_elems.color = 0xff0000;
 			c_elems.color = n_elems.color;
 		}
 		else if (n_elems.z == 0)
@@ -84,11 +84,12 @@ static t_coords **new_data(t_data *data, t_params *params, t_win *win,
 		elems = 0;
 		while (elems < params->x_max)
 		{
+			printf("%d\n", data->is_colors);
 			n_data[lines][elems].x += (((n_data[lines][elems].x * win->zoom) +
 										n_data[lines][elems].z) + win->move);
 			n_data[lines][elems].y += (((n_data[lines][elems].y * win->zoom) -
 										n_data[lines][elems].z) + win->move);
-			n_data[lines][elems].color = (n_data[lines][elems].z > 0 &&
+			n_data[lines][elems].color = (n_data[lines][elems].z != 0 &&
 				data->is_colors == 0) ? 0xff0000 : n_data[lines][elems].color;
 			++elems;
 		}
@@ -108,7 +109,7 @@ void		draw_windows(t_app *app)
 	while (lines < app->params->y_max)
 	{
 		elems = 0;
-		while (elems < app->params->x_max)
+		while (elems < app->params->x_max - 1)
 		{
 			// mlx_put_pixel_to_image(app, &n_data[lines][elems],
 									// n_data[lines][elems].color);
