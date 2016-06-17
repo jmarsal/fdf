@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 23:41:13 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 15:40:01 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct			s_size_win
 {
 	int					*tab_of_size_width;
 	int					*tab_of_size_height;
-	int					*tab_of_size_space_pix;
+	int					*tab_of_size_zoom;
 }						t_size_win;
 
 typedef struct			s_win
@@ -51,7 +51,9 @@ typedef struct			s_win
 	int					width;
 	int					height;
 	size_t				div_const;
-	size_t				space_pix;
+	double				const_power;
+	int					move;
+	int					zoom;
 }						t_win;
 
 typedef struct			s_img
@@ -93,9 +95,6 @@ typedef struct			s_params
 	size_t				x_max;
 	size_t				y_max;
 	size_t				check_elements;
-	double				const_power;
-	int					move;
-	int					zoom;
 }						t_params;
 
 typedef struct			s_app
@@ -113,7 +112,7 @@ typedef struct			s_app
 */
 
 t_app		*init_app();
-t_win		*init_win(int width, int heigth, size_t space_pix);
+t_win		*init_win(int width, int heigth, int zoom);
 t_mlx		*init_mlx(t_win *win);
 t_img		*init_img(t_mlx *mlx, t_win *win, t_error err);
 
@@ -164,7 +163,7 @@ t_data		*init_data();
 */
 
 int		 	read_name_for_size_win(const char *av, t_win *win);
-int			*init_size_win_space_pix();
+int			*init_size_win_zoom();
 int			*init_size_win_height();
 int			*init_size_win_width();
 

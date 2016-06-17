@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 13:10:53 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 14:06:59 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 	}
 	else
 		c_data->color = color;
-	c_data->x += app->win->space_pix;
+	c_data->x += 1;
 	free(number);
 	return (0);
 }

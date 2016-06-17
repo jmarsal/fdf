@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 13:14:38 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 14:07:09 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		get_data_in_line(t_app *app, t_data *data, char *line,
 	}
 	if ((get_data(app, line, c_data, data)) == -1)
 		return (print_error(app->err, 2));
-	c_data->y += app->win->space_pix;
+	c_data->y += 1;
 	app->params->y_max++;
 	data->helper.line++;
 	return (0);

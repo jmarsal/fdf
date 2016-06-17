@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/16 23:57:22 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 15:36:44 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int			*init_size_win_space_pix()
+int			*init_size_win_zoom()
 {
 	int	*tab_of_size;
 
@@ -59,7 +59,7 @@ int			*init_size_win_width()
 	tab_of_size[2] = 1100;	//elem-fract.fdf width 1000
 	tab_of_size[3] = 400;	//elem.fdf width
 	tab_of_size[4] = 750;	//elem2.fdf width
-	tab_of_size[5] = 1220;	//julia.fdf width
+	tab_of_size[5] = 1920;	//julia.fdf width
 	tab_of_size[6] = 1750;	//mars.fdf width 1840
 	tab_of_size[7] = 850;	//t1.fdf width 1840
 	tab_of_size[8] = 1220;	//t2.fdf width 1220
@@ -70,7 +70,7 @@ static void		get_size(t_win *win, int witch_file)
 {
 	win->width = win->size->tab_of_size_width[witch_file];
 	win->height = win->size->tab_of_size_height[witch_file];
-	win->space_pix = win->size->tab_of_size_space_pix[witch_file];
+	win->zoom = win->size->tab_of_size_zoom[witch_file];
 }
 
 int		 	read_name_for_size_win(const char *av, t_win *win)
