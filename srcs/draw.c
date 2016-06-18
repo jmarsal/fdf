@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/18 01:15:59 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/18 22:54:54 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static t_coords **new_data(t_data *data, t_params *params, t_win *win,
 		elems = 0;
 		while (elems < params->x_max)
 		{
-			printf("%d\n", data->is_colors);
 			n_data[lines][elems].x += (((n_data[lines][elems].x * win->zoom) +
 										n_data[lines][elems].z) + win->move);
 			n_data[lines][elems].y += (((n_data[lines][elems].y * win->zoom) -

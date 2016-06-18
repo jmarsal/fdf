@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 14:06:59 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/19 00:00:32 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,53 +38,26 @@ static int	get_color(const char *line, size_t *i)
 	return (color);
 }
 
-static char	*get_number(const char *line, size_t *i)
-{
-	size_t	len;
-	size_t	sign;
-	size_t	index;
-	char	*number;
-
-	len = 0;
-	sign = (line[*i] == '-') ? 1 : 0;
-	index = 0;
-	if ((number = init_number_z(line, i, sign)) == NULL)
-		return (NULL);
-	if (sign)
-		number[index++] = '-';
-	*i = (sign) ? *i += 1 : *i;
-	while (ft_isdigit(line[*i + len]) && line[*i + len])
-		number[index++] = line[*i + len++];
-	number[index] = '\0';
-	*i += len;
-	return (number);
-}
-
 static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 {
 	char	*number;
-	int		z;
 	int		color;
 
 	color = 0xFFFFFF;
-	if (!(number = get_number(line, &h->i)))
+	if (!(number = ft_get_number(line, &h->i)))
 		return (-1);
-	z = ft_atoi(number);
-	c_data->z = z;
+	c_data->z = ft_atoi(number);
+	free(number);
 	if (line[h->i] && line[h->i] == ',')
 	{
 		if ((c_data->color = get_color(line, &h->i)) == -1)
-		{
-			free(number);
 			return (-1);
-		}
 		color = c_data->color;
 		app->data->is_colors = 1;
 	}
 	else
 		c_data->color = color;
 	c_data->x += 1;
-	free(number);
 	return (0);
 }
 

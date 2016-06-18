@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 15:40:01 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/19 00:01:24 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ void		mlx_start(t_app *app);
 ** init_data.c
 */
 
-char		*init_number_z(const char *line, size_t *i, size_t sign);
 t_coords	**init_tab(t_coords **tab, size_t line, size_t nb_elems);
 t_coords	*init_coords(int x, int y, int z, int color);
 t_data		*init_data();
