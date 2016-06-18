@@ -6,57 +6,29 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/19 00:00:32 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/19 00:38:35 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static int	get_color(const char *line, size_t *i)
-{
-	int		len;
-	int		color;
-	char	*number;
-
-	*i += 3;
-	len = 0;
-	while (!ft_isspace(line[*i + len]) && line[*i + len])
-		++len;
-	if (!(number = ft_memalloc(sizeof(char) * (len + 1))))
-		return (-1);
-	len = 0;
-	while (line[*i + len] != ' ' && line[*i + len])
-	{
-		number[len] = line[*i + len];
-		len++;
-	}
-	number[len] = '\0';
-	color = ft_atoi_base(number, 16);
-	if (color == 0)
-		color = 0xFFFFFF;
-	free(number);
-	return (color);
-}
-
 static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 {
 	char	*number;
-	int		color;
 
-	color = 0xFFFFFF;
 	if (!(number = ft_get_number(line, &h->i)))
 		return (-1);
 	c_data->z = ft_atoi(number);
 	free(number);
 	if (line[h->i] && line[h->i] == ',')
 	{
-		if ((c_data->color = get_color(line, &h->i)) == -1)
+		h->i++;
+		if ((c_data->color = ft_get_color_mlx(line, &h->i)) == -1)
 			return (-1);
-		color = c_data->color;
 		app->data->is_colors = 1;
 	}
 	else
-		c_data->color = color;
+		c_data->color = (c_data->color == 0) ? 0xFFFFFF : c_data->color;
 	c_data->x += 1;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 14:07:09 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/19 00:42:28 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ static int		get_data_in_line(t_app *app, t_data *data, char *line,
 {
 	if (data->helper.line % (data->oldsize - 1) == 0)
 	{
-		if (!(data->data_elem = ft_realloc(data->data_elem, \
-			data->newsize * sizeof(t_coords), data->oldsize * sizeof(t_coords))))
+		if (!(data->data_elem = ft_realloc(data->data_elem,
+			data->newsize * sizeof(t_coords),
+			data->oldsize * sizeof(t_coords) + 1)))
 			return (-1);
 		data->oldsize = data->newsize;
 		data->newsize = data->oldsize * 2;
