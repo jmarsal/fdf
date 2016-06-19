@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/19 00:26:46 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/19 01:30:24 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ t_coords		**init_tab(t_coords **tab, size_t line, size_t nb_elems)
 	return (tab);
 }
 
-t_coords	*init_coords(int x, int y, int z, int color)
+t_coords	*init_coords(int y)
 {
 	t_coords	*coords;
 
-	if (!(coords = ft_memalloc(sizeof(coords))))
+	if (!(coords = ft_memalloc(sizeof(t_coords))))
 		return (NULL);
-	coords->x = x;
+	coords->x = 0;
 	coords->y = y;
-	coords->z = z;
-	coords->color = color;
+	coords->z = 0;
+	coords->color = 0;
 	return (coords);
 }
 

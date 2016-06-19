@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/19 00:42:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/19 01:13:08 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ static int		get_data_in_line(t_app *app, t_data *data, char *line,
 	{
 		if (!(data->data_elem = ft_realloc(data->data_elem,
 			data->newsize * sizeof(t_coords),
-			data->oldsize * sizeof(t_coords) + 1)))
+			data->oldsize * sizeof(t_coords))))
 			return (-1);
 		data->oldsize = data->newsize;
 		data->newsize = data->oldsize * 2;
 	}
+	data->data_elem[app->params->y_max] = NULL;
 	if ((get_data(app, line, c_data, data)) == -1)
 		return (print_error(app->err, 2));
 	c_data->y += 1;
@@ -51,7 +52,7 @@ static int		read_file(const char **av, t_app *app)
 	int			fd;
 
 	read_name_for_size_win(av[1], app->win);
-	if ((c_data = init_coords(0, 0, 0, 0)) == NULL)
+	if ((c_data = init_coords(0)) == NULL)
 		return (-1);
 	fd = open(av[1], O_RDONLY);
 	if (error_read(app->err, av[1], fd) == -1)
