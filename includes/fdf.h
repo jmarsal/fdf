@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 15:10:03 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 16:25:58 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct			s_win
 	int					width;
 	int					height;
 	size_t				div_const;
-	double				const_power;
+	double				move_z;
 	int					move;
 	float				zoom;
 }						t_win;
@@ -121,7 +121,7 @@ typedef struct			s_app
 */
 
 t_app		*init_app();
-t_win		*init_win(int width, int heigth, int zoom);
+t_win		*init_win(int zoom, int width, int heigth, float move_z);
 t_mlx		*init_mlx(t_win *win);
 t_img		*init_img(t_mlx *mlx, t_win *win, t_error err);
 
@@ -157,6 +157,7 @@ int			print_error(t_error err, int witch_one);
 */
 
 void		mlx_start(t_app *app);
+t_win		*new_win(t_params *param, t_win hook);
 
 /*
 ** init_data.c
@@ -193,5 +194,11 @@ t_coords	**new_data(t_data *data, t_params *params, t_win *win,
 int			*init_size_win_zoom();
 int			*init_size_win_height();
 int			*init_size_win_width();
+
+/*
+** key_funct.c
+*/
+
+int			key_funct(int keycode, t_app *app);
 
 #endif

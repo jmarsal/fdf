@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/10 12:51:17 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 16:14:44 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 // if (keycode == 69) // +
 // if (keycode == 78) // -
 
-int		key_hook(int keycode)
+/*int		key_hook(int keycode)
 {
 	printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
 	return (0);
-}
+}*/
 
 int		mouse_hook(int button, int x, int y)
 {

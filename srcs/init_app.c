@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 15:12:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 16:23:15 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_img		*init_img(t_mlx *mlx, t_win *win, t_error err)
 	return (img);
 }
 
-t_win		*init_win(int width, int heigth, int zoom)
+t_win		*init_win(int zoom, int width, int heigth, float move_z)
 {
 	t_win	*tmp;
 
@@ -52,7 +52,10 @@ t_win		*init_win(int width, int heigth, int zoom)
 	tmp->width = width;
 	tmp->height = heigth;
 	tmp->move = 30;
-	tmp->const_power = 2;
+	if (move_z)
+		tmp->move_z = move_z;
+	else
+		tmp->move_z = 1;
 	tmp->zoom = zoom;
 	return (tmp);
 }
