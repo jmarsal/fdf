@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 13:49:59 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 15:40:01 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,16 @@
 # include <fcntl.h>
 # include <string.h>
 # include <mlx.h>
+# include <math.h>
 # define BUFF_SIZE 1024
-# define NB_FILES 6
-# define WIDTH 1920
-# define HEIGHT 1080
-# define H_SPACE_PIX 30
+# define NB_FILES 9
 # define H_RESIZE 18
 # define NB_ERR 5
 
 typedef struct			s_coords
 {
-	struct s_coords		*next;
-	size_t				x;
-	size_t				y;
+	int					x;
+	int					y;
 	int					z;
 	int					color;
 }						t_coords;
@@ -41,12 +38,22 @@ typedef struct			s_error
 	char				**p_err;
 }						t_error;
 
+typedef struct			s_size_win
+{
+	int					*tab_of_size_width;
+	int					*tab_of_size_height;
+	int					*tab_of_size_zoom;
+}						t_size_win;
+
 typedef struct			s_win
 {
-	size_t				width;
-	size_t				height;
+	t_size_win			*size;
+	int					width;
+	int					height;
 	size_t				div_const;
-	size_t				space_pix;
+	double				const_power;
+	int					move;
+	int					zoom;
 }						t_win;
 
 typedef struct			s_img
@@ -68,15 +75,27 @@ typedef struct			s_get_data
 {
 	char				**elems;
 	size_t				nb_elems;
+	size_t				line;
+	size_t				index;
 	size_t				i;
 	size_t  			j;
 }						t_get_data;
 
 typedef struct			s_data
 {
-	struct s_data		*next;
-	t_coords			*data_val;
+	t_coords			**data_elem;
+	t_get_data			helper;
+	size_t				newsize;
+	size_t				oldsize;
+	int					is_colors;
 }						t_data;
+
+typedef struct			s_params
+{
+	size_t				x_max;
+	size_t				y_max;
+	size_t				check_elements;
+}						t_params;
 
 typedef struct			s_app
 {
@@ -85,11 +104,7 @@ typedef struct			s_app
 	t_win				*win;
 	t_error				err;
 	t_data				*data;
-	size_t				x_max;
-	size_t				y_max;
-	size_t				check_elements;
-	int					fd;
-	int					len;
+	t_params			*params;
 }						t_app;
 
 /*
@@ -97,9 +112,9 @@ typedef struct			s_app
 */
 
 t_app		*init_app();
-t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix);
-t_mlx		*init_mlx(t_app *app);
-t_img		*init_img(t_app *app);
+t_win		*init_win(int width, int heigth, int zoom);
+t_mlx		*init_mlx(t_win *win);
+t_img		*init_img(t_mlx *mlx, t_win *win, t_error err);
 
 /*
 **	event.c
@@ -107,6 +122,7 @@ t_img		*init_img(t_app *app);
 
 int			key_hook(int keycode);
 int			mouse_hook(int button, int x, int y);
+int			change_z(int keycode, t_app *app);
 
 /*
 **	draw.c
@@ -118,20 +134,14 @@ void		draw_windows(t_app *app);
 ** get_data.c
 */
 
-int			get_data(t_app *app, const char *line, t_coords *c_data);
+int			get_data(t_app *app, const char *line, t_coords *c_data,
+						t_data *data);
 
 /*
 ** perror.c
 */
 
-int			print_error(t_app *app, int witch_one);
-
-/*
-** list.c
-*/
-
-void		coords_add_end(t_coords **alst, t_coords *new);
-void		data_add_end(t_data **alst, t_data *new);
+int			print_error(t_error err, int witch_one);
 
 /*
 ** mlx_start.c
@@ -143,14 +153,18 @@ void		mlx_start(t_app *app);
 ** init_data.c
 */
 
-char		*init_number_z(const char *line, size_t *i);
+char		*init_number_z(const char *line, size_t *i, size_t sign);
+t_coords	**init_tab(t_coords **tab, size_t line, size_t nb_elems);
 t_coords	*init_coords(int x, int y, int z, int color);
-t_data		*init_data(t_coords *lst_lines);
+t_data		*init_data();
 
 /*
 ** size_win.c
 */
 
-void		 read_name_for_size_win(const char *av, t_app *app);
+int		 	read_name_for_size_win(const char *av, t_win *win);
+int			*init_size_win_zoom();
+int			*init_size_win_height();
+int			*init_size_win_width();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 23:12:12 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/08 11:01:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/11 23:09:32 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void 		init_perror(t_error *err)
 	err->p_err[5] = "\033[31mERROR\033[0m\n--> Can't create app !\n";
 }
 
-int			print_error(t_app *app, const int witch_one)
+int			print_error(t_error err, const int witch_one)
 {
-	init_perror(&app->err);
-	ft_putstr(app->err.p_err[witch_one]);
+	init_perror(&err);
+	ft_putstr(err.p_err[witch_one]);
 	return (-1);
 }

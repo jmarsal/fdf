@@ -6,21 +6,21 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 13:48:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 15:43:13 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_mlx		*init_mlx(t_app *app)
+t_mlx		*init_mlx(t_win *win)
 {
 	t_mlx	*mlx;
 
-	if ((mlx = (t_mlx*)malloc(sizeof(t_mlx))) == NULL)
+	if (!(mlx = ft_memalloc(sizeof(t_mlx))))
 		return (NULL);
-	if ((mlx->mlx_ptr = mlx_init()) == NULL || (mlx->mlx_win =
-		mlx_new_window(mlx->mlx_ptr, app->win->width, app->win->height,
-			"fdf by jmarsal")) == NULL)
+	if (!(mlx->mlx_ptr = mlx_init()) || !(mlx->mlx_win =
+		mlx_new_window(mlx->mlx_ptr, win->width, win->height,
+			"fdf by jmarsal")))
 	{
 		free(mlx);
 		return (NULL);
@@ -28,53 +28,55 @@ t_mlx		*init_mlx(t_app *app)
 	return (mlx);
 }
 
-t_img		*init_img(t_app *app)
+t_img		*init_img(t_mlx *mlx, t_win *win, t_error err)
 {
 	t_img	*img;
 
-	if ((img = (t_img *)malloc(sizeof(t_img))) == NULL)
+	if (!(img = ft_memalloc(sizeof(t_img))))
 	{
-		print_error(app, 3);
+		print_error(err, 3);
 		return (NULL);
 	}
-	img->img_ptr = mlx_new_image(app->mlx, app->win->width, app->win->height);
+	img->img_ptr = mlx_new_image(mlx, win->width, win->height);
 	img->data = mlx_get_data_addr(img->img_ptr, &img->bpp,
 			&img->sizeline, &img->endian);
 	return (img);
 }
 
-t_win		*init_win(size_t width, size_t heigth, size_t div_const, size_t space_pix)
+t_win		*init_win(int width, int heigth, int zoom)
 {
 	t_win	*tmp;
 
-	if ((tmp = (t_win*)malloc(sizeof(t_win))) == NULL)
+	if (!(tmp = ft_memalloc(sizeof(t_win))))
 		return (NULL);
 	tmp->width = width;
 	tmp->height = heigth;
-	tmp->div_const = div_const;
-	tmp->space_pix = space_pix;
+	tmp->move = 50;
+	tmp->const_power = 2;
+	tmp->zoom = zoom;
 	return (tmp);
 }
 
 t_app		*init_app()
 {
 	t_app		*app;
-	t_coords	*start;
 
-	if ((app = (t_app*)malloc(sizeof(t_app))) == NULL)
+	if (!(app = ft_memalloc(sizeof(t_app))))
 		return (NULL);
-	start = NULL;
-	if (
-		(app->data = init_data(NULL)) == NULL ||
-		(app->err.p_err = (char**)malloc(sizeof(char*) * (NB_ERR + 1))) == NULL
-		|| (app->win = (t_win*)malloc(sizeof(t_win))) == NULL)
+	if (!(app->data = init_data()) ||
+		!(app->err.p_err = ft_memalloc(sizeof(char*) * (NB_ERR + 1))) ||
+		!(app->win = ft_memalloc(sizeof(t_win))) ||
+		!(app->params = ft_memalloc(sizeof(t_params))) ||
+		!(app->win->size = ft_memalloc(sizeof(t_win))) ||
+		!(app->win->size->tab_of_size_width = init_size_win_width()) ||
+		!(app->win->size->tab_of_size_height = init_size_win_height()) ||
+		!(app->win->size->tab_of_size_zoom = init_size_win_zoom()))
 	{
 		free(app);
 		return (NULL);
 	}
-	app->check_elements = 0;
-	app->x_max = 0;
-	app->y_max = 0;
-	app->len = 0;
+	app->params->check_elements = 0;
+	app->params->x_max = 0;
+	app->params->y_max = 0;
 	return (app);
 }

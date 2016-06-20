@@ -6,13 +6,19 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/09 13:08:11 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/17 23:37:25 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
+// static void echangerEntiers(int* x, int* y)
+// {
+//   int t = *x;
+//   *x = *y;
+//   *y = t;
+// }
+void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 {
 	int		octet;
 
@@ -22,89 +28,94 @@ static void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
 					octet * c->y)], &color, octet);
 }
 
-// static void draw_lines(t_app *app)
-// {
-// 	t_coords	*coords;
-// 	t_coords	*test;
-// 	size_t		x;
-// 	size_t		y;
-//
-// 	coords = app->data->data_val;
-// 	test = coords;
-// 	while (coords->next)
-// 	{
-// 		test = coords;
-// 		x = test->x;
-// 		y = test->y;
-// 		if (test->color == 0xFFFFFF && test->z > 0)
-// 			coords->color = 0xa10404;
-// 		while (y < coords->next->y + PIX_SPACE && coords)
-// 		{
-// 			test->y = y;
-// 			mlx_put_pixel_to_image(app, test, coords->color);
-// 			y++;
-// 		}
-// 		while (x < coords->next->x && coords)
-// 		{
-// 			test->x = x;
-// 			mlx_put_pixel_to_image(app, test, coords->color);
-// 			x++;
-// 		}
-// 		coords = coords->next;
-// 	}
-// }
-
-// static void draw_columns(t_app *app)
-// {
-// 	t_coords	*coords;
-// 	t_coords	*test;
-// 	size_t		y;
-//
-// 	coords = app->data->data_val;
-// 	while (coords->next)
-// 	{
-// 		test = coords;
-// 		y = test->y;
-// 		while (y <= coords->next->y)
-// 		{
-// 			test->y = y;
-// 			mlx_put_pixel_to_image(app, test, coords->color);
-// 			y++;
-// 		}
-// 		coords = coords->next;
-// 	}
-// }
-
-static void draw_points(t_app *app)
+/*void	draw_columns(t_app *app, t_coords *current, t_coords *next, size_t i)
 {
-	t_data		*lst_cur;
-	t_coords	*coords;
-	t_coords	*new_coords;
-	int test;
-
-	lst_cur = app->data;
-	coords = NULL;
-	while (lst_cur)
+	t_coords	*tmp;
+	int			y;
+	tmp = current;
+	y = current->y;
+	while (i-- > 0 && next)
+		next = next->next;
+	while (next && y < next->y)
 	{
-		test = 0;
-		coords = lst_cur->data_val;
-		new_coords = coords;
-		while (coords)
+		tmp->y = y;
+		mlx_put_pixel_to_image(app, tmp, current->color);
+		y++;
+	}
+}*/
+void	draw_line(t_app *app, t_coords **n_data, size_t lines, size_t elems)
+{
+	t_coords	c_elems;
+	t_coords	n_elems;
+	t_coords	n_line;
+
+	c_elems = n_data[lines][elems];
+	n_elems = n_data[lines][elems + 1];
+	n_line = n_data[lines + 1][elems];
+	while (c_elems.x < n_elems.x)
+	{
+		if (c_elems.y < n_elems.y)
+			c_elems.y++;
+		else if (c_elems.y > n_elems.y)
+			c_elems.y--;
+		if (c_elems.y != n_elems.y && c_elems.z == 0)
+			c_elems.color = 0xFFFFFF;
+		else if (n_elems.z > 0 || (n_elems.z != n_elems.z && n_elems.z > 0))
 		{
-			new_coords->x = coords->x + H_RESIZE;
-			new_coords->y = coords->y + H_RESIZE;
-			if (coords->color == 0xFFFFFF && coords->z > 0)
-				coords->color = 0xff0000;
-			mlx_put_pixel_to_image(app, new_coords, coords->color);
-			coords = coords->next;
+			n_elems.color = 0xff0000;
+			c_elems.color = n_elems.color;
 		}
-		lst_cur = lst_cur->next;
+		else if (n_elems.z == 0)
+			c_elems.color = 0xFFFFFF;
+		mlx_put_pixel_to_image(app, &c_elems, c_elems.color);
+		c_elems.x++;
 	}
 }
 
-void	draw_windows(t_app *app)
+static t_coords **new_data(t_data *data, t_params *params, t_win *win,
+							t_coords **n_data)
 {
-	draw_points(app);
-	// draw_lines(app);
-	// draw_columns(app);
+	size_t		lines;
+	size_t		elems;
+
+	lines = 0;
+	while (lines < params->y_max)
+	{
+		elems = 0;
+		while (elems < params->x_max)
+		{
+			n_data[lines][elems].x += (((n_data[lines][elems].x * win->zoom) +
+										n_data[lines][elems].z) + win->move);
+			n_data[lines][elems].y += (((n_data[lines][elems].y * win->zoom) -
+										n_data[lines][elems].z) + win->move);
+			n_data[lines][elems].color = (n_data[lines][elems].z > 0 &&
+				data->is_colors == 0) ? 0xff0000 : n_data[lines][elems].color;
+			++elems;
+		}
+		++lines;
+	}
+	return (n_data);
+}
+
+void		draw_windows(t_app *app)
+{
+	t_coords	**n_data;
+	size_t		lines;
+	size_t		elems;
+
+	n_data = new_data(app->data, app->params, app->win, app->data->data_elem);
+	lines = 0;
+	while (lines < app->params->y_max)
+	{
+		elems = 0;
+		while (elems < app->params->x_max)
+		{
+			// mlx_put_pixel_to_image(app, &n_data[lines][elems],
+									// n_data[lines][elems].color);
+			draw_line(app, n_data, lines, elems);
+			// draw_columns(app, coords_cur, coords_next, i);
+			++elems;
+		}
+		++lines;
+	}
 }
