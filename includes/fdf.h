@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 15:40:01 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 22:20:05 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,21 @@
 # define NB_FILES 9
 # define H_RESIZE 18
 # define NB_ERR 5
+# define CST1 0.5
+
+typedef struct			s_affine
+{
+	int					x;
+	int					y;
+	float				coef;
+	float				cst;
+}						t_affine;
 
 typedef struct			s_coords
 {
 	int					x;
 	int					y;
-	int					z;
+	float				z;
 	int					color;
 }						t_coords;
 
@@ -53,7 +62,7 @@ typedef struct			s_win
 	size_t				div_const;
 	double				const_power;
 	int					move;
-	int					zoom;
+	float				zoom;
 }						t_win;
 
 typedef struct			s_img
@@ -153,9 +162,8 @@ void		mlx_start(t_app *app);
 ** init_data.c
 */
 
-char		*init_number_z(const char *line, size_t *i, size_t sign);
 t_coords	**init_tab(t_coords **tab, size_t line, size_t nb_elems);
-t_coords	*init_coords(int x, int y, int z, int color);
+t_coords	*init_coords(int y);
 t_data		*init_data();
 
 /*
@@ -163,6 +171,25 @@ t_data		*init_data();
 */
 
 int		 	read_name_for_size_win(const char *av, t_win *win);
+
+/*
+** affine.c
+*/
+
+void		check_affine(t_app *app, t_coords *c_elems, t_coords *n_elems);
+
+/*
+** draw_tools.c
+*/
+
+void		mlx_put_pixel_to_image(t_app *app, t_affine *c, int color);
+t_coords	**new_data(t_data *data, t_params *params, t_win *win,
+							t_coords **n_data);
+
+/*
+** init_size_win.c
+*/
+
 int			*init_size_win_zoom();
 int			*init_size_win_height();
 int			*init_size_win_width();

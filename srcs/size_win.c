@@ -6,12 +6,17 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/06/17 15:59:27 by jmarsal          ###   ########.fr       */
+=======
+/*   Updated: 2016/06/20 15:08:48 by jmarsal          ###   ########.fr       */
+>>>>>>> 5d9ea684cf9d480249333d53956865d1b4d5965b
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
+<<<<<<< HEAD
 int			*init_size_win_zoom()
 {
 	int	*tab_of_size;
@@ -75,6 +80,17 @@ static void		get_size(t_win *win, int witch_file)
 
 int		 	read_name_for_size_win(const char *av, t_win *win)
 {
+=======
+static void		get_size(t_win *win, int witch_file)
+{
+	win->width = win->size->tab_of_size_width[witch_file];
+	win->height = win->size->tab_of_size_height[witch_file];
+	win->zoom = win->size->tab_of_size_zoom[witch_file];
+}
+
+int		 	read_name_for_size_win(const char *av, t_win *win)
+{
+>>>>>>> 5d9ea684cf9d480249333d53956865d1b4d5965b
 	if (ft_strstr(av, "42.fdf"))
 		get_size(win, 0);
 	else if (ft_strstr(av, "elem-col.fdf"))
