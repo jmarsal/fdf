@@ -6,65 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 15:59:27 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 15:08:48 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-int			*init_size_win_zoom()
-{
-	int	*tab_of_size;
-
-	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
-		return (NULL);
-	tab_of_size[0] = 33;	//42.fdf space_pix
-	tab_of_size[1] = 31;	//elem-col.fdf stace_pix
-	tab_of_size[2] = 1;		//elem-fract.fdf space_pix 2
-	tab_of_size[3] = 30;	//elem.fdf space_pix
-	tab_of_size[4] = 30;	//elem2.fdf space_pix
-	tab_of_size[5] = 1;		//julia.fdf space_pix
-	tab_of_size[6] = 8;		//mars.fdf space_pix 10
-	tab_of_size[7] = 3;		//t1.fdf space_pix 10
-	tab_of_size[8] = 10;	//t2.fdf space_pix 10
-	return (tab_of_size);
-}
-
-int			*init_size_win_height()
-{
-	int	*tab_of_size;
-
-	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
-		return (NULL);
-	tab_of_size[0] = 500;	//42.fdf height
-	tab_of_size[1] = 450;	//elem-col.fdf height
-	tab_of_size[2] = 1105;	//elem-fract.fdf height 1005
-	tab_of_size[3] = 400;	//elem.fdf height
-	tab_of_size[4] = 700;	//elem2.fdf height
-	tab_of_size[5] = 1080;	//julia.fdf height
-	tab_of_size[6] = 1000;	//mars.fdf height 1080
-	tab_of_size[7] = 700;	//t1.fdf height 1080
-	tab_of_size[8] = 1080;	//t2.fdf height 1080
-	return (tab_of_size);
-}
-
-int			*init_size_win_width()
-{
-	int	*tab_of_size;
-
-	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
-		return (NULL);
-	tab_of_size[0] = 800;	//42.fdf width
-	tab_of_size[1] = 500;	//elem-col.fdf width
-	tab_of_size[2] = 1100;	//elem-fract.fdf width 1000
-	tab_of_size[3] = 400;	//elem.fdf width
-	tab_of_size[4] = 750;	//elem2.fdf width
-	tab_of_size[5] = 1220;	//julia.fdf width
-	tab_of_size[6] = 1750;	//mars.fdf width 1840
-	tab_of_size[7] = 850;	//t1.fdf width 1840
-	tab_of_size[8] = 1220;	//t2.fdf width 1220
-	return (tab_of_size);
-}
 
 static void		get_size(t_win *win, int witch_file)
 {

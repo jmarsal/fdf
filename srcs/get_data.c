@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/19 02:17:55 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 15:20:59 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 			return (-1);
 		app->data->is_colors = 1;
 	}
-	else
-		c_data->color = (c_data->color == 0) ? 0xFFFFFF : c_data->color;
+	c_data->color = (c_data->color == 0) ? 0xFFFFFF : c_data->color;
 	c_data->x += 1;
 	return (0);
 }

@@ -13,4 +13,5 @@ fdf
 
 # Exclusion des ".DS"
 
-*.DS
+*DS_Store
+._*
