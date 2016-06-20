@@ -6,15 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2016/06/09 22:12:40 by jmarsal          ###   ########.fr       */
-=======
-/*   Updated: 2016/06/17 15:44:41 by jmarsal          ###   ########.fr       */
->>>>>>> graphique
-=======
-/*   Updated: 2016/06/20 15:36:41 by jmarsal          ###   ########.fr       */
->>>>>>> 5d9ea684cf9d480249333d53956865d1b4d5965b
+/*   Updated: 2016/06/20 22:57:21 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +20,7 @@ static int		close_win(t_mlx *mlx)
 
 void			mlx_start(t_app *app)
 {
-	if (!(app->win = init_win(app->win->width, app->win->height,
-		app->win->zoom)) || !(app->mlx = init_mlx(app->win)) ||
+	if (!(app->mlx = init_mlx(app->win)) ||
 		!(app->img = init_img(app->mlx, app->win, app->err)))
 	{
 		print_error(app->err, 5);

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 15:08:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 15:21:30 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 22:44:08 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int			*init_size_win_zoom()
 		return (NULL);
 	tab_of_size[0] = 4;	//42.fdf zoom
 	tab_of_size[1] = 3;	//elem-col.fdf zoom
-	tab_of_size[2] = 1;		//elem-fract.fdf zoom 2
+	tab_of_size[2] = 1;	//elem-fract.fdf zoom 2
 	tab_of_size[3] = 3;	//elem.fdf zoom
 	tab_of_size[4] = 3;	//elem2.fdf zoom
-	tab_of_size[5] = 1;		//julia.fdf zoom
-	tab_of_size[6] = 2;		//mars.fdf zoom 10
-	tab_of_size[7] = 1;		//t1.fdf zoom 10
+	tab_of_size[5] = 1;	//julia.fdf zoom
+	tab_of_size[6] = 2;	//mars.fdf zoom 10
+	tab_of_size[7] = 1;	//t1.fdf zoom 10
 	tab_of_size[8] = 2;	//t2.fdf zoom 10
 	return (tab_of_size);
 }

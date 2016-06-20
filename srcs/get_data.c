@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 22:20:37 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 22:43:29 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 int			get_data(t_app *app, const char *line, t_coords *c_data,
 						t_data *data)
 {
-	if (!(c_data = init_coords(c_data->y)))
+	t_coords	*new_data;
+
+	if (!(new_data = init_coords(c_data->y)))
 		return (-1);
 	if (!(data->helper.elems = ft_memalloc(sizeof(char) * ft_strlen(line))))
 		return (-1);
@@ -72,7 +74,7 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 	data->helper.nb_elems = 0;
 	data->helper.index = 0;
 	app->params->x_max = 0;
-	if ((parse_data(app, line, c_data, &data->helper)) == -1)
+	if ((parse_data(app, line, new_data, &data->helper)) == -1)
 		return (-1);
 	return ((app->params->check_elements != app->params->x_max) ? -1 : 0);
 }

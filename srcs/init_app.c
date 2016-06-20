@@ -6,11 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/06/17 15:43:13 by jmarsal          ###   ########.fr       */
-=======
-/*   Updated: 2016/06/20 15:12:21 by jmarsal          ###   ########.fr       */
->>>>>>> 5d9ea684cf9d480249333d53956865d1b4d5965b
+/*   Updated: 2016/06/20 23:03:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +49,14 @@ t_win		*init_win(int width, int heigth, int zoom)
 
 	if (!(tmp = ft_memalloc(sizeof(t_win))))
 		return (NULL);
+	if (!(tmp->size = ft_memalloc(sizeof(t_win))) ||
+		!(tmp->size->tab_of_size_width = init_size_win_width()) ||
+		!(tmp->size->tab_of_size_height = init_size_win_height()) ||
+		!(tmp->size->tab_of_size_zoom = init_size_win_zoom()))
+		return (NULL);
 	tmp->width = width;
 	tmp->height = heigth;
-<<<<<<< HEAD
-	tmp->move = 50;
-=======
 	tmp->move = 30;
->>>>>>> 5d9ea684cf9d480249333d53956865d1b4d5965b
 	tmp->const_power = 2;
 	tmp->zoom = zoom;
 	return (tmp);
@@ -73,12 +70,8 @@ t_app		*init_app()
 		return (NULL);
 	if (!(app->data = init_data()) ||
 		!(app->err.p_err = ft_memalloc(sizeof(char*) * (NB_ERR + 1))) ||
-		!(app->win = ft_memalloc(sizeof(t_win))) ||
-		!(app->params = ft_memalloc(sizeof(t_params))) ||
-		!(app->win->size = ft_memalloc(sizeof(t_win))) ||
-		!(app->win->size->tab_of_size_width = init_size_win_width()) ||
-		!(app->win->size->tab_of_size_height = init_size_win_height()) ||
-		!(app->win->size->tab_of_size_zoom = init_size_win_zoom()))
+		!(app->win = init_win(0, 0, 0)) ||
+		!(app->params = ft_memalloc(sizeof(t_params))))
 	{
 		free(app);
 		return (NULL);
