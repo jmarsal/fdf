@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:50:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 15:21:06 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/21 00:12:34 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_coords	**new_data(t_data *data, t_params *params, t_win *win,
 		elems = 0;
 		while (elems < params->x_max)
 		{
+			n_data[lines][elems].z *= win->move_z;
 			n_data[lines][elems].x = (n_data[lines][elems].x + CST1 *
 										n_data[lines][elems].z) * win->zoom
 										+ win->move;

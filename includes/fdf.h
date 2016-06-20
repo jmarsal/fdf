@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 16:25:58 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 23:40:25 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ typedef struct			s_size_win
 typedef struct			s_win
 {
 	t_size_win			*size;
+	float				const_power;
+	float				move_z;
+	float				zoom;
 	int					width;
 	int					height;
-	size_t				div_const;
-	double				move_z;
 	int					move;
-	float				zoom;
 }						t_win;
 
 typedef struct			s_img

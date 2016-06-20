@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 16:23:15 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/21 00:27:35 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,15 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 
 	if (!(tmp = ft_memalloc(sizeof(t_win))))
 		return (NULL);
+	if (!(tmp->size = ft_memalloc(sizeof(t_win))) ||
+		!(tmp->size->tab_of_size_width = init_size_win_width()) ||
+		!(tmp->size->tab_of_size_height = init_size_win_height()) ||
+		!(tmp->size->tab_of_size_zoom = init_size_win_zoom()))
+		return (NULL);
 	tmp->width = width;
 	tmp->height = heigth;
 	tmp->move = 30;
-	if (move_z)
+	if (move_z != 0)
 		tmp->move_z = move_z;
 	else
 		tmp->move_z = 1;
@@ -68,12 +73,8 @@ t_app		*init_app()
 		return (NULL);
 	if (!(app->data = init_data()) ||
 		!(app->err.p_err = ft_memalloc(sizeof(char*) * (NB_ERR + 1))) ||
-		!(app->win = ft_memalloc(sizeof(t_win))) ||
-		!(app->params = ft_memalloc(sizeof(t_params))) ||
-		!(app->win->size = ft_memalloc(sizeof(t_win))) ||
-		!(app->win->size->tab_of_size_width = init_size_win_width()) ||
-		!(app->win->size->tab_of_size_height = init_size_win_height()) ||
-		!(app->win->size->tab_of_size_zoom = init_size_win_zoom()))
+		!(app->win = init_win(0, 0, 0, 0)) ||
+		!(app->params = ft_memalloc(sizeof(t_params))))
 	{
 		free(app);
 		return (NULL);
