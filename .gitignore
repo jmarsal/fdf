@@ -1,0 +1,17 @@
+# Exclusion du dossier /obj crées à la compilation
+
+/obj
+
+# Exlusion de l'executable
+
+fdf
+
+# Exclusion des ".a" et ".o" de la libmlx
+
+*.a
+*.o
+
+# Exclusion des ".DS"
+
+*DS_Store
+._*

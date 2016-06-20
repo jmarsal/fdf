@@ -6,128 +6,98 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/17 13:31:44 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/20 15:36:29 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// static void echangerEntiers(int* x, int* y)
-// {
-//   int t = *x;
-//   *x = *y;
-//   *y = t;
-// }
-void	mlx_put_pixel_to_image(t_app *app, t_coords *c, int color)
+static void	draw_col_bet_points(t_app *app, t_coords c_line, t_coords n_line,
+								t_affine draw)
 {
-	int		octet;
-
-	octet = app->img->bpp / 8;
-	if (c->x > 0 && c->x < app->win->width && c->y > 0 && c->y < app->win->height)
-		ft_memcpy(&app->img->data[octet * (c->x + app->img->sizeline /
-					octet * c->y)], &color, octet);
-}
-
-/*void	draw_columns(t_app *app, t_coords *current, t_coords *next, size_t i)
-{
-	t_coords	*tmp;
-	int			y;
-	tmp = current;
-	y = current->y;
-	while (i-- > 0 && next)
-		next = next->next;
-	while (next && y < next->y)
+	if (draw.y < n_line.y)
 	{
-		tmp->y = y;
-		mlx_put_pixel_to_image(app, tmp, current->color);
-		y++;
-	}
-}
-void	draw_line(t_app *app, t_coords *current)
-{
-	t_coords	*tmp;
-	int			y;
-	int			x;
-	int			color;
-	tmp = current;
-	y = current->y;
-	x = current->x;
-	color = current->color;
-	while (current->next && x < current->next->x)
-	{
-		tmp->x = x;
-		if (y < current->next->y)
-			y++;
-		else if (y > current->next->y)
-			y--;
-		tmp->y = y;
-		if ((y != current->next->y && current->z == 0) ||
-		(y != current->next->y && current->next->z == 0))
-			tmp->color = 0xFFFFFF;
-		else if (current->next->z > 0)
+		while (draw.y < n_line.y)
 		{
-			current->next->color = 0xff0000;
-			tmp->color = current->next->color;
+			mlx_put_pixel_to_image(app, &draw, c_line.color);
+			draw.y++;
 		}
-		else if (current->z == 0)
-			tmp->color = 0xFFFFFF;
-		mlx_put_pixel_to_image(app, tmp, tmp->color);
-		x++;
+	}
+	else if (draw.y > n_line.y)
+	{
+		while (draw.y > n_line.y)
+		{
+			mlx_put_pixel_to_image(app, &draw, c_line.color);
+			draw.y--;
+		}
 	}
 }
-void change_data(t_data *lst, t_params *params, t_win *win, t_data *data)
+
+static void	draw_columns(t_app *app, t_coords **n_data, size_t lines,
+							size_t elems)
 {
-	t_data		*lst_cur;
-	t_coords	*coords_cur;
-	lst_cur = lst;
-	while (lst_cur)
+	t_coords	c_line;
+	t_coords	n_line;
+	t_affine	draw;
+
+	c_line = n_data[lines][elems];
+	draw.x = c_line.x;
+	draw.y = c_line.y;
+	if (n_data[lines + 1])
+		n_line = n_data[lines + 1][elems];
+	else
+		n_line = c_line;
+	if (c_line.x - n_line.x == 0)
 	{
-		coords_cur = lst_cur->data_val;
-		printf(" dans change_data coords_cur = %p\n", coords_cur);
-		while (coords_cur)
-		{
-			coords_cur->x = (params->move +
-				((coords_cur->x + coords_cur->z) +
-				win->space_pix) * params->zoom);
-			coords_cur->y = (params->move +
-				((coords_cur->y - coords_cur->z) +
-				win->space_pix) * params->zoom);
-			if (coords_cur->z > 0 && data->is_colors == 0)
-				coords_cur->color = 0xff0000;
-			coords_cur = coords_cur->next;
-		}
-		lst_cur = lst_cur->next;
+		draw_col_bet_points(app, c_line, n_line, draw);
 	}
-}*/
+	else
+		check_affine(app, &c_line, &n_line);
+}
+
+static void	draw_line(t_app *app, t_coords **n_data, size_t lines, size_t elems)
+{
+	t_coords	c_elems;
+	t_coords	n_elems;
+	t_affine	draw;
+
+	c_elems = n_data[lines][elems];
+	draw.x = c_elems.x;
+	draw.y = c_elems.y;
+	if (elems + 1 < app->params->x_max)
+		n_elems = n_data[lines][elems + 1];
+	else
+		n_elems = c_elems;
+	if (c_elems.y - n_elems.y == 0)
+	{
+		while (draw.x < n_elems.x)
+		{
+			mlx_put_pixel_to_image(app, &draw, c_elems.color);
+			draw.x++;
+		}
+	}
+	else
+		check_affine(app, &c_elems, &n_elems);
+}
 
 void		draw_windows(t_app *app)
 {
-	t_coords	**data;
+	t_coords	**n_data;
 	size_t		lines;
 	size_t		elems;
-	int			color;
 
-	data = app->data->data_elem;
+	n_data = new_data(app->data, app->params, app->win, app->data->data_elem);
 	lines = 0;
-	// change_data(lst_cur, app->params, app->win, app->data);
-	while (lines < app->params->y_max)
+	while (n_data[lines])
 	{
 		elems = 0;
-		printf("lines = %lu\n", lines);
 		while (elems < app->params->x_max)
 		{
-			color = data[lines][elems].color;
-			// printf("x = %d, y = %d, z = %d\n",	data[lines][elems].x,
-			// 								data[lines][elems].y,
-			// 								 data[lines][elems].z);
-			mlx_put_pixel_to_image(app, &data[lines][elems], color);
-			// printf("elems = %lu\n", elems);
-			++elems;
-			// draw_line(app, coords_cur);
-			// draw_columns(app, coords_cur, coords_next, i);
+			draw_line(app, n_data, lines, elems);
+			draw_columns(app, n_data, lines, elems);
+			elems++;
 		}
-
-		// printf("y_max = %lu\n", app->params->y_max);
-		++lines;
+		lines++;
 	}
+	elems = 0;
 }
