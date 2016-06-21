@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 15:46:15 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/21 16:24:48 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/21 16:28:57 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		key_funct(int keycode, t_app *app)
 		exit(0);
 	if (keycode == 69)
 		app->win->move_z *= 1.1;
-	if (keycode == 78)
+	else if (keycode == 78)
 		app->win->move_z /= 1.1;
 	// mlx_destroy_image(app->mlx->mlx_ptr, app->img);
 	// ft_memdel((void **)&app->img);
