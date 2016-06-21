@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 23:40:25 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/21 16:13:22 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,8 @@ int			print_error(t_error err, int witch_one);
 
 void		mlx_start(t_app *app);
 t_win		*new_win(t_params *param, t_win hook);
+int			print_mlx(t_app *app);
+int			close_win(t_mlx *mlx);
 
 /*
 ** init_data.c
