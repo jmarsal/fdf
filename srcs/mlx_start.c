@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/21 16:16:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/21 22:20:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		close_win(t_mlx *mlx)
 
 int		print_mlx(t_app *app)
 {
-	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
+	// mlx_destroy_image(app->mlx->mlx_ptr, app->img);
 	// ft_memdel((void **)&app->img);
 	if (!(app->img = init_img(app->mlx, app->win, app->err)))
 	{

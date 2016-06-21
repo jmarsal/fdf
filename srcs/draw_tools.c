@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:50:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/21 16:26:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/21 22:16:38 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_coords	**new_data(t_data *data, t_params *params, t_win *win,
 	{
 		printf("move_z = %f\n", win->move_z);
 		elems = 0;
-		printf("z = %f\n", tmp[lines][elems].z);
+		printf("z = %f\n", n_data[lines][elems].z);
 		while (elems < params->x_max)
 		{
 			tmp[lines][elems].z = n_data[lines][elems].z * win->move_z;

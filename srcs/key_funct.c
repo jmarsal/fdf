@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 15:46:15 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/21 16:28:57 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/21 22:25:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,22 @@
 
 int		key_funct(int keycode, t_app *app)
 {
+	t_win	hook;
 
-	// if (app->mlx == NULL)
-	// 	return (0);
+	if (app->mlx == NULL)
+		return (0);
+	hook.height = app->win->height;
+	hook.width = app->win->width;
+	hook.zoom = app->win->zoom;
 	printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 69)
-		app->win->move_z *= 1.1;
-	else if (keycode == 78)
-		app->win->move_z /= 1.1;
+	if (keycode == 69 || keycode == 24)
+		hook.move_z *= 1.1;
+	else if (keycode == 78 || keycode == 27)
+		hook.move_z /= 1.1;
+	ft_memdel((void **)&app->img);
+	app->win = new_win(app->params, hook);
 	// mlx_destroy_image(app->mlx->mlx_ptr, app->img);
 	// ft_memdel((void **)&app->img);
 	print_mlx(app);
