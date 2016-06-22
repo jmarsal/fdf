@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 12:05:04 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 16:02:28 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void		mlx_start(t_app *app)
 		free (app);
 		exit (-1);
 	}
-	// mlx_mouse_hook(app->mlx->mlx_win, mouse_hook, &app->mlx);
+	mlx_mouse_hook(app->mlx->mlx_win, mouse_funct, &app->mlx);
 	draw_windows(app);
 	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
 		app->img->img_ptr, 0, 0);
-	mlx_hook(app->mlx->mlx_win, 2, 3, key_funct, app);
+	mlx_hook(app->mlx->mlx_win, 2, 3, key_funct, &app->mlx);
 	mlx_hook(app->mlx->mlx_win, 17, 1L << 17, close_win, &app->mlx);
 	mlx_loop(app->mlx->mlx_ptr);
 }

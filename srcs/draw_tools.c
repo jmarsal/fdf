@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:50:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 12:59:52 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 15:53:30 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,31 @@ void		mlx_put_pixel_to_image(t_app *app, t_affine *c, int color)
 										octet * c->y)], &color, octet);
 }
 
-t_coords		ch_data_paralelle(int is_color, t_win *win, t_coords data)
+t_coords	ch_data_paralelle(int is_color, t_win *win, t_coords data)
 {
 	t_coords	modify;
 
 	modify.z = data.z * win->move_z;
-	modify.y = ((CST1 / 2) * -modify.z + data.y) * win->zoom + win->zoom_change
+	modify.y = ((CST1 / 2) * -modify.z + data.y) * win->zoom
 				+ win->move_vertical;
-	modify.x = (data.x + CST1 * modify.z) * win->zoom + win->zoom_change +
-				win->move_horizontal;
+	modify.y *= win->zoom_change;
+	modify.x = (data.x + CST1 * modify.z) * win->zoom + win->move_horizontal;
+	modify.x *= win->zoom_change;
+	modify.color = (data.z != 0 && is_color == 0) ? 0xff0000 : data.color;
+	return (modify);
+}
+
+t_coords	ch_data_isometric(int is_color, t_win *win, t_coords data)
+{
+	t_coords	modify;
+
+	modify.z = data.z * win->move_z;
+	modify.y = ((CST1 / 2) * data.x + (CST2 / 2) * data.y - modify.z) *
+				win->zoom + win->move_vertical;
+	modify.y *= win->zoom_change;
+	modify.x = (data.x * CST1 - data.y * CST2) *
+				win->zoom + win->move_horizontal;
+	modify.x *= win->zoom_change;
 	modify.color = (data.z != 0 && is_color == 0) ? 0xff0000 : data.color;
 	return (modify);
 }

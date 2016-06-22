@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 12:58:31 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 15:59:17 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define H_RESIZE 18
 # define NB_ERR 5
 # define CST1 0.8
+# define CST2 0.8
 # define QUIT 53
 # define Z_PLUS 69
 # define Z_MINUS 78
@@ -35,6 +36,10 @@
 # define T_DOWN 125
 # define T_MOVE 2
 # define ORIGIN_POS 71
+# define ISO 116
+# define PARALELLE 121
+# define UP_ZOOM 4
+# define DOWN_ZOOM 5
 
 typedef struct			s_affine
 {
@@ -67,7 +72,6 @@ typedef struct			s_size_win
 typedef struct			s_win
 {
 	t_size_win			*size;
-	float				const_power;
 	double				move_z;
 	float				zoom;
 	float				zoom_change;
@@ -75,6 +79,7 @@ typedef struct			s_win
 	int					height;
 	int					move_horizontal;
 	int					move_vertical;
+	int					witch_proj;
 }						t_win;
 
 typedef struct			s_img
@@ -144,6 +149,8 @@ t_img		*init_img(t_mlx *mlx, t_win *win, t_error err);
 void		move_z(t_app *app, int keycode);
 void		move_tray(t_app *app, int keycode);
 void		get_original_pos(t_app *app);
+void		change_proj(t_app *app, int keycode);
+void		change_zoom(t_app *app, int button);
 
 /*
 **	draw.c
@@ -196,6 +203,7 @@ void		check_affine(t_app *app, t_coords *c_elems, t_coords *n_elems);
 
 void		mlx_put_pixel_to_image(t_app *app, t_affine *c, int color);
 t_coords	ch_data_paralelle(int is_color, t_win *win, t_coords data);
+t_coords	ch_data_isometric(int is_color, t_win *win, t_coords data);
 
 /*
 ** init_size_win.c
@@ -210,5 +218,6 @@ int			*init_size_win_width();
 */
 
 int			key_funct(int keycode, t_app *app);
+int			mouse_funct(int button, int x, int y, t_app *app);
 
 #endif

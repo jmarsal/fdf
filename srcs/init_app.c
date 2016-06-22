@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 13:06:02 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 15:25:26 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 	else
 		tmp->move_z = 1;
 	tmp->zoom = zoom;
-	tmp->zoom_change = 0;
+	tmp->zoom_change = 1;
+	tmp->witch_proj = 0;
 	return (tmp);
 }
 

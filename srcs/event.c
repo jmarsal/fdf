@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 13:10:35 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 16:02:32 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,46 @@ void	move_tray(t_app *app, int keycode)
 
 void	get_original_pos(t_app *app)
 {
-	app->win->zoom_change = 0;
+	app->win->zoom_change = 1;
 	app->win->move_z = 1;
 	app->win->move_horizontal = app->win->width / 4;
 	app->win->move_vertical = app->win->height / 4;
+	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
+	if (!(app->img = init_img(app->mlx, app->win, app->err)))
+	{
+		print_error(app->err, 5);
+		free (app);
+		exit (-1);
+	}
+	draw_windows(app);
+	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
+		app->img->img_ptr, 0, 0);
+}
+
+void	change_proj(t_app *app, int keycode)
+{
+	if (keycode == 116)
+		app->win->witch_proj = 1;
+	if (keycode == 121)
+		app->win->witch_proj = 0;
+	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
+	if (!(app->img = init_img(app->mlx, app->win, app->err)))
+	{
+		print_error(app->err, 5);
+		free (app);
+		exit (-1);
+	}
+	draw_windows(app);
+	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
+		app->img->img_ptr, 0, 0);
+}
+
+void	change_zoom(t_app *app, int button)
+{
+	if (button == UP_ZOOM)
+		app->win->zoom_change += (app->win->zoom_change >= 100) ? 10 : 1;
+	if (button == DOWN_ZOOM && app->win->zoom_change > 1)
+		app->win->zoom_change -= (app->win->zoom_change >= 100) ? 10 : 1;
 	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
 	if (!(app->img = init_img(app->mlx, app->win, app->err)))
 	{
