@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 15:59:17 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 22:33:06 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define QUIT 53
 # define Z_PLUS 69
 # define Z_MINUS 78
+# define Z_PLUS2 24
+# define Z_MINUS2 27
 # define Z_CHANGE 0.005
 # define T_LEFT 123
 # define T_RIGHT 124
@@ -36,8 +38,11 @@
 # define T_DOWN 125
 # define T_MOVE 2
 # define ORIGIN_POS 71
+# define ORIGIN_POS2 31
 # define ISO 116
+# define ISO2 19
 # define PARALELLE 121
+# define PARALELLE2 18
 # define UP_ZOOM 4
 # define DOWN_ZOOM 5
 

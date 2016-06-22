@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 16:02:32 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 22:36:56 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	move_z(t_app *app, int keycode)
 {
-	if (keycode == Z_PLUS)
+	if (keycode == Z_PLUS || keycode == Z_PLUS2)
 		app->win->move_z += Z_CHANGE;
-	if (keycode == Z_MINUS)
+	if (keycode == Z_MINUS || keycode == Z_MINUS2)
 		app->win->move_z -= Z_CHANGE;
 	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
 	if (!(app->img = init_img(app->mlx, app->win, app->err)))
@@ -72,9 +72,9 @@ void	get_original_pos(t_app *app)
 
 void	change_proj(t_app *app, int keycode)
 {
-	if (keycode == 116)
+	if (keycode == ISO || keycode == ISO2)
 		app->win->witch_proj = 1;
-	if (keycode == 121)
+	if (keycode == PARALELLE || keycode == PARALELLE2)
 		app->win->witch_proj = 0;
 	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
 	if (!(app->img = init_img(app->mlx, app->win, app->err)))
