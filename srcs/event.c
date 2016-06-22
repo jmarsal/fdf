@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 22:36:56 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 00:28:21 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	move_z(t_app *app, int keycode)
 	draw_windows(app);
 	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
 		app->img->img_ptr, 0, 0);
+	print_info(app);
 }
 
 void	move_tray(t_app *app, int keycode)
@@ -50,6 +51,7 @@ void	move_tray(t_app *app, int keycode)
 	draw_windows(app);
 	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
 		app->img->img_ptr, 0, 0);
+	print_info(app);
 }
 
 void	get_original_pos(t_app *app)
@@ -68,6 +70,7 @@ void	get_original_pos(t_app *app)
 	draw_windows(app);
 	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
 		app->img->img_ptr, 0, 0);
+	print_info(app);
 }
 
 void	change_proj(t_app *app, int keycode)
@@ -86,14 +89,15 @@ void	change_proj(t_app *app, int keycode)
 	draw_windows(app);
 	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
 		app->img->img_ptr, 0, 0);
+	print_info(app);
 }
 
 void	change_zoom(t_app *app, int button)
 {
 	if (button == UP_ZOOM)
-		app->win->zoom_change += (app->win->zoom_change >= 100) ? 10 : 1;
+		app->win->zoom_change += (app->win->zoom_change >= 100) ? 5 : 1;
 	if (button == DOWN_ZOOM && app->win->zoom_change > 1)
-		app->win->zoom_change -= (app->win->zoom_change >= 100) ? 10 : 1;
+		app->win->zoom_change -= (app->win->zoom_change >= 100) ? 5 : 1;
 	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
 	if (!(app->img = init_img(app->mlx, app->win, app->err)))
 	{
@@ -104,4 +108,5 @@ void	change_zoom(t_app *app, int button)
 	draw_windows(app);
 	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
 		app->img->img_ptr, 0, 0);
+	print_info(app);
 }

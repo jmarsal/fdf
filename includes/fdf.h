@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 22:33:06 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 00:27:19 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ int			print_error(t_error err, int witch_one);
 */
 
 void		mlx_start(t_app *app);
+void 		print_info(t_app *app);
 
 /*
 ** init_data.c

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 13:26:10 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 23:02:22 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ static void	draw_columns(t_app *app, t_coords **n_data, size_t lines,
 	else
 		n_line = c_line;
 	if (c_line.x - n_line.x == 0)
-	{
 		draw_col_bet_points(app, c_line, n_line, draw);
-	}
 	else
 		check_affine(app, &c_line, &n_line);
 }
