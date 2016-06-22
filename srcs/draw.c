@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 22:30:09 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 11:42:51 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ static void	draw_columns(t_app *app, t_coords **n_data, size_t lines,
 	t_coords	n_line;
 	t_affine	draw;
 
-	c_line = n_data[lines][elems];
+	c_line = ch_data_paralelle(app->data->is_colors, app->win,
+									n_data[lines][elems]);
 	draw.x = c_line.x;
 	draw.y = c_line.y;
 	if (n_data[lines + 1])
-		n_line = n_data[lines + 1][elems];
+		n_line = ch_data_paralelle(app->data->is_colors, app->win,
+										n_data[lines + 1][elems]);
 	else
 		n_line = c_line;
 	if (c_line.x - n_line.x == 0)
@@ -61,11 +63,13 @@ static void	draw_line(t_app *app, t_coords **n_data, size_t lines, size_t elems)
 	t_coords	n_elems;
 	t_affine	draw;
 
-	c_elems = n_data[lines][elems];
+	c_elems = ch_data_paralelle(app->data->is_colors, app->win,
+									n_data[lines][elems]);
 	draw.x = c_elems.x;
 	draw.y = c_elems.y;
 	if (elems + 1 < app->params->x_max)
-		n_elems = n_data[lines][elems + 1];
+		n_elems = ch_data_paralelle(app->data->is_colors, app->win,
+										n_data[lines][elems + 1]);
 	else
 		n_elems = c_elems;
 	if (c_elems.y - n_elems.y == 0)
@@ -86,7 +90,7 @@ void		draw_windows(t_app *app)
 	size_t		lines;
 	size_t		elems;
 
-	n_data = new_data(app->data, app->params, app->win, app->data->data_elem);
+	n_data = app->data->data_elem;
 	lines = 0;
 	while (n_data[lines])
 	{

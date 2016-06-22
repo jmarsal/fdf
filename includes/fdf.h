@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/21 16:13:22 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 12:36:50 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@
 # define NB_FILES 9
 # define H_RESIZE 18
 # define NB_ERR 5
-# define CST1 0.5
+# define CST1 0.8
+# define QUIT 53
+# define Z_PLUS 69
+# define Z_MINUS 78
+# define T_LEFT 123
+# define T_RIGHT 124
+# define T_UP 126
+# define T_DOWN 125
 
 typedef struct			s_affine
 {
@@ -58,11 +65,12 @@ typedef struct			s_win
 {
 	t_size_win			*size;
 	float				const_power;
-	float				move_z;
+	double				move_z;
 	float				zoom;
 	int					width;
 	int					height;
-	int					move;
+	int					move_horizontal;
+	int					move_vertical;
 }						t_win;
 
 typedef struct			s_img
@@ -157,9 +165,6 @@ int			print_error(t_error err, int witch_one);
 */
 
 void		mlx_start(t_app *app);
-t_win		*new_win(t_params *param, t_win hook);
-int			print_mlx(t_app *app);
-int			close_win(t_mlx *mlx);
 
 /*
 ** init_data.c
@@ -186,8 +191,7 @@ void		check_affine(t_app *app, t_coords *c_elems, t_coords *n_elems);
 */
 
 void		mlx_put_pixel_to_image(t_app *app, t_affine *c, int color);
-t_coords	**new_data(t_data *data, t_params *params, t_win *win,
-							t_coords **n_data);
+t_coords	ch_data_paralelle(int is_color, t_win *win, t_coords data);
 
 /*
 ** init_size_win.c
