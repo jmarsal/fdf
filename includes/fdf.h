@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 12:36:50 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 12:58:31 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@
 # define QUIT 53
 # define Z_PLUS 69
 # define Z_MINUS 78
+# define Z_CHANGE 0.005
 # define T_LEFT 123
 # define T_RIGHT 124
 # define T_UP 126
 # define T_DOWN 125
+# define T_MOVE 2
+# define ORIGIN_POS 71
 
 typedef struct			s_affine
 {
@@ -67,6 +70,7 @@ typedef struct			s_win
 	float				const_power;
 	double				move_z;
 	float				zoom;
+	float				zoom_change;
 	int					width;
 	int					height;
 	int					move_horizontal;
@@ -137,9 +141,9 @@ t_img		*init_img(t_mlx *mlx, t_win *win, t_error err);
 **	event.c
 */
 
-int			key_hook(int keycode);
-int			mouse_hook(int button, int x, int y);
-int			change_z(int keycode, t_app *app);
+void		move_z(t_app *app, int keycode);
+void		move_tray(t_app *app, int keycode);
+void		get_original_pos(t_app *app);
 
 /*
 **	draw.c

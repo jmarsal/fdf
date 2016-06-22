@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:50:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 12:38:04 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 12:59:52 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ t_coords		ch_data_paralelle(int is_color, t_win *win, t_coords data)
 	t_coords	modify;
 
 	modify.z = data.z * win->move_z;
-	modify.y = ((CST1 / 2) * -modify.z + data.y) * win->zoom + win->move_vertical;
-	modify.x = (data.x + CST1 * modify.z) * win->zoom + win->move_horizontal;
+	modify.y = ((CST1 / 2) * -modify.z + data.y) * win->zoom + win->zoom_change
+				+ win->move_vertical;
+	modify.x = (data.x + CST1 * modify.z) * win->zoom + win->zoom_change +
+				win->move_horizontal;
 	modify.color = (data.z != 0 && is_color == 0) ? 0xff0000 : data.color;
 	return (modify);
 }

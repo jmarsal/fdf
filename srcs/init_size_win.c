@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 15:08:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 11:40:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 12:48:15 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			*init_size_win_zoom()
 
 	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
 		return (NULL);
-	tab_of_size[0] = 4;	//42.fdf zoom
+	tab_of_size[0] = 20;	//42.fdf zoom
 	tab_of_size[1] = 3;	//elem-col.fdf zoom
 	tab_of_size[2] = 1;	//elem-fract.fdf zoom 2
 	tab_of_size[3] = 3;	//elem.fdf zoom

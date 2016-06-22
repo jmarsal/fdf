@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 12:37:34 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/22 13:06:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 		return (NULL);
 	tmp->width = width;
 	tmp->height = heigth;
-	tmp->move_horizontal = 15;
-	tmp->move_vertical = 15;
+	tmp->move_horizontal = width / 4;
+	tmp->move_vertical = heigth / 4;
 	if (move_z != 0)
 		tmp->move_z = move_z;
 	else
 		tmp->move_z = 1;
 	tmp->zoom = zoom;
+	tmp->zoom_change = 0;
 	return (tmp);
 }
 
