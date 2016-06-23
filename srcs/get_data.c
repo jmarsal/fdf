@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 15:04:33 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 15:58:06 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 		helper->i = 0;
 		if (get_z(app, helper->elems[helper->j], helper, c_data) == -1)
 			return (-1);
-		app->data->data_elem[helper->line][helper->index].x = c_data->x;
-		app->data->data_elem[helper->line][helper->index].y = c_data->y;
-		app->data->data_elem[helper->line][helper->index].z = c_data->z;
-		app->data->data_elem[helper->line][helper->index].color = c_data->color;
+		ELEMS_LINES_INDEX.x = c_data->x;
+		ELEMS_LINES_INDEX.y = c_data->y;
+		ELEMS_LINES_INDEX.z = c_data->z;
+		ELEMS_LINES_INDEX.color = c_data->color;
 		helper->index++;
 		helper->j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 11:44:31 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 15:56:32 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ t_mlx		*init_mlx(t_win *win)
 	if (!(mlx = ft_memalloc(sizeof(t_mlx))))
 		return (NULL);
 	if (!(mlx->mlx_ptr = mlx_init()) || !(mlx->mlx_win =
-		mlx_new_window(mlx->mlx_ptr, win->width, win->height,
-			"fdf by jmarsal")))
+		mlx_new_window(mlx->mlx_ptr, win->width, win->height, TITLE)))
 	{
 		free(mlx);
 		return (NULL);
@@ -59,17 +58,17 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 	if (!(tmp = ft_memalloc(sizeof(t_win))))
 		return (NULL);
 	if (!(tmp->size = ft_memalloc(sizeof(t_win))) ||
-		!(tmp->size->tab_of_size_width = init_tab_of_size()) ||
-		!(tmp->size->tab_of_size_height = init_tab_of_size()) ||
-		!(tmp->size->tab_of_size_zoom = init_tab_of_size()))
+		!(TAB_S_O_W = init_tab_of_size()) ||
+		!(TAB_S_O_H = init_tab_of_size()) ||
+		!(TAB_S_O_Z = init_tab_of_size()))
 		return (NULL);
-	tmp->size->tab_of_size_width = init_size_win_width(tmp->size->tab_of_size_width);
-	tmp->size->tab_of_size_height = init_size_win_height(tmp->size->tab_of_size_height);
-	tmp->size->tab_of_size_zoom = init_size_win_zoom(tmp->size->tab_of_size_zoom);
+	TAB_S_O_W = init_size_win_width(TAB_S_O_W);
+	TAB_S_O_H = init_size_win_height(TAB_S_O_H);
+	TAB_S_O_Z = init_size_win_zoom(TAB_S_O_Z);
 	tmp->width = width;
 	tmp->height = heigth;
-	tmp->move_horizontal = width / 3;
-	tmp->move_vertical = heigth / 3;
+	tmp->move_horizontal = width / 2;
+	tmp->move_vertical = heigth / 2;
 	if (move_z != 0)
 		tmp->move_z = move_z;
 	else

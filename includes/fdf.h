@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 13:23:06 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 16:02:57 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@
 # define CST1 0.8
 # define CST2 0.8
 # define QUIT 53
+# define TITLE "fdf by jmarsal"
+# define TAB_S_O_W tmp->size->tab_of_size_width
+# define TAB_S_O_H tmp->size->tab_of_size_height
+# define TAB_S_O_Z tmp->size->tab_of_size_zoom
+# define ELEMS_LINES_INDEX app->data->data_elem[helper->line][helper->index]
+# define MLX_WIN app->mlx->mlx_win
+# define MLX_PTR app->mlx->mlx_ptr
+# define PAR "Current proj : paralelle"
+# define ISOMETRIC "Current proj : isometrique"
 # define Z_PLUS 69
 # define Z_MINUS 78
 # define Z_PLUS2 24
