@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 00:27:19 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 10:50:01 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <mlx.h>
 # include <math.h>
 # define BUFF_SIZE 1024
-# define NB_FILES 9
+# define NB_FILES 21
 # define H_RESIZE 18
 # define NB_ERR 5
 # define CST1 0.8
@@ -215,9 +215,9 @@ t_coords	ch_data_isometric(int is_color, t_win *win, t_coords data);
 ** init_size_win.c
 */
 
-int			*init_size_win_zoom();
-int			*init_size_win_height();
-int			*init_size_win_width();
+int			*init_size_win_zoom(int *tab);
+int			*init_size_win_height(int *tab);
+int			*init_size_win_width(int *tab);
 
 /*
 ** key_funct.c

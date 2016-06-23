@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 00:22:12 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 11:44:31 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ t_img		*init_img(t_mlx *mlx, t_win *win, t_error err)
 	return (img);
 }
 
+static int	*init_tab_of_size()
+{
+	int	*tab_of_size;
+
+	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
+		return (NULL);
+	return (tab_of_size);
+}
+
 t_win		*init_win(int zoom, int width, int heigth, float move_z)
 {
 	t_win	*tmp;
@@ -50,10 +59,13 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 	if (!(tmp = ft_memalloc(sizeof(t_win))))
 		return (NULL);
 	if (!(tmp->size = ft_memalloc(sizeof(t_win))) ||
-		!(tmp->size->tab_of_size_width = init_size_win_width()) ||
-		!(tmp->size->tab_of_size_height = init_size_win_height()) ||
-		!(tmp->size->tab_of_size_zoom = init_size_win_zoom()))
+		!(tmp->size->tab_of_size_width = init_tab_of_size()) ||
+		!(tmp->size->tab_of_size_height = init_tab_of_size()) ||
+		!(tmp->size->tab_of_size_zoom = init_tab_of_size()))
 		return (NULL);
+	tmp->size->tab_of_size_width = init_size_win_width(tmp->size->tab_of_size_width);
+	tmp->size->tab_of_size_height = init_size_win_height(tmp->size->tab_of_size_height);
+	tmp->size->tab_of_size_zoom = init_size_win_zoom(tmp->size->tab_of_size_zoom);
 	tmp->width = width;
 	tmp->height = heigth;
 	tmp->move_horizontal = width / 3;
@@ -64,7 +76,7 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 		tmp->move_z = 1;
 	tmp->zoom = zoom;
 	tmp->zoom_change = 1;
-	tmp->witch_proj = 0;
+	tmp->witch_proj = 1;
 	return (tmp);
 }
 

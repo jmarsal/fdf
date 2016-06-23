@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 00:16:57 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 10:38:27 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,30 @@ static int	close_win(t_mlx *mlx)
 
 void 		print_info(t_app *app)
 {
-	char	*str;
+	char	*print;
 
-	str = ft_itoa(app->win->zoom_change);
+	print = ft_itoa(app->win->zoom_change);
 	mlx_string_put(app->mlx->mlx_ptr, app->mlx->mlx_win, 15, 10, 0xAEECFE,
 		"Current zoom x :");
 	mlx_string_put(app->mlx->mlx_ptr, app->mlx->mlx_win, 190, 10, 0xFFFFFF,
-		str);
-	free(str);
-	str = ft_itoa(app->win->move_horizontal);
+		print);
+	free(print);
+	print = ft_itoa(app->win->move_horizontal);
 	mlx_string_put(app->mlx->mlx_ptr, app->mlx->mlx_win, 15, 40, 0xAEECFE,
 		"position.x     :");
 	mlx_string_put(app->mlx->mlx_ptr, app->mlx->mlx_win, 190, 40, 0xFFFFFF,
-		str);
-	free(str);
-	str = ft_itoa(app->win->move_vertical);
+		print);
+	free(print);
+	print = ft_itoa(app->win->move_vertical);
 	mlx_string_put(app->mlx->mlx_ptr, app->mlx->mlx_win, 15, 70, 0xAEECFE,
 		"position.y     :");
 	mlx_string_put(app->mlx->mlx_ptr, app->mlx->mlx_win, 190, 70, 0xFFFFFF,
-		str);
-	free(str);
-	str = !(app->win->witch_proj) ?
+		print);
+	free(print);
+	print = !(app->win->witch_proj) ?
 	"Current proj : paralelle" : "Current proj : isometrique";
 	mlx_string_put(app->mlx->mlx_ptr, app->mlx->mlx_win, 15, 100, 0xAEECFE,
-		str);
+		print);
 }
 
 void		mlx_start(t_app *app)
