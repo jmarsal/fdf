@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 10:50:01 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 13:23:06 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define NB_FILES 21
 # define H_RESIZE 18
 # define NB_ERR 5
+# define COLOR_DEF 0xFFFFFF
 # define CST1 0.8
 # define CST2 0.8
 # define QUIT 53

@@ -11,6 +11,11 @@ fdf
 *.a
 *.o
 
+# Exculsion de /maps2
+
+/fdf_externe
+*.zip
+
 # Exclusion des ".DS"
 
 *DS_Store
