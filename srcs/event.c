@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 00:28:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 12:26:52 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ void	change_proj(t_app *app, int keycode)
 void	change_zoom(t_app *app, int button)
 {
 	if (button == UP_ZOOM)
-		app->win->zoom_change += (app->win->zoom_change >= 100) ? 5 : 1;
+		app->win->zoom_change += (app->win->zoom + app->win->zoom_change >= 100)
+									? 0.2 : 0.1;
 	if (button == DOWN_ZOOM && app->win->zoom_change > 1)
-		app->win->zoom_change -= (app->win->zoom_change >= 100) ? 5 : 1;
+		app->win->zoom_change -= (app->win->zoom + app->win->zoom_change >= 100)
+									? 0.2 : 0.1;
 	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
 	if (!(app->img = init_img(app->mlx, app->win, app->err)))
 	{
