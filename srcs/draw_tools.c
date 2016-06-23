@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:50:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 13:44:46 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/23 15:13:40 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_coords	ch_data_isometric(int is_color, t_win *win, t_coords data)
 	t_coords	modify;
 
 	modify.z = data.z * win->move_z;
-	modify.y = ((CST1 / 2) * data.x + (CST2 / 2) * data.y - modify.z) *
+	modify.y = (data.x * (CST1 / 2) + data.y * (CST2 / 2) - modify.z) *
 				win->zoom + win->move_vertical;
 	modify.y *= win->zoom_change;
 	modify.x = (data.x * CST1 - data.y * CST2) *
