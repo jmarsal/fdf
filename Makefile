@@ -6,7 +6,7 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/24 23:48:21 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/24 23:50:23 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,14 @@ $(NAME): $(OBJ_FILES)
 $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) -o $@ -c $< $(CFLAGS) $(INC_PATH)
+
+linux: $(OBJ_FILES)
+	@make -C libft
+	@make -C libmlx
+	@$(CC) -o $(NAME) $(OBJ_FILES) $(CFLAGS) $(INC_PATH) $(LIB_PATH)
+	@echo "\n-----------------------------------------"
+	@echo "|\033[32;1m\t$(NAME) has been created !\t\t\033[0m|"
+	@echo "-----------------------------------------\n"
 
 clean:
 	@rm -rf $(OBJ_PATH)
