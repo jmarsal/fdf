@@ -6,11 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/24 15:12:45 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 static void		get_size(const char *filename, t_win *win, int witch_file)
 {

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/24 23:06:45 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/25 01:25:28 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,5 +242,11 @@ int			*init_size_win_zoom(int *tab);
 
 int			key_funct(int keycode, t_app *app);
 int			mouse_funct(int button, int x, int y, t_app *app);
+
+/*
+** print_strings.c
+*/
+
+void		print_info(t_app *app);
 
 #endif

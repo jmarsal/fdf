@@ -6,11 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 15:58:06 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 {

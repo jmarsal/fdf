@@ -6,11 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:50:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/24 01:46:02 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 void		mlx_put_pixel_to_image(t_app *app, t_affine *c, int color)
 {

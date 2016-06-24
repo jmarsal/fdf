@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 static void		draw_affine(t_app *app, t_coords *c_elems, t_coords *n_elems,
 							t_affine draw)

@@ -6,11 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/22 23:02:22 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 static void	draw_col_bet_points(t_app *app, t_coords c_line, t_coords n_line,
 								t_affine draw)

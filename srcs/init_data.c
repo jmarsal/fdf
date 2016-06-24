@@ -6,11 +6,11 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/20 22:19:09 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 t_coords		**init_tab(t_coords **tab, size_t line, size_t nb_elems)
 {
