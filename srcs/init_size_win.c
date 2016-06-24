@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 15:08:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 12:15:04 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/24 02:00:40 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,70 +14,44 @@
 
 int			*init_size_win_zoom(int *tab)
 {
-	tab[0] = 20;
+	tab[0] = 30;
 	tab[1] = 20;
 	tab[2] = 1;
 	tab[3] = 20;
 	tab[4] = 15;
 	tab[5] = 1;
 	tab[6] = 5;
-	tab[7] = 2;
-	tab[8] = 4;
-	tab[9] = 10;
+	tab[7] = 4;
+	tab[8] = 6;
+	tab[9] = 15;
 	tab[10] = 10;
 	tab[11] = 10;
-	tab[12] = 20;
-	tab[13] = 20;
-	tab[14] = 15;
-	tab[15] = 15;
+	tab[12] = 30;
+	tab[13] = 30;
+	tab[14] = 20;
+	tab[15] = 30;
 	tab[16] = 4;
-	tab[17] = 4;
-	tab[18] = 4;
-	tab[19] = 4;
+	tab[17] = 6;
+	tab[18] = 6;
+	tab[19] = 8;
 	tab[20] = 25;
 	return (tab);
 }
 
 int			*init_size_win_height(int *tab)
 {
-	tab[0] = 500;
-	tab[1] = 800;
-	tab[2] = 1105;
-	tab[3] = 800;
-	tab[4] = 1100;
-	tab[5] = 1080;
-	tab[6] = 1000;
-	tab[7] = 1080;
-	tab[8] = 1080;
-	tab[9] = 500;
-	tab[10] = 500;
-	tab[11] = 800;
-	tab[12] = 500;
-	tab[13] = 500;
-	tab[14] = 500;
-	tab[15] = 500;
-	tab[16] = 800;
-	tab[17] = 500;
-	tab[18] = 500;
-	tab[19] = 500;
-	tab[20] = 500;
-	return (tab);
-}
-
-int			*init_size_win_width(int *tab)
-{
 	tab[0] = 800;
 	tab[1] = 800;
-	tab[2] = 1100;
+	tab[2] = 800;
 	tab[3] = 800;
-	tab[4] = 1200;
-	tab[5] = 1100;
-	tab[6] = 1750;
-	tab[7] = 1220;
-	tab[8] = 1220;
+	tab[4] = 800;
+	tab[5] = 800;
+	tab[6] = 800;
+	tab[7] = 800;
+	tab[8] = 800;
 	tab[9] = 800;
 	tab[10] = 800;
-	tab[11] = 1000;
+	tab[11] = 800;
 	tab[12] = 800;
 	tab[13] = 800;
 	tab[14] = 800;
@@ -87,5 +61,31 @@ int			*init_size_win_width(int *tab)
 	tab[18] = 800;
 	tab[19] = 800;
 	tab[20] = 800;
+	return (tab);
+}
+
+int			*init_size_win_width(int *tab)
+{
+	tab[0] = 1300;
+	tab[1] = 1300;
+	tab[2] = 1300;
+	tab[3] = 1300;
+	tab[4] = 1300;
+	tab[5] = 1300;
+	tab[6] = 1300;
+	tab[7] = 1300;
+	tab[8] = 1300;
+	tab[9] = 1300;
+	tab[10] = 1300;
+	tab[11] = 1000;
+	tab[12] = 1300;
+	tab[13] = 1300;
+	tab[14] = 1300;
+	tab[15] = 1300;
+	tab[16] = 1300;
+	tab[17] = 1300;
+	tab[18] = 1300;
+	tab[19] = 1300;
+	tab[20] = 1300;
 	return (tab);
 }

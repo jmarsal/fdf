@@ -6,20 +6,20 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 15:56:32 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/24 01:27:58 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_mlx		*init_mlx(t_win *win)
+t_mlx		*init_mlx()
 {
 	t_mlx	*mlx;
 
 	if (!(mlx = ft_memalloc(sizeof(t_mlx))))
 		return (NULL);
 	if (!(mlx->mlx_ptr = mlx_init()) || !(mlx->mlx_win =
-		mlx_new_window(mlx->mlx_ptr, win->width, win->height, TITLE)))
+		mlx_new_window(mlx->mlx_ptr, 1920, 1080, TITLE)))
 	{
 		free(mlx);
 		return (NULL);
@@ -27,16 +27,16 @@ t_mlx		*init_mlx(t_win *win)
 	return (mlx);
 }
 
-t_img		*init_img(t_mlx *mlx, t_win *win, t_error err)
+t_img		*init_img(t_app *app, int width, int height)
 {
 	t_img	*img;
 
 	if (!(img = ft_memalloc(sizeof(t_img))))
 	{
-		print_error(err, 3);
+		print_error(app->err, 3);
 		return (NULL);
 	}
-	img->img_ptr = mlx_new_image(mlx, win->width, win->height);
+	img->img_ptr = mlx_new_image(app->mlx, width, height);
 	img->data = mlx_get_data_addr(img->img_ptr, &img->bpp,
 			&img->sizeline, &img->endian);
 	return (img);
@@ -67,8 +67,8 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 	TAB_S_O_Z = init_size_win_zoom(TAB_S_O_Z);
 	tmp->width = width;
 	tmp->height = heigth;
-	tmp->move_horizontal = width / 2;
-	tmp->move_vertical = heigth / 2;
+	tmp->move_horizontal = 1920 / 3;
+	tmp->move_vertical = 1080 / 4;
 	if (move_z != 0)
 		tmp->move_z = move_z;
 	else
