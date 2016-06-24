@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/24 01:52:49 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/24 23:06:45 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct			s_win
 	int					move_horizontal;
 	int					move_vertical;
 	int					witch_proj;
+	char				*filename;
 }						t_win;
 
 typedef struct			s_img
@@ -144,6 +145,10 @@ typedef struct			s_app
 {
 	t_mlx				*mlx;
 	t_img				*img;
+	t_img				*img_ecole;
+	t_img				*cadre;
+	t_img				*phenix;
+	t_img				*rtfm;
 	t_img				*menu;
 	t_win				*win;
 	t_error				err;
@@ -195,6 +200,7 @@ int			print_error(t_error err, int witch_one);
 
 void		mlx_start(t_app *app);
 void 		print_info(t_app *app);
+void 		refresh_win(t_app *app);
 
 /*
 ** init_data.c
@@ -229,8 +235,6 @@ t_coords	ch_data_isometric(int is_color, t_win *win, t_coords data);
 */
 
 int			*init_size_win_zoom(int *tab);
-int			*init_size_win_height(int *tab);
-int			*init_size_win_width(int *tab);
 
 /*
 ** key_funct.c

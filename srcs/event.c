@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/24 01:51:58 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/24 15:49:57 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,7 @@ void	move_z(t_app *app, int keycode)
 		app->win->move_z += Z_CHANGE;
 	if (keycode == Z_MINUS || keycode == Z_MINUS2)
 		app->win->move_z -= Z_CHANGE;
-	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
-	if (!(app->img = init_img(app, app->win->width, app->win->height)))
-	{
-		print_error(app->err, 5);
-		free (app);
-		exit (-1);
-	}
-	draw_windows(app);
-	mlx_put_image_to_window(MLX_PTR, MLX_WIN,
-		app->menu->img_ptr, 0, 0);
-	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
-		app->img->img_ptr, SIZE_MENU_W, SIZE_MENU_H);
-	print_info(app);
+	refresh_win(app);
 }
 
 void	move_tray(t_app *app, int keycode)
@@ -43,40 +31,16 @@ void	move_tray(t_app *app, int keycode)
 		app->win->move_vertical -= T_MOVE;
 	if (keycode == T_DOWN)
 		app->win->move_vertical += T_MOVE;
-	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
-	if (!(app->img = init_img(app, app->win->width, app->win->height)))
-	{
-		print_error(app->err, 5);
-		free (app);
-		exit (-1);
-	}
-	draw_windows(app);
-	mlx_put_image_to_window(MLX_PTR, MLX_WIN,
-		app->menu->img_ptr, 0, 0);
-	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
-		app->img->img_ptr, SIZE_MENU_W, SIZE_MENU_H);
-	print_info(app);
+	refresh_win(app);
 }
 
 void	get_original_pos(t_app *app)
 {
 	app->win->zoom_change = 1;
 	app->win->move_z = 1;
-	app->win->move_horizontal = app->win->width / 3;
-	app->win->move_vertical = app->win->height / 4;
-	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
-	if (!(app->img = init_img(app, app->win->width, app->win->height)))
-	{
-		print_error(app->err, 5);
-		free (app);
-		exit (-1);
-	}
-	draw_windows(app);
-	mlx_put_image_to_window(MLX_PTR, MLX_WIN,
-		app->menu->img_ptr, 0, 0);
-	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
-		app->img->img_ptr, SIZE_MENU_W, SIZE_MENU_H);
-	print_info(app);
+	app->win->move_horizontal = 1920 / 3;
+	app->win->move_vertical = 1080 / 4;
+	refresh_win(app);
 }
 
 void	change_proj(t_app *app, int keycode)
@@ -85,19 +49,7 @@ void	change_proj(t_app *app, int keycode)
 		app->win->witch_proj = 1;
 	if (keycode == PARALELLE || keycode == PARALELLE2)
 		app->win->witch_proj = 0;
-	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
-	if (!(app->img = init_img(app, app->win->width, app->win->height)))
-	{
-		print_error(app->err, 5);
-		free (app);
-		exit (-1);
-	}
-	draw_windows(app);
-	mlx_put_image_to_window(MLX_PTR, MLX_WIN,
-		app->menu->img_ptr, 0, 0);
-	mlx_put_image_to_window(app->mlx->mlx_ptr, app->mlx->mlx_win,
-		app->img->img_ptr, SIZE_MENU_W, SIZE_MENU_H);
-	print_info(app);
+	refresh_win(app);
 }
 
 void	change_zoom(t_app *app, int button)
@@ -108,17 +60,5 @@ void	change_zoom(t_app *app, int button)
 	if ((button == DOWN_ZOOM) && (app->win->zoom_change > 1))
 		app->win->zoom_change -= (app->win->zoom + app->win->zoom_change >= 100)
 									? 0.6 : 0.2;
-	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
-	if (!(app->img = init_img(app, app->win->width, app->win->height)))
-	{
-		print_error(app->err, 5);
-		free (app);
-		exit (-1);
-	}
-	draw_windows(app);
-	mlx_put_image_to_window(MLX_PTR, MLX_WIN,
-		app->menu->img_ptr, 0, 0);
-	mlx_put_image_to_window(MLX_PTR, MLX_WIN,
-		app->img->img_ptr, SIZE_MENU_W, SIZE_MENU_H);
-	print_info(app);
+	refresh_win(app);
 }

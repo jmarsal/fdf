@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/24 01:27:58 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/24 15:13:56 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,8 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 	if (!(tmp = ft_memalloc(sizeof(t_win))))
 		return (NULL);
 	if (!(tmp->size = ft_memalloc(sizeof(t_win))) ||
-		!(TAB_S_O_W = init_tab_of_size()) ||
-		!(TAB_S_O_H = init_tab_of_size()) ||
 		!(TAB_S_O_Z = init_tab_of_size()))
 		return (NULL);
-	TAB_S_O_W = init_size_win_width(TAB_S_O_W);
-	TAB_S_O_H = init_size_win_height(TAB_S_O_H);
 	TAB_S_O_Z = init_size_win_zoom(TAB_S_O_Z);
 	tmp->width = width;
 	tmp->height = heigth;
@@ -76,6 +72,7 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 	tmp->zoom = zoom;
 	tmp->zoom_change = 1;
 	tmp->witch_proj = 1;
+	tmp->filename = NULL;
 	return (tmp);
 }
 
