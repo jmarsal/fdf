@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 16:02:57 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/24 23:06:45 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@
 # define ELEMS_LINES_INDEX app->data->data_elem[helper->line][helper->index]
 # define MLX_WIN app->mlx->mlx_win
 # define MLX_PTR app->mlx->mlx_ptr
-# define PAR "Current proj : paralelle"
-# define ISOMETRIC "Current proj : isometrique"
+# define PAR "Current proj   : paralelle"
+# define ISOMETRIC "Current proj   : iso"
 # define Z_PLUS 69
 # define Z_MINUS 78
 # define Z_PLUS2 24
 # define Z_MINUS2 27
-# define Z_CHANGE 0.005
+# define Z_CHANGE 0.1
 # define T_LEFT 123
 # define T_RIGHT 124
 # define T_UP 126
 # define T_DOWN 125
-# define T_MOVE 2
+# define T_MOVE 5
 # define ORIGIN_POS 71
 # define ORIGIN_POS2 31
 # define ISO 116
@@ -55,6 +55,8 @@
 # define PARALELLE2 18
 # define UP_ZOOM 4
 # define DOWN_ZOOM 5
+# define SIZE_MENU_W 350
+# define SIZE_MENU_H 100
 
 typedef struct			s_affine
 {
@@ -95,6 +97,7 @@ typedef struct			s_win
 	int					move_horizontal;
 	int					move_vertical;
 	int					witch_proj;
+	char				*filename;
 }						t_win;
 
 typedef struct			s_img
@@ -142,6 +145,11 @@ typedef struct			s_app
 {
 	t_mlx				*mlx;
 	t_img				*img;
+	t_img				*img_ecole;
+	t_img				*cadre;
+	t_img				*phenix;
+	t_img				*rtfm;
+	t_img				*menu;
 	t_win				*win;
 	t_error				err;
 	t_data				*data;
@@ -154,8 +162,8 @@ typedef struct			s_app
 
 t_app		*init_app();
 t_win		*init_win(int zoom, int width, int heigth, float move_z);
-t_mlx		*init_mlx(t_win *win);
-t_img		*init_img(t_mlx *mlx, t_win *win, t_error err);
+t_mlx		*init_mlx();
+t_img		*init_img(t_app *app, int width, int height);
 
 /*
 **	event.c
@@ -192,6 +200,7 @@ int			print_error(t_error err, int witch_one);
 
 void		mlx_start(t_app *app);
 void 		print_info(t_app *app);
+void 		refresh_win(t_app *app);
 
 /*
 ** init_data.c
@@ -226,8 +235,6 @@ t_coords	ch_data_isometric(int is_color, t_win *win, t_coords data);
 */
 
 int			*init_size_win_zoom(int *tab);
-int			*init_size_win_height(int *tab);
-int			*init_size_win_width(int *tab);
 
 /*
 ** key_funct.c

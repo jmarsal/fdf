@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:50:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/23 15:13:40 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/24 01:46:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_coords	ch_data_paralelle(int is_color, t_win *win, t_coords data)
 {
 	t_coords	modify;
 
-	modify.z = data.z * win->move_z;
+	modify.z = (data.z * 40 / 100) * win->move_z;
 	modify.y = ((CST1 / 2) * -modify.z + data.y) * win->zoom
 				+ win->move_vertical;
 	modify.y *= win->zoom_change;
@@ -41,7 +41,7 @@ t_coords	ch_data_isometric(int is_color, t_win *win, t_coords data)
 {
 	t_coords	modify;
 
-	modify.z = data.z * win->move_z;
+	modify.z = (data.z * 40 / 100) * win->move_z;
 	modify.y = (data.x * (CST1 / 2) + data.y * (CST2 / 2) - modify.z) *
 				win->zoom + win->move_vertical;
 	modify.y *= win->zoom_change;
