@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 22:29:02 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 18:43:52 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	 	read_name_for_size_win2(const char *av, t_win *win)
 	else if (ft_strstr(av, "10-2.fdf"))
 		get_size(av, win, 20);
 	else
-		get_size(av, win, 6);
+		get_size(av, win, 5);
 	return (0);
 }
 

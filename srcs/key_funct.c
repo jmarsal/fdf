@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 15:46:15 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 02:18:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 18:42:22 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		key_funct(int keycode, t_app *app)
 {
-	printf("key = %d\n", keycode);
 	if (keycode == A || keycode == B || keycode == C || keycode == D ||
 		keycode == E || keycode == F || keycode == G || keycode == H ||
 		keycode == I || keycode == J || keycode == K || (keycode == R && app->c_map != NULL) ||
