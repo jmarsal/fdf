@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 23:34:40 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 14:38:29 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	get_data_in_line(t_app *app, t_data *data, char *line,
 	return (0);
 }
 
-static void	free_data(t_coords **data)
+void		free_data(t_coords **data)
 {
 	size_t	lines;
 
@@ -77,7 +77,7 @@ int			read_file(const char *av, t_app *app)
 			free_data(app->data->data_elem);
 			return (-1);
 		}
-	free (c_data);
+	free(c_data);
 	if (close(fd) == -1)
 		return (-1);
 	return (0);
@@ -95,7 +95,12 @@ int			main(int ac, char **av)
 			exit (-1);
 		}
 		if (read_file((const char*)av[1], app) == -1)
+		{
+			while (app->data->helper.elems--)
+				ft_strdel(app->data->helper.elems);
+			free(app->data->helper.elems);
 			exit (-1);
+		}
 		mlx_start(app);
 	}
 	else

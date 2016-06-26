@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 01:46:48 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 14:19:03 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ typedef struct			s_error
 
 typedef struct			s_size_win
 {
-	int					*tab_of_size_width;
-	int					*tab_of_size_height;
 	int					*tab_of_size_zoom;
 }						t_size_win;
 
@@ -172,6 +170,7 @@ typedef struct			s_app
 */
 
 int			read_file(const char *av, t_app *app);
+void		free_data(t_coords **data);
 
 /*
 **	init_app.c

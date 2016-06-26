@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 23:44:14 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 02:52:02 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 16:18:11 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,19 @@
 
 static void relaunch_soft(char *map, t_app *app)
 {
-	free(app->data);
-	free(app->win);
-	free(app->params);
-	free(app->mlx);
-	free(app->img);
-	free(app->img_ecole);
-	free(app->cadre);
-	free(app->phenix);
-	free(app->rtfm);
-	free(app->menu);
-	free(app->c_map);
-	free(app);
-	if ((app = init_app(map)) == NULL)
-	{
-		ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
-		exit (-1);
-	}
+	while (app->data->helper.nb_elems--)
+		ft_strdel(&app->data->helper.elems[app->data->helper.nb_elems]);
+	free (app->data->helper.elems);
+	free_data(app->data->data_elem);
+	mlx_destroy_image(app->mlx->mlx_ptr, app->c_map);
+	app->params->x_max = 0;
+	app->params->y_max = 0;
+	app->params->check_elements = 0;
+	if (!(app->data = init_data()))
+		exit(0);
 	if (read_file((const char*)map, app) == -1)
 		exit (-1);
-	mlx_start(app);
+	get_original_pos(app);
 }
 
 void 	new_map2(char *map, t_app *app, int keycode)

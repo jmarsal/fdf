@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 02:42:53 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 15:51:54 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,30 @@ static void fill_img(t_app *app, int *h, int *w)
 
 void 		refresh_win(t_app *app)
 {
+	int		h;
+	int		w;
+
+	h = app->win->height;
+	w = app->win->width;
 	mlx_destroy_image(app->mlx->mlx_ptr, app->img);
-	if (!(app->img = init_img(app, app->win->width, app->win->height)))
+	mlx_destroy_image(app->mlx->mlx_ptr, app->menu);
+	mlx_destroy_image(app->mlx->mlx_ptr, app->img_ecole);
+	mlx_destroy_image(app->mlx->mlx_ptr, app->phenix);
+	mlx_destroy_image(app->mlx->mlx_ptr, app->cadre);
+	mlx_destroy_image(app->mlx->mlx_ptr, app->rtfm);
+	if (!(app->img = init_img(app, app->win->width, app->win->height)) ||
+		!(app->menu = init_img(app, 1920, 1080)) ||
+		!(app->img_ecole = init_img(app, 200, 216)) ||
+		!(app->phenix = init_img(app, 60, 53)) ||
+		!(app->cadre = init_img(app, 1300, 800)) ||
+		!(app->rtfm = init_img(app, 200, 216)))
 	{
 		print_error(app->err, 5);
 		free (app);
 		exit (-1);
 	}
 	draw_windows(app);
+	fill_img(app, &h, &w);
 	mlx_put_image_to_window(MLX_PTR, MLX_WIN,
 		app->menu->img_ptr, 0, 0);
 	mlx_put_image_to_window(MLX_PTR, MLX_WIN,

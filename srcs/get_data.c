@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 23:03:56 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 14:33:06 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 						t_get_data *helper)
 {
-	helper->elems = ft_strsplit(line, ' ');
+	if ((helper->elems = ft_strsplit(line, ' ')) == NULL)
+		return (-1);
 	if (!helper->nb_elems)
 		while (helper->elems[++helper->nb_elems])
 			;
@@ -67,17 +68,18 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 
 	if (!(new_data = init_coords(c_data->y)))
 		return (-1);
-	if (!(data->helper.elems = ft_memalloc(sizeof(char) * ft_strlen(line))))
-	{
-		free (data->helper.elems);
-		return (-1);
-	}
+	data->helper.elems = NULL;
 	data->helper.i = 0;
 	data->helper.j = 0;
 	data->helper.nb_elems = 0;
 	data->helper.index = 0;
 	app->params->x_max = 0;
 	if ((parse_data(app, line, new_data, &data->helper)) == -1)
+	{
+		while (data->helper.nb_elems--)
+			ft_strdel(&data->helper.elems[data->helper.nb_elems]);
+		free_data(app->data->data_elem);
 		return (-1);
+	}
 	return ((app->params->check_elements != app->params->x_max) ? -1 : 0);
 }
