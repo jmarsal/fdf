@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/25 23:03:56 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 	if (!(new_data = init_coords(c_data->y)))
 		return (-1);
 	if (!(data->helper.elems = ft_memalloc(sizeof(char) * ft_strlen(line))))
+	{
+		free (data->helper.elems);
 		return (-1);
+	}
 	data->helper.i = 0;
 	data->helper.j = 0;
 	data->helper.nb_elems = 0;

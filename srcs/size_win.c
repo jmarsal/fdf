@@ -6,15 +6,38 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/25 22:29:02 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static char		*get_filename(const char *s, int c)
+{
+	size_t	len;
+	size_t	i;
+	char	*ret;
+	char	*tmp;
+
+	len = 0;
+	i = 0;
+	tmp = ft_strrchr(s, '/');
+	while (tmp[++len] != (char)c)
+		;
+	if ((ret = ft_memalloc(sizeof(char) * len + 1)) == NULL)
+		return (NULL);
+	while (tmp[i] && i < len - 1)
+	{
+		ret[i] = tmp[i + 1];
+		i++;
+	}
+	ret[++i] = '\0';
+	return (ret);
+}
+
 static void		get_size(const char *filename, t_win *win, int witch_file)
 {
-	win->filename = ft_strtoupper(ft_strcut_before(filename, '.'));
+	win->filename = ft_strtoupper(get_filename(filename, '.'));
 	win->width = 1300;
 	win->height = 800;
 	win->zoom = win->size->tab_of_size_zoom[witch_file];

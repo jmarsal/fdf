@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 02:41:18 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,14 @@ t_app		*init_app()
 		free(app);
 		return (NULL);
 	}
+	app->mlx = NULL;
+	app->c_map = NULL;
+	app->img = NULL;
+	app->img_ecole = NULL;
+	app->cadre = NULL;
+	app->phenix = NULL;
+	app->rtfm = NULL;
+	app->menu = NULL;
 	app->params->check_elements = 0;
 	app->params->x_max = 0;
 	app->params->y_max = 0;

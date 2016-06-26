@@ -6,7 +6,7 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/25 01:27:19 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/25 23:52:36 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Werror -Wextra $(OPTI)
 SRC_DIR = ./srcs/
 SRC_FILES = main.c init_app.c event.c draw.c perror.c get_data.c mlx_start.c \
 			init_data.c size_win.c affine.c draw_tools.c init_size_win.c \
-			key_funct.c print_strings.c
+			key_funct.c print_strings.c change_map.c
 OBJ_PATH = ./obj
 OBJ_FILES = $(SRC_FILES:%.c=$(OBJ_PATH)/%.o)
 INC_PATH = -I./libft/ -I./libmlx/ -I./includes/

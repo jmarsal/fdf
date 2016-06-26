@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 01:05:14 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	get_original_pos(t_app *app)
 
 void	change_proj(t_app *app, int keycode)
 {
-	if (keycode == ISO || keycode == ISO2)
+	if (keycode == ISO)
 		app->win->witch_proj = 1;
-	if (keycode == PARALELLE || keycode == PARALELLE2)
+	if (keycode == PARALELLE)
 		app->win->witch_proj = 0;
 	refresh_win(app);
 }

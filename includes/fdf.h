@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 01:25:28 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 01:46:48 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,26 @@
 # define T_UP 126
 # define T_DOWN 125
 # define T_MOVE 5
-# define ORIGIN_POS 71
-# define ORIGIN_POS2 31
+# define ORIGIN_POS 31
 # define ISO 116
-# define ISO2 19
 # define PARALELLE 121
-# define PARALELLE2 18
 # define UP_ZOOM 4
 # define DOWN_ZOOM 5
 # define SIZE_MENU_W 350
 # define SIZE_MENU_H 100
+# define ENTER 36
+# define A 12
+# define B 11
+# define C 8
+# define D 2
+# define E 14
+# define F 3
+# define G 5
+# define H 4
+# define I 34
+# define J 38
+# define K 40
+# define R 15
 
 typedef struct			s_affine
 {
@@ -150,11 +160,18 @@ typedef struct			s_app
 	t_img				*phenix;
 	t_img				*rtfm;
 	t_img				*menu;
+	t_img				*c_map;
 	t_win				*win;
 	t_error				err;
 	t_data				*data;
 	t_params			*params;
 }						t_app;
+
+/*
+** main.c
+*/
+
+int			read_file(const char *av, t_app *app);
 
 /*
 **	init_app.c
@@ -248,5 +265,13 @@ int			mouse_funct(int button, int x, int y, t_app *app);
 */
 
 void		print_info(t_app *app);
+void 		print_map_menu(t_app *app);
+
+/*
+** change_map.c
+*/
+
+void		change_map(t_app *app, int keycode);
+void		new_map(t_app *app, int keycode);
 
 #endif
