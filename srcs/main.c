@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 14:38:29 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 23:37:25 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int			main(int ac, char **av)
 	{
 		if ((app = init_app(av[1])) == NULL)
 		{
-			ft_putstr("\033[31mERROR\033[0m\n--> Can't create app !\n");
+			ft_putstr(ERR_APP);
 			exit (-1);
 		}
 		if (read_file((const char*)av[1], app) == -1)
@@ -104,6 +104,6 @@ int			main(int ac, char **av)
 		mlx_start(app);
 	}
 	else
-		ft_putstr("\n\033[31mERROR\033[0m\n--> usage : ./fdf template.fdf\n");
+		ft_putstr(ERR_USAGE);
 	return (0);
 }

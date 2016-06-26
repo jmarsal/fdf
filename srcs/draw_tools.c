@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:50:24 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 23:03:30 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void		mlx_put_pixel_to_image(t_app *app, t_affine *c, int color)
 	int		octet;
 
 	octet = app->img->bpp / 8;
-	if (c->x > 0 && c->x < app->win->width && c->y > 0 &&
-		c->y < app->win->height)
+	if (c->x > 0 && c->x < WIDTH_DRAW && c->y > 0 &&
+		c->y < HEIGHT_DRAW)
 	ft_memcpy(&app->img->data[octet * (c->x + app->img->sizeline /
 										octet * c->y)], &color, octet);
 }

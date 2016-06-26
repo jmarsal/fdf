@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 02:41:18 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 23:11:20 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_mlx		*init_mlx()
 	if (!(mlx = ft_memalloc(sizeof(t_mlx))))
 		return (NULL);
 	if (!(mlx->mlx_ptr = mlx_init()) || !(mlx->mlx_win =
-		mlx_new_window(mlx->mlx_ptr, 1920, 1080, TITLE)))
+		mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, TITLE)))
 	{
 		free(mlx);
 		return (NULL);
@@ -51,7 +51,7 @@ static int	*init_tab_of_size()
 	return (tab_of_size);
 }
 
-t_win		*init_win(int zoom, int width, int heigth, float move_z)
+t_win		*init_win(int zoom, float move_z)
 {
 	t_win	*tmp;
 
@@ -61,10 +61,8 @@ t_win		*init_win(int zoom, int width, int heigth, float move_z)
 		!(TAB_S_O_Z = init_tab_of_size()))
 		return (NULL);
 	TAB_S_O_Z = init_size_win_zoom(TAB_S_O_Z);
-	tmp->width = width;
-	tmp->height = heigth;
-	tmp->move_horizontal = 1920 / 3;
-	tmp->move_vertical = 1080 / 4;
+	tmp->move_horizontal = WIDTH / 3;
+	tmp->move_vertical = HEIGHT / 4;
 	if (move_z != 0)
 		tmp->move_z = move_z;
 	else
@@ -84,12 +82,13 @@ t_app		*init_app()
 		return (NULL);
 	if (!(app->data = init_data()) ||
 		!(app->err.p_err = ft_memalloc(sizeof(char*) * (NB_ERR + 1))) ||
-		!(app->win = init_win(0, 0, 0, 0)) ||
+		!(app->win = init_win(0, 0)) ||
 		!(app->params = ft_memalloc(sizeof(t_params))))
 	{
 		free(app);
 		return (NULL);
 	}
+	app->if_menu = 0;
 	app->mlx = NULL;
 	app->c_map = NULL;
 	app->img = NULL;

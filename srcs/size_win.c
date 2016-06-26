@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 18:43:52 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/26 23:03:06 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static char		*get_filename(const char *s, int c)
 static void		get_size(const char *filename, t_win *win, int witch_file)
 {
 	win->filename = ft_strtoupper(get_filename(filename, '.'));
-	win->width = 1300;
-	win->height = 800;
 	win->zoom = win->size->tab_of_size_zoom[witch_file];
 }
 
@@ -65,6 +63,8 @@ static int	 	read_name_for_size_win2(const char *av, t_win *win)
 		get_size(av, win, 19);
 	else if (ft_strstr(av, "10-2.fdf"))
 		get_size(av, win, 20);
+	else if (ft_strstr(av, "IGN_France_250_ASC_L93_OCEAN0_M.fdf"))
+		get_size(av, win, 21);
 	else
 		get_size(av, win, 5);
 	return (0);

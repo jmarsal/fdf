@@ -1,28 +1,38 @@
 # fdf
 Infographie project map relief.
 
-Installation : Include Minilibix Library and launch:
+Installation : Launch:
 
 Make
 
 Usage : Execute program with path map file
 
-./fdf map_name.fdf
+./fdf maps/map_name.fdf
 
 Control :
 
 Translation
 
-Y: Key: UP, DOWN
-X: Key: LEFT, RIGHT
-
-Rotation
-
-X: Keypad: 1, 4
-Y: Keypad: 2, 5
-Z: Keypad: 3, 6
+--> Y: Key: UP, DOWN
+--> X: Key: LEFT, RIGHT
+--> Z + : +
+--> Z - : -
 
 Zoom
 
-IN: Keypad: +
-OUT: Keypad: -
+--> zoom + : scroll up
+--> zoom - : scroll down
+
+Change View
+
+--> ISOMETRIC : PageUp
+--> PARALELLE : PageDown
+--> Origin : O
+
+Change Map
+
+--> ENTER
+
+Exit
+
+--> ESC
