@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 16:22:07 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 16:29:44 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static char	*get_filename(const char *s, int c)
 	len = 0;
 	i = 0;
 	tmp = (char *)s;
-	// tmp = ft_strrchr(s, '/');
-	printf("tmp = %s\n", tmp);
+	tmp = ft_strrchr(s, '/');
 	while (tmp[++len] != (char)c)
 		;
 	if ((ret = ft_memalloc(sizeof(char) * len + 1)) == NULL)
