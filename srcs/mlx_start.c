@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 23:46:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 11:11:50 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	close_win(t_mlx *mlx)
 	exit(0);
 }
 
-static void fill_img(t_app *app, int *h, int *w)
+static void	fill_img(t_app *app, int *h, int *w)
 {
 	app->menu->img_ptr = mlx_xpm_file_to_image(MLX_PTR,
 												"images/galaxy.xpm", w, h);
@@ -32,7 +32,7 @@ static void fill_img(t_app *app, int *h, int *w)
 												"images/cadre.xpm", w, h);
 }
 
-static void free_and_init_img(t_app *app)
+static void	free_and_init_img(t_app *app)
 {
 	mlx_destroy_image(MLX_PTR, app->img);
 	mlx_destroy_image(MLX_PTR, app->menu);
@@ -48,12 +48,12 @@ static void free_and_init_img(t_app *app)
 		!(app->rtfm = init_img(app, 200, 216)))
 	{
 		print_error(app->err, 5);
-		free (app);
-		exit (-1);
+		free(app);
+		exit(-1);
 	}
 }
 
-void 		refresh_win(t_app *app)
+void		refresh_win(t_app *app)
 {
 	int		h;
 	int		w;
@@ -95,8 +95,8 @@ void		mlx_start(t_app *app)
 		!(app->rtfm = init_img(app, 200, 216)))
 	{
 		print_error(app->err, 5);
-		free (app);
-		exit (-1);
+		free(app);
+		exit(-1);
 	}
 	mlx_mouse_hook(MLX_WIN, mouse_funct, &app->mlx);
 	fill_img(app, &h, &w);

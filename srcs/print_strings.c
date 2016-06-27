@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 01:19:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 01:30:09 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 16:14:53 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-static void print_info2(t_app *app)
+static void	print_info2(t_app *app)
 {
 	char *print;
 
@@ -39,10 +39,13 @@ static void print_info2(t_app *app)
 	mlx_string_put(MLX_PTR, MLX_WIN, 60, 316, 0xAEECFE, print);
 }
 
-static void print_info1(t_app *app)
+static void	print_info1(t_app *app)
 {
-	mlx_string_put(MLX_PTR, MLX_WIN, 880, 30, 0xAEECFE, "File Name : ");
-	mlx_string_put(MLX_PTR, MLX_WIN, 1000, 30, 0xFFFFFF, app->win->filename);
+	if (app->win->filename)
+	{
+		mlx_string_put(MLX_PTR, MLX_WIN, 880, 30, 0xAEECFE, "File Name : ");
+		mlx_string_put(MLX_PTR, MLX_WIN, 1000, 30, 0xFFFFFF, FILENAME);
+	}
 	mlx_string_put(MLX_PTR, MLX_WIN, 1750, 245, 0xAEECFE, "Commands :");
 	mlx_string_put(MLX_PTR, MLX_WIN, 1700, 300, 0xAEECFE, "ISO      :    ");
 	mlx_string_put(MLX_PTR, MLX_WIN, 1810, 300, 0xFFFFFF, "Page Up");
@@ -64,13 +67,13 @@ static void print_info1(t_app *app)
 	mlx_string_put(MLX_PTR, MLX_WIN, 1810, 540, 0xFFFFFF, "Enter");
 }
 
-void 		print_info(t_app *app)
+void		print_info(t_app *app)
 {
 	print_info1(app);
 	print_info2(app);
 }
 
-static void print_map_menu2(t_app *app)
+static void	print_map_menu2(t_app *app)
 {
 	mlx_string_put(MLX_PTR, MLX_WIN, 750, 330, 0xAEECFE, "press 0");
 	mlx_string_put(MLX_PTR, MLX_WIN, 750, 360, 0xAEECFE, "press 1");
@@ -94,10 +97,9 @@ static void print_map_menu2(t_app *app)
 	mlx_string_put(MLX_PTR, MLX_WIN, 1250, 570, 0xAEECFE, "press J");
 	mlx_string_put(MLX_PTR, MLX_WIN, 1250, 600, 0xAEECFE, "press K");
 	mlx_string_put(MLX_PTR, MLX_WIN, 950, 800, 0xFF0000, "press R");
-
 }
 
-void 		print_map_menu(t_app *app)
+void		print_map_menu(t_app *app)
 {
 	mlx_string_put(MLX_PTR, MLX_WIN, 880, 200, 0xAEECFE, "--- MAPS ----");
 	mlx_string_put(MLX_PTR, MLX_WIN, 600, 330, 0xFFFFFF, "42");

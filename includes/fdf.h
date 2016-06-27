@@ -6,14 +6,12 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 23:01:41 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 10:45:57 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-
-#include <stdio.h> // WARNING !!!
 
 # include <fcntl.h>
 # include <string.h>
@@ -72,8 +70,8 @@ int			print_error(t_error err, int witch_one);
 */
 
 void		mlx_start(t_app *app);
-void 		print_info(t_app *app);
-void 		refresh_win(t_app *app);
+void		print_info(t_app *app);
+void		refresh_win(t_app *app);
 
 /*
 ** init_data.c
@@ -87,7 +85,7 @@ t_data		*init_data();
 ** size_win.c
 */
 
-int		 	read_name_for_size_win(const char *av, t_win *win);
+int			read_name_for_size_win(const char *av, t_win *win);
 
 /*
 ** affine.c
@@ -121,7 +119,7 @@ int			mouse_funct(int button, int x, int y, t_app *app);
 */
 
 void		print_info(t_app *app);
-void 		print_map_menu(t_app *app);
+void		print_map_menu(t_app *app);
 
 /*
 ** change_map.c

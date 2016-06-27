@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:59:54 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 22:43:25 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 11:09:45 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	move_z(t_app *app, int KC)
+void	move_z(t_app *app, int keycode)
 {
 	if (KC == Z_PLUS || KC == Z_PLUS2)
 		app->win->move_z += Z_CHANGE;
@@ -21,7 +21,7 @@ void	move_z(t_app *app, int KC)
 	refresh_win(app);
 }
 
-void	move_tray(t_app *app, int KC)
+void	move_tray(t_app *app, int keycode)
 {
 	if (KC == T_LEFT)
 		app->win->move_horizontal -= T_MOVE;
@@ -43,7 +43,7 @@ void	get_original_pos(t_app *app)
 	refresh_win(app);
 }
 
-void	change_proj(t_app *app, int KC)
+void	change_proj(t_app *app, int keycode)
 {
 	if (KC == ISO)
 		app->win->witch_proj = 1;

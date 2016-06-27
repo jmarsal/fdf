@@ -6,19 +6,25 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 23:11:20 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 11:48:15 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_mlx		*init_mlx()
+t_mlx		*init_mlx(void)
 {
 	t_mlx	*mlx;
 
+	mlx = NULL;
 	if (!(mlx = ft_memalloc(sizeof(t_mlx))))
 		return (NULL);
-	if (!(mlx->mlx_ptr = mlx_init()) || !(mlx->mlx_win =
+	if (!(mlx->mlx_ptr = mlx_init()))
+	{
+		free(mlx);
+		return (NULL);
+	}
+	if (!(mlx->mlx_win =
 		mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, TITLE)))
 	{
 		free(mlx);
@@ -31,6 +37,7 @@ t_img		*init_img(t_app *app, int width, int height)
 {
 	t_img	*img;
 
+	img = NULL;
 	if (!(img = ft_memalloc(sizeof(t_img))))
 	{
 		print_error(app->err, 3);
@@ -42,10 +49,11 @@ t_img		*init_img(t_app *app, int width, int height)
 	return (img);
 }
 
-static int	*init_tab_of_size()
+static int	*init_tab_of_size(void)
 {
 	int	*tab_of_size;
 
+	tab_of_size = NULL;
 	if (!(tab_of_size = ft_memalloc(sizeof(t_img) * NB_FILES)))
 		return (NULL);
 	return (tab_of_size);
@@ -55,6 +63,7 @@ t_win		*init_win(int zoom, float move_z)
 {
 	t_win	*tmp;
 
+	tmp = NULL;
 	if (!(tmp = ft_memalloc(sizeof(t_win))))
 		return (NULL);
 	if (!(tmp->size = ft_memalloc(sizeof(t_win))) ||
@@ -74,10 +83,11 @@ t_win		*init_win(int zoom, float move_z)
 	return (tmp);
 }
 
-t_app		*init_app()
+t_app		*init_app(void)
 {
 	t_app		*app;
 
+	app = NULL;
 	if (!(app = ft_memalloc(sizeof(t_app))))
 		return (NULL);
 	if (!(app->data = init_data()) ||
@@ -90,7 +100,6 @@ t_app		*init_app()
 	}
 	app->if_menu = 0;
 	app->mlx = NULL;
-	app->c_map = NULL;
 	app->img = NULL;
 	app->img_ecole = NULL;
 	app->cadre = NULL;

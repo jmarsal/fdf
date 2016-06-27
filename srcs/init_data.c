@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/25 01:14:14 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 12:10:18 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_coords		**init_tab(t_coords **tab, size_t line, size_t nb_elems)
+t_coords	**init_tab(t_coords **tab, size_t line, size_t nb_elems)
 {
 	if (!(tab[line] = ft_memalloc(sizeof(t_coords) * nb_elems + 1)))
 		return (NULL);
@@ -32,15 +32,15 @@ t_coords	*init_coords(int y)
 	return (coords);
 }
 
-t_data		*init_data()
+t_data		*init_data(void)
 {
 	t_data		*data;
 
 	if (!(data = ft_memalloc(sizeof(t_data))))
 		return (NULL);
 	data->data_elem = NULL;
-	data->oldsize = 16;
-	data->newsize = data->oldsize * 2;
+	data->oldsize = 1024;
+	data->newsize = data->oldsize * 2 + 1;
 	data->is_colors = 0;
 	data->helper.line = 0;
 	return (data);

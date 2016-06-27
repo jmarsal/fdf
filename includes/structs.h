@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 21:56:20 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 23:01:25 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 10:43:36 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct			s_win
 
 typedef struct			s_img
 {
-	void 				*img_ptr;
+	void				*img_ptr;
 	char				*data;
 	int					bpp;
 	int					sizeline;
@@ -73,7 +73,7 @@ typedef struct			s_get_data
 	size_t				line;
 	size_t				index;
 	size_t				i;
-	size_t  			j;
+	size_t				j;
 }						t_get_data;
 
 typedef struct			s_data

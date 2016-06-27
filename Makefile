@@ -6,7 +6,7 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/06/25 23:52:36 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/06/27 12:26:32 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 CC = gcc
 OPTI = -O1
 CFLAGS_DEBUG = -g3 -O0 -fsanitize=address
-CFLAGS = -Wall -Werror -Wextra $(OPTI)
+CFLAGS = -Wall -Werror -Wextra $(OPTI) -fsanitize=address
 SRC_DIR = ./srcs/
 SRC_FILES = main.c init_app.c event.c draw.c perror.c get_data.c mlx_start.c \
 			init_data.c size_win.c affine.c draw_tools.c init_size_win.c \

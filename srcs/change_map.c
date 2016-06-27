@@ -6,17 +6,17 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 23:44:14 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 23:32:34 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 11:09:21 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void relaunch_soft(char *map, t_app *app)
+static void	relaunch_soft(char *map, t_app *app)
 {
 	while (app->data->helper.nb_elems--)
 		ft_strdel(&app->data->helper.elems[app->data->helper.nb_elems]);
-	free (app->data->helper.elems);
+	free(app->data->helper.elems);
 	free_data(app->data->data_elem);
 	mlx_destroy_image(MLX_PTR, app->c_map);
 	app->params->x_max = 0;
@@ -25,11 +25,11 @@ static void relaunch_soft(char *map, t_app *app)
 	if (!(app->data = init_data()))
 		exit(0);
 	if (read_file((const char*)map, app) == -1)
-		exit (-1);
+		exit(-1);
 	get_original_pos(app);
 }
 
-static void if_back(t_app *app, int KC)
+static void	if_back(t_app *app, int keycode)
 {
 	if (KC == R)
 	{
@@ -41,7 +41,7 @@ static void if_back(t_app *app, int KC)
 	}
 }
 
-void 	new_map2(char *map, t_app *app, int KC)
+void		new_map2(char *map, t_app *app, int keycode)
 {
 	if_back(app, KC);
 	if (KC == K)
@@ -70,7 +70,7 @@ void 	new_map2(char *map, t_app *app, int KC)
 		relaunch_soft(map, app);
 }
 
-void	new_map(t_app *app, int KC)
+void		new_map(t_app *app, int keycode)
 {
 	char *map;
 
@@ -98,7 +98,7 @@ void	new_map(t_app *app, int KC)
 	new_map2(map, app, KC);
 }
 
-void 	change_map(t_app *app, int KC)
+void		change_map(t_app *app, int keycode)
 {
 	if (KC == ENTER)
 	{

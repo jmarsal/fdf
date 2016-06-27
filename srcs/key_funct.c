@@ -6,18 +6,16 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 15:46:15 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 23:23:30 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 12:47:18 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	keyfunct2(int KC, t_app *app)
+static int	keyfunct2(int keycode, t_app *app)
 {
 	if (KC == ENTER)
 		change_map(app, KC);
-	else if (KC == QUIT)
-		exit(0);
 	else if (KC == Z_PLUS || KC == Z_MINUS || KC == Z_PLUS2 || KC == Z_MINUS2)
 		move_z(app, KC);
 	else if (KC == T_LEFT || KC == T_RIGHT || KC == T_UP || KC == T_DOWN)
@@ -29,8 +27,10 @@ static int	keyfunct2(int KC, t_app *app)
 	return (0);
 }
 
-int			key_funct(int KC, t_app *app)
+int			key_funct(int keycode, t_app *app)
 {
+	if (KC == QUIT)
+		exit(0);
 	if (app->if_menu == 1)
 	{
 		if (KC == A || KC == B || KC == C || KC == D ||

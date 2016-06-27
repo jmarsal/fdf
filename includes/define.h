@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 21:56:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 23:46:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 16:14:45 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define ZOOM_SPEED_P 0.6
 # define ZOOM_SPEED_M 0.2
 # define ZOOM_CHANGE app->win->zoom_change
+# define FILENAME app->win->filename
 
 /*
 ** keyhook
@@ -51,7 +52,7 @@
 # define UP_ZOOM 4
 # define DOWN_ZOOM 5
 # define ENTER 36
-# define A 12
+# define A 0
 # define B 11
 # define C 8
 # define D 2
