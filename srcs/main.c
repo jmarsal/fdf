@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 15:28:51 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/07/02 23:53:54 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int			read_file(const char *av, t_app *app)
 	char		*line;
 	int			fd;
 
+	line = NULL;
 	if ((fd = open(av, O_RDONLY)) < 1)
 		exit(-1);
 	if (error_read(app->err, av, fd) == -1)
@@ -93,8 +94,6 @@ int			main(int ac, char **av)
 		}
 		if (read_file((const char*)av[1], app) == -1)
 		{
-			while (app->data->helper.elems--)
-				ft_strdel(app->data->helper.elems);
 			free(app->data->helper.elems);
 			exit(-1);
 		}

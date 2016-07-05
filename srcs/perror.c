@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 23:12:12 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 15:27:38 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 22:37:49 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int			print_error(t_error err, const int witch_one)
 	i = 0;
 	init_perror(&err);
 	ft_putstr(err.p_err[witch_one]);
-	return (-1);
+	exit(-1);
 }

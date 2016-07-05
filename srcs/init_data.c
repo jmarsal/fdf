@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 13:59:43 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 12:10:18 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/07/03 00:44:27 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,10 @@ t_data		*init_data(void)
 	data->newsize = data->oldsize * 2 + 1;
 	data->is_colors = 0;
 	data->helper.line = 0;
+	data->helper.elems = NULL;
+	data->helper.nb_elems = 0;
+	data->helper.index = 0;
+	data->helper.i = 0;
+	data->helper.j = 0;
 	return (data);
 }

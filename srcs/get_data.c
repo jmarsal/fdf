@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 14:33:06 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/06/27 22:39:04 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 	data->helper.nb_elems = 0;
 	data->helper.index = 0;
 	app->params->x_max = 0;
+	if (ft_strlen(line) == 0)
+		print_error(app->err, 1);
 	if ((parse_data(app, line, new_data, &data->helper)) == -1)
 	{
 		while (data->helper.nb_elems--)

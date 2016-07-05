@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 13:25:10 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 16:29:44 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/07/03 00:47:42 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static char	*get_filename(const char *s, int c)
 
 	len = 0;
 	i = 0;
+	ret = NULL;
 	tmp = (char *)s;
 	tmp = ft_strrchr(s, '/');
 	while (tmp[++len] != (char)c)

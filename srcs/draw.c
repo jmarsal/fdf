@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/26 02:16:56 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/07/03 00:08:36 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ t_coords	witch_proj(int is_color, t_win *win, t_coords data)
 {
 	t_coords	modify;
 
+	modify.x = 0;
+	modify.y = 0;
+	modify.z = 0;
+	modify.color = 0;
 	if (win->witch_proj == 0)
 		modify = ch_data_paralelle(is_color, win, data);
 	else
@@ -55,6 +59,12 @@ static void	draw_columns(t_app *app, t_coords **n_data, size_t lines,
 									n_data[lines][elems]);
 	draw.x = c_line.x;
 	draw.y = c_line.y;
+	draw.coef = 0;
+	draw.cst = 0;
+	n_line.x = 0;
+	n_line.y = 0;
+	n_line.z = 0;
+	n_line.color = 0;
 	if (n_data[lines + 1])
 		n_line = witch_proj(app->data->is_colors, app->win,
 										n_data[lines + 1][elems]);
@@ -76,6 +86,12 @@ static void	draw_line(t_app *app, t_coords **n_data, size_t lines, size_t elems)
 									n_data[lines][elems]);
 	draw.x = c_elems.x;
 	draw.y = c_elems.y;
+	draw.coef = 0;
+	draw.cst = 0;
+	n_elems.x = 0;
+	n_elems.y = 0;
+	n_elems.z = 0;
+	n_elems.color = 0;
 	if (elems + 1 < app->params->x_max)
 		n_elems = witch_proj(app->data->is_colors, app->win,
 										n_data[lines][elems + 1]);
@@ -101,6 +117,7 @@ void		draw_windows(t_app *app)
 
 	n_data = app->data->data_elem;
 	lines = 0;
+	elems = 0;
 	while (n_data[lines])
 	{
 		elems = 0;
