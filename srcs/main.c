@@ -24,13 +24,17 @@ static int	error_read(t_error err, const char *av, int fd)
 static int	get_data_in_line(t_app *app, t_data *data, char *line,
 									t_coords *c_data)
 {
+	void	*new;
+	size_t	new_size;
+
+	new_size = sizeof(void *) * data->newsize * 2;
 	if (data->helper.line % (data->oldsize - 1) == 0)
 	{
-		if (!(data->data_elem = ft_realloc(data->data_elem,
-			data->newsize * sizeof(t_coords),
-			data->oldsize + 1 * sizeof(t_coords))))
+		if (!(new = ft_realloc(data->data_elem,
+			new_size, data->oldsize * sizeof(void *))))
 			return (-1);
-		data->oldsize = data->newsize;
+		data->data_elem = new;
+		data->oldsize = new_size;
 		data->newsize = data->oldsize * 2;
 	}
 	data->data_elem[app->params->y_max] = NULL;

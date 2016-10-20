@@ -6,13 +6,13 @@
 #    By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/17 00:34:02 by jmarsal           #+#    #+#              #
-#    Updated: 2016/07/02 23:56:16 by jmarsal          ###   ########.fr        #
+#    Updated: 2016/09/22 09:29:57 by jmarsal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = gcc
-OPTI = -O3
+OPTI = -O3 -fsanitize=address
 CFLAGS_DEBUG = -g3 -O0 -fsanitize=address
 CFLAGS = -Wall -Werror -Wextra $(OPTI)
 SRC_DIR = ./srcs/
@@ -21,13 +21,13 @@ SRC_FILES = main.c init_app.c event.c draw.c perror.c get_data.c mlx_start.c \
 			key_funct.c print_strings.c change_map.c
 OBJ_PATH = ./obj
 OBJ_FILES = $(SRC_FILES:%.c=$(OBJ_PATH)/%.o)
-INC_PATH = -I./libft/ -I./libmlx/ -I./includes/
-LIB_PATH = -L./libmlx/ -lmlx -L./libft/ -lft -framework OpenGL -framework AppKit
+INC_PATH = -I./libmlx/ -I./libft/includes/ -I./includes/
+LIB_PATH = -L./libft/ -lft -L./libmlx/ -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 $(NAME): $(OBJ_FILES)
-	@make -C libft
 	@make -C libmlx
+	@make -C libft
 	@$(CC) -o $(NAME) $(OBJ_FILES) $(CFLAGS) $(INC_PATH) $(LIB_PATH)
 	@echo "\n-----------------------------------------"
 	@echo "|\033[32;1m\t$(NAME) has been created !\t\t\033[0m|"

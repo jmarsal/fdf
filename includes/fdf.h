@@ -18,7 +18,7 @@
 # include <mlx.h>
 # include "define.h"
 # include "structs.h"
-# include "../libft/includes/libft.h"
+# include "libft.h"
 
 /*
 ** main.c
