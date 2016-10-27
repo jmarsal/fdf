@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:49:52 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/07/02 23:53:54 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 21:44:47 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@ static int	get_data_in_line(t_app *app, t_data *data, char *line,
 	void	*new;
 	size_t	new_size;
 
-	new_size = sizeof(void *) * data->newsize * 2;
+	new_size = sizeof(void *) * data->oldsize * 2;
 	if (data->helper.line % (data->oldsize - 1) == 0)
 	{
-		if (!(new = ft_realloc(data->data_elem,
-			new_size, data->oldsize * sizeof(void *))))
+		if (!(new = ft_realloc(data->data_elem, new_size, data->oldsize)))
 			return (-1);
 		data->data_elem = new;
 		data->oldsize = new_size;
-		data->newsize = data->oldsize * 2;
 	}
 	data->data_elem[app->params->y_max] = NULL;
 	if ((get_data(app, line, c_data, data)) == -1)
@@ -53,10 +51,10 @@ void		free_data(t_coords **data)
 	lines = 0;
 	while (data[lines])
 	{
-		free(data[lines]);
+		ft_free_null(data[lines]);
 		lines++;
 	}
-	free(data);
+	ft_free_null(data);
 }
 
 int			read_file(const char *av, t_app *app)
@@ -79,7 +77,7 @@ int			read_file(const char *av, t_app *app)
 			free_data(app->data->data_elem);
 			return (-1);
 		}
-	free(c_data);
+	ft_free_null(c_data);
 	if (close(fd) == -1)
 		return (-1);
 	return (0);
@@ -98,7 +96,7 @@ int			main(int ac, char **av)
 		}
 		if (read_file((const char*)av[1], app) == -1)
 		{
-			free(app->data->helper.elems);
+			ft_free_null(app->data->helper.elems);
 			exit(-1);
 		}
 		mlx_start(app);

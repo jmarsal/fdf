@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 11:11:50 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 21:45:33 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	close_win(t_mlx *mlx)
 {
-	free(mlx);
+	ft_free_null(mlx);
 	exit(0);
 }
 
@@ -48,7 +48,7 @@ static void	free_and_init_img(t_app *app)
 		!(app->rtfm = init_img(app, 200, 216)))
 	{
 		print_error(app->err, 5);
-		free(app);
+		ft_free_null(app);
 		exit(-1);
 	}
 }
@@ -95,7 +95,7 @@ void		mlx_start(t_app *app)
 		!(app->rtfm = init_img(app, 200, 216)))
 	{
 		print_error(app->err, 5);
-		free(app);
+		ft_free_null(app);
 		exit(-1);
 	}
 	mlx_mouse_hook(MLX_WIN, mouse_funct, &app->mlx);

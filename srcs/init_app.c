@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/07/03 00:40:39 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 21:43:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ t_mlx		*init_mlx(void)
 		return (NULL);
 	if (!(mlx->mlx_ptr = mlx_init()))
 	{
-		free(mlx);
+		ft_free_null(mlx);
 		return (NULL);
 	}
 	if (!(mlx->mlx_win =
 		mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, TITLE)))
 	{
-		free(mlx->mlx_ptr);
-		free(mlx);
+		ft_free_null(mlx->mlx_ptr);
+		ft_free_null(mlx);
 		return (NULL);
 	}
 	return (mlx);
@@ -96,7 +96,7 @@ t_app		*init_app(void)
 		!(app->win = init_win(0, 0)) ||
 		!(app->params = ft_memalloc(sizeof(t_params))))
 	{
-		free(app);
+		ft_free_null(app);
 		return (NULL);
 	}
 	app->if_menu = 0;

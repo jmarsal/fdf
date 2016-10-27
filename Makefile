@@ -12,7 +12,7 @@
 
 NAME = fdf
 CC = gcc
-OPTI = -O3 -fsanitize=address
+OPTI = -O3
 CFLAGS_DEBUG = -g3 -O0 -fsanitize=address
 CFLAGS = -Wall -Werror -Wextra $(OPTI)
 SRC_DIR = ./srcs/

@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 21:56:20 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 10:43:36 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 17:38:56 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ typedef struct			s_data
 {
 	t_coords			**data_elem;
 	t_get_data			helper;
-	size_t				newsize;
 	size_t				oldsize;
 	int					is_colors;
 }						t_data;

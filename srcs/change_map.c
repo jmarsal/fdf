@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 23:44:14 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 11:09:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 21:43:09 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	relaunch_soft(char *map, t_app *app)
 {
 	while (app->data->helper.nb_elems--)
 		ft_strdel(&app->data->helper.elems[app->data->helper.nb_elems]);
-	free(app->data->helper.elems);
+	ft_free_null(app->data->helper.elems);
 	free_data(app->data->data_elem);
 	mlx_destroy_image(MLX_PTR, app->c_map);
 	app->params->x_max = 0;
