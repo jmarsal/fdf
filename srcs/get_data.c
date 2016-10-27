@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 01:59:39 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/10/27 21:43:05 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 22:43:19 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,16 @@ static int	parse_data(t_app *app, const char *line, t_coords *c_data,
 	return (0);
 }
 
+static void	init_helper_and_x_max(t_get_data *helper, size_t *x_max)
+{
+	helper->elems = NULL;
+	helper->i = 0;
+	helper->j = 0;
+	helper->nb_elems = 0;
+	helper->index = 0;
+	*x_max = 0;
+}
+
 int			get_data(t_app *app, const char *line, t_coords *c_data,
 						t_data *data)
 {
@@ -68,12 +78,7 @@ int			get_data(t_app *app, const char *line, t_coords *c_data,
 
 	if (!(new_data = init_coords(c_data->y)))
 		return (-1);
-	data->helper.elems = NULL;
-	data->helper.i = 0;
-	data->helper.j = 0;
-	data->helper.nb_elems = 0;
-	data->helper.index = 0;
-	app->params->x_max = 0;
+	init_helper_and_x_max(&data->helper, &app->params->x_max);
 	if (ft_strlen(line) == 0)
 		print_error(app->err, 1);
 	if ((parse_data(app, line, new_data, &data->helper)) == -1)

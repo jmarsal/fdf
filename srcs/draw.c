@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 23:11:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/07/03 00:08:36 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 22:25:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,7 @@ static void	draw_columns(t_app *app, t_coords **n_data, size_t lines,
 
 	c_line = witch_proj(app->data->is_colors, app->win,
 									n_data[lines][elems]);
-	draw.x = c_line.x;
-	draw.y = c_line.y;
-	draw.coef = 0;
-	draw.cst = 0;
-	n_line.x = 0;
-	n_line.y = 0;
-	n_line.z = 0;
-	n_line.color = 0;
+	init_for_draw_line_or_column(&c_line, &n_line, &draw);
 	if (n_data[lines + 1])
 		n_line = witch_proj(app->data->is_colors, app->win,
 										n_data[lines + 1][elems]);
@@ -84,14 +77,7 @@ static void	draw_line(t_app *app, t_coords **n_data, size_t lines, size_t elems)
 
 	c_elems = witch_proj(app->data->is_colors, app->win,
 									n_data[lines][elems]);
-	draw.x = c_elems.x;
-	draw.y = c_elems.y;
-	draw.coef = 0;
-	draw.cst = 0;
-	n_elems.x = 0;
-	n_elems.y = 0;
-	n_elems.z = 0;
-	n_elems.color = 0;
+	init_for_draw_line_or_column(&c_elems, &n_elems, &draw);
 	if (elems + 1 < app->params->x_max)
 		n_elems = witch_proj(app->data->is_colors, app->win,
 										n_data[lines][elems + 1]);

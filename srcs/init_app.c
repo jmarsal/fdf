@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/10/27 21:43:46 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 22:49:18 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ t_app		*init_app(void)
 	app->menu = NULL;
 	app->c_map = NULL;
 	app->params->check_elements = 0;
-	app->params->x_max = 0;
 	app->params->y_max = 0;
 	return (app);
 }

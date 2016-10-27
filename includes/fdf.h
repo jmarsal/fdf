@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 10:45:57 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 22:23:46 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void		refresh_win(t_app *app);
 t_coords	**init_tab(t_coords **tab, size_t line, size_t nb_elems);
 t_coords	*init_coords(int y);
 t_data		*init_data();
+void		init_for_draw_line_or_column(t_coords *c_elem, t_coords *n_elems, t_affine *draw);
+
 
 /*
 ** size_win.c

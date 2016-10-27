@@ -6,13 +6,13 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:11:49 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/07/02 23:58:06 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 22:02:00 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		draw_affine(t_app *app, t_coords *c_elems, t_coords *n_elems,
+static void	draw_affine(t_app *app, t_coords *c_elems, t_coords *n_elems,
 							t_affine draw)
 {
 	draw.x = c_elems->x;
@@ -39,7 +39,7 @@ static void		draw_affine(t_app *app, t_coords *c_elems, t_coords *n_elems,
 	}
 }
 
-void			check_affine(t_app *app, t_coords *c_elems, t_coords *n_elems)
+void		check_affine(t_app *app, t_coords *c_elems, t_coords *n_elems)
 {
 	t_affine affine;
 
