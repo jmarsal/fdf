@@ -80,8 +80,8 @@ void		refresh_win(t_app *app);
 t_coords	**init_tab(t_coords **tab, size_t line, size_t nb_elems);
 t_coords	*init_coords(int y);
 t_data		*init_data();
-void		init_for_draw_line_or_column(t_coords *c_elem, t_coords *n_elems, t_affine *draw);
-
+void		init_for_draw_line_or_column(t_coords *c_elem, t_coords *n_elems,
+										t_affine *draw);
 
 /*
 ** size_win.c
