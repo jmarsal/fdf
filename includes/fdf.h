@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:32:02 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/10/27 22:23:46 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/12/03 15:28:59 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <mlx.h>
+# include <sys/utsname.h>
 # include "define.h"
 # include "structs.h"
 # include "libft.h"

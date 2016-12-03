@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 14:11:49 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/10/27 22:02:00 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/12/03 15:08:59 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		check_affine(t_app *app, t_coords *c_elems, t_coords *n_elems)
 	t_affine affine;
 
 	if (c_elems->x > n_elems->x)
-		return (check_affine(app, n_elems, c_elems));
+		check_affine(app, n_elems, c_elems);
 	affine.coef = (float)(n_elems->y - c_elems->y) /
 					(float)(n_elems->x - c_elems->x);
 	affine.cst = c_elems->y - (affine.coef * c_elems->x);

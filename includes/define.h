@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 21:56:25 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 16:14:45 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/12/03 16:37:15 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,68 @@
 ** keyhook
 */
 
-# define KC keycode
-# define QUIT 53
-# define Z_PLUS 69
-# define Z_MINUS 78
-# define Z_PLUS2 24
-# define Z_MINUS2 27
-# define T_LEFT 123
-# define T_RIGHT 124
-# define T_UP 126
-# define T_DOWN 125
-# define T_MOVE 5
-# define ORIGIN_POS 31
-# define ISO 116
-# define PARALELLE 121
-# define UP_ZOOM 4
-# define DOWN_ZOOM 5
-# define ENTER 36
-# define A 0
-# define B 11
-# define C 8
-# define D 2
-# define E 14
-# define F 3
-# define G 5
-# define H 4
-# define I 34
-# define J 38
-# define K 40
-# define R 15
+# ifdef __linux__
+#  define KC keycode
+#  define QUIT 65307
+#  define Z_PLUS 61
+#  define Z_MINUS 45
+#  define Z_PLUS2 65451
+#  define Z_MINUS2 65453
+#  define T_LEFT 65361
+#  define T_RIGHT 65363
+#  define T_UP 65362
+#  define T_DOWN 65364
+#  define T_MOVE 5
+#  define ORIGIN_POS 111
+#  define ISO 65365
+#  define PARALELLE 65366
+#  define UP_ZOOM 4
+#  define DOWN_ZOOM 5
+#  define ENTER 65293
+#  define A 97
+#  define B 98
+#  define C 99
+#  define D 100
+#  define E 101
+#  define F 102
+#  define G 103
+#  define H 104
+#  define I 105
+#  define J 106
+#  define K 107
+#  define R 114
+
+# else
+#  define KC keycode
+#  define QUIT 53
+#  define Z_PLUS 69
+#  define Z_MINUS 78
+#  define Z_PLUS2 24
+#  define Z_MINUS2 27
+#  define T_LEFT 123
+#  define T_RIGHT 124
+#  define T_UP 126
+#  define T_DOWN 125
+#  define T_MOVE 5
+#  define ORIGIN_POS 31
+#  define ISO 116
+#  define PARALELLE 121
+#  define UP_ZOOM 4
+#  define DOWN_ZOOM 5
+#  define ENTER 36
+#  define A 0
+#  define B 11
+#  define C 8
+#  define D 2
+#  define E 14
+#  define F 3
+#  define G 5
+#  define H 4
+#  define I 34
+#  define J 38
+#  define K 40
+#  define R 15
+# endif
 
 /*
 ** win

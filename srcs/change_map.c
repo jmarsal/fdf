@@ -16,7 +16,7 @@ static void	relaunch_soft(char *map, t_app *app)
 {
 	while (app->data->helper.nb_elems--)
 		ft_strdel(&app->data->helper.elems[app->data->helper.nb_elems]);
-	ft_free_null(app->data->helper.elems);
+	ft_free(app->data->helper.elems);
 	free_data(app->data->data_elem);
 	mlx_destroy_image(MLX_PTR, app->c_map);
 	app->params->x_max = 0;

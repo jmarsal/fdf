@@ -6,11 +6,12 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/20 15:46:15 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 12:47:18 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/12/03 16:37:40 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static int	keyfunct2(int keycode, t_app *app)
 {
@@ -29,6 +30,7 @@ static int	keyfunct2(int keycode, t_app *app)
 
 int			key_funct(int keycode, t_app *app)
 {
+	// printf("keycode = %d\n", keycode);
 	if (KC == QUIT)
 		exit(0);
 	if (app->if_menu == 1)

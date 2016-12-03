@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 23:12:12 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/06/27 22:37:49 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/11/19 16:33:21 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ static void	init_perror(t_error *err)
 
 int			print_error(t_error err, const int witch_one)
 {
-	int i;
-
-	i = 0;
 	init_perror(&err);
 	ft_putstr(err.p_err[witch_one]);
 	exit(-1);

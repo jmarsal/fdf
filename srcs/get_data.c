@@ -19,7 +19,7 @@ static int	get_z(t_app *app, const char *line, t_get_data *h, t_coords *c_data)
 	if (!(number = ft_get_number(line, &h->i)))
 		return (-1);
 	c_data->z = ft_atoi(number);
-	ft_free_null(number);
+	ft_free(number);
 	if (line[h->i] && line[h->i] == ',')
 	{
 		h->i++;
