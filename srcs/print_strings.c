@@ -19,11 +19,11 @@ static void	print_info2(t_app *app)
 	print = ft_itoa(app->win->zoom_change);
 	mlx_string_put(MLX_PTR, MLX_WIN, 60, 226, 0xAEECFE, "Current zoom x :");
 	mlx_string_put(MLX_PTR, MLX_WIN, 235, 226, 0xFFFFFF, print);
-	ft_free(print);
+	ft_free_null(print);
 	print = ft_itoa(app->win->move_horizontal);
 	mlx_string_put(MLX_PTR, MLX_WIN, 60, 256, 0xAEECFE, "position.x     :");
 	mlx_string_put(MLX_PTR, MLX_WIN, 235, 256, 0xFFFFFF, print);
-	ft_free(print);
+	ft_free_null(print);
 	print = ft_itoa(app->win->move_vertical);
 	mlx_string_put(MLX_PTR, MLX_WIN, 60, 286, 0xAEECFE, "position.y     :");
 	mlx_string_put(MLX_PTR, MLX_WIN, 235, 286, 0xFFFFFF, print);
@@ -34,7 +34,7 @@ static void	print_info2(t_app *app)
 	mlx_string_put(MLX_PTR, MLX_WIN, 20, 960, 0xFFFFFF,
 												"https://github.com/jmarsal");
 	mlx_string_put(MLX_PTR, MLX_WIN, 20, 990, 0xFFFFFF, "June 2016");
-	ft_free(print);
+	ft_free_null(print);
 	print = !(app->win->witch_proj) ? PAR : ISOMETRIC;
 	mlx_string_put(MLX_PTR, MLX_WIN, 60, 316, 0xAEECFE, print);
 }

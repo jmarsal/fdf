@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 11:03:31 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/12/03 16:36:15 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 21:45:33 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	close_win(t_mlx *mlx)
 {
-	ft_free(mlx);
+	ft_free_null(mlx);
 	exit(0);
 }
 
@@ -34,12 +34,12 @@ static void	fill_img(t_app *app, int *h, int *w)
 
 static void	free_and_init_img(t_app *app)
 {
-	// mlx_destroy_image(MLX_PTR, app->img);
-	// mlx_destroy_image(MLX_PTR, app->menu);
-	// mlx_destroy_image(MLX_PTR, app->img_ecole);
-	// mlx_destroy_image(MLX_PTR, app->phenix);
-	// mlx_destroy_image(MLX_PTR, app->cadre);
-	// mlx_destroy_image(MLX_PTR, app->rtfm);
+	mlx_destroy_image(MLX_PTR, app->img);
+	mlx_destroy_image(MLX_PTR, app->menu);
+	mlx_destroy_image(MLX_PTR, app->img_ecole);
+	mlx_destroy_image(MLX_PTR, app->phenix);
+	mlx_destroy_image(MLX_PTR, app->cadre);
+	mlx_destroy_image(MLX_PTR, app->rtfm);
 	if (!(app->img = init_img(app, WIDTH_DRAW, HEIGHT_DRAW)) ||
 		!(app->menu = init_img(app, WIDTH, HEIGHT)) ||
 		!(app->img_ecole = init_img(app, 200, 216)) ||
@@ -48,7 +48,7 @@ static void	free_and_init_img(t_app *app)
 		!(app->rtfm = init_img(app, 200, 216)))
 	{
 		print_error(app->err, 5);
-		ft_free(app);
+		ft_free_null(app);
 		exit(-1);
 	}
 }
@@ -95,11 +95,10 @@ void		mlx_start(t_app *app)
 		!(app->rtfm = init_img(app, 200, 216)))
 	{
 		print_error(app->err, 5);
-		ft_free(app);
+		ft_free_null(app);
 		exit(-1);
 	}
 	mlx_mouse_hook(MLX_WIN, mouse_funct, &app->mlx);
-	mlx_key_hook(MLX_WIN, key_funct, &app->mlx);
 	fill_img(app, &h, &w);
 	refresh_win(app);
 	mlx_hook(MLX_WIN, 2, 3, key_funct, &app->mlx);

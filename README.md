@@ -1,38 +1,25 @@
-# fdf
-Infographie project map relief.
+****![Fdf 42](./readme_images/42.png)
 
-Installation : Launch:
+## Contributeur
+[@jmarsal](https://github.com/jmarsal)
 
-Make
+# Projet Fdf 42
+Vous decouvrirez dans ce projet les bases de la programmation graphique, et en particulier,
+le placement de points dans l’espace, comment les relier avec des segments et
+surtout comment observer la scène depuis un certain point de vue.
+Vous découvrirez également votre première bibliothèque graphique : La miniLibX.
+Cette bibliothèque développée en interne rassemble le minimum nécéssaire pour ouvrir
+une fenêtre, allumer un pixel et gérer les évènements lié à cette fenêtre : le clavier, la
+souris et l’“expose”. Ce sera pour vous l’occasion de vous initier à la programmation dite
+“evenementielle”. 
 
-Usage : Execute program with path map file
+## Note Final
+`125 / 100`
 
-./fdf maps/map_name.fdf
+## Manuel
+1. `Make`
+2. `./fdf maps/[maps]`
 
-Control :
-
-Translation
-
---> Y: Key: UP, DOWN
---> X: Key: LEFT, RIGHT
---> Z + : +
---> Z - : -
-
-Zoom
-
---> zoom + : scroll up
---> zoom - : scroll down
-
-Change View
-
---> ISOMETRIC : PageUp
---> PARALELLE : PageDown
---> Origin : O
-
-Change Map
-
---> ENTER
-
-Exit
-
---> ESC
+![Fdf menu](./readme_images/menu.png)
+![Fdf julia](./readme_images/julia.png)
+![Fdf france](./readme_images/france.png)

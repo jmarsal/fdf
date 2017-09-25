@@ -33,6 +33,8 @@ struct  s_col_name
                   return ((void *)0); }
 
 
+
+
 char	*mlx_int_get_line(char *ptr,int *pos,int size)
 {
   int	pos2;
@@ -50,33 +52,7 @@ char	*mlx_int_get_line(char *ptr,int *pos,int size)
   return (ptr+pos4);
 }
 
-size_t strlcpy(dst, src, siz)
-	char *dst;
-	const char *src;
-	size_t siz;
-{
-	register char *d = dst;
-	register const char *s = src;
-	register size_t n = siz;
 
-	/* Copy as many bytes as will fit */
-	if (n != 0 && --n != 0) {
-		do {
-			if ((*d++ = *s++) == 0)
-				break;
-		} while (--n != 0);
-	}
-
-	/* Not enough room in dst, add NUL and traverse rest of src */
-	if (n == 0) {
-		if (siz != 0)
-			*d = '\0';		/* NUL-terminate dst */
-		while (*s++)
-			;
-	}
-
-	return(s - src - 1);	/* count does not include NUL */
-}
 
 char	*mlx_int_static_line(char **xpm_data,int *pos,int size)
 {

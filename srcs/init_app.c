@@ -6,7 +6,7 @@
 /*   By: jmarsal <jmarsal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 22:29:18 by jmarsal           #+#    #+#             */
-/*   Updated: 2016/12/03 15:17:21 by jmarsal          ###   ########.fr       */
+/*   Updated: 2016/10/27 22:49:18 by jmarsal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ t_mlx		*init_mlx(void)
 		return (NULL);
 	if (!(mlx->mlx_ptr = mlx_init()))
 	{
-		ft_free(mlx);
+		ft_free_null(mlx);
 		return (NULL);
 	}
 	if (!(mlx->mlx_win =
 		mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, TITLE)))
 	{
-		ft_free(mlx->mlx_ptr);
-		ft_free(mlx);
+		ft_free_null(mlx->mlx_ptr);
+		ft_free_null(mlx);
 		return (NULL);
 	}
 	return (mlx);
@@ -44,7 +44,7 @@ t_img		*init_img(t_app *app, int width, int height)
 		print_error(app->err, 3);
 		return (NULL);
 	}
-	img->img_ptr = mlx_new_image(MLX_PTR, width, height);
+	img->img_ptr = mlx_new_image(app->mlx, width, height);
 	img->data = mlx_get_data_addr(img->img_ptr, &img->bpp,
 			&img->sizeline, &img->endian);
 	return (img);
@@ -96,7 +96,7 @@ t_app		*init_app(void)
 		!(app->win = init_win(0, 0)) ||
 		!(app->params = ft_memalloc(sizeof(t_params))))
 	{
-		ft_free(app);
+		ft_free_null(app);
 		return (NULL);
 	}
 	app->if_menu = 0;

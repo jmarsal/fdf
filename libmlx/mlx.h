@@ -53,7 +53,6 @@ void	*mlx_init();
 **  return (void *)0 if failed
 */
 
-size_t strlcpy(dst, src, siz);
 
 /*
 ** Basic actions
