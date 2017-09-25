@@ -1,4 +1,4 @@
-****![Fdf 42](./readme_images/42.png)
+![Fdf 42](./readme_images/42.png)
 
 ## Contributeur
 [@jmarsal](https://github.com/jmarsal)
