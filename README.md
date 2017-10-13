@@ -13,7 +13,7 @@ une fenêtre, allumer un pixel et gérer les évènements lié à cette fenêtre
 souris et l’“expose”. Ce sera pour vous l’occasion de vous initier à la programmation dite
 “evenementielle”. 
 
-## Note Final
+## Note Finale
 `125 / 100`
 
 ## Manuel
